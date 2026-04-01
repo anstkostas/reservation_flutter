@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:get_it/get_it.dart';
 
+import '../cubits/auth/auth_bloc.dart';
 import '../models/models.dart';
 import 'cookie_setup/cookie_setup.dart';
 
@@ -62,7 +64,11 @@ class DioClient {
     final statusCode = e.response?.statusCode;
 
     if (statusCode == 401) {
-      // TODO: Phase 7 — dispatch AuthLogoutRequested via getIt<AuthBloc>() once AuthBloc exists
+      // Dispatch to AuthBloc so any 401 — from any endpoint — logs the user
+      // out and transitions the UI to the login screen. get_it is used here
+      // because the interceptor has no BuildContext or BlocProvider access.
+      // AuthBloc is a lazy singleton guaranteed to exist before any request fires.
+      GetIt.instance<AuthBloc>().add(const AuthLogoutRequested());
       handler.reject(
         DioException(
           requestOptions: e.requestOptions,
