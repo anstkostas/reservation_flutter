@@ -16,4 +16,13 @@ enum ReservationStatus {
       _ => throw ArgumentError('Unknown ReservationStatus: $value'),
     };
   }
+
+  /// Returns the API string representation of this status.
+  /// [noShow] maps to `"no-show"` — not `"noShow"` — to match the backend enum.
+  String toApiString() {
+    return switch (this) {
+      ReservationStatus.noShow => 'no-show',
+      _ => name,
+    };
+  }
 }
