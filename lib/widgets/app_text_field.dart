@@ -14,6 +14,7 @@ class AppTextField extends StatefulWidget {
     required this.name,
     required this.label,
     this.hint,
+    this.initialValue,
     this.validator,
     this.obscureText = false,
     this.keyboardType,
@@ -23,6 +24,7 @@ class AppTextField extends StatefulWidget {
   final String name;
   final String label;
   final String? hint;
+  final String? initialValue;
   final String? Function(String?)? validator;
   final bool obscureText;
   final TextInputType? keyboardType;
@@ -46,6 +48,7 @@ class _AppTextFieldState extends State<AppTextField> {
   Widget build(BuildContext context) {
     return FormBuilderTextField(
       name: widget.name,
+      initialValue: widget.initialValue,
       obscureText: _obscure,
       validator: widget.validator,
       keyboardType: widget.keyboardType,

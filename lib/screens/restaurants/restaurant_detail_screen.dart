@@ -8,6 +8,7 @@ import '../../cubits/restaurants/restaurant_cubit.dart';
 import '../../models/models.dart';
 import '../../widgets/error_display.dart';
 import '../../widgets/loading_indicator.dart';
+import '../../widgets/reservations/reservation_create_sheet.dart';
 
 /// Shows full details for a single restaurant.
 ///
@@ -129,7 +130,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                   style: Theme.of(context).textTheme.bodyMedium,
                 ),
                 const SizedBox(height: 32),
-                _buildReservationButton(),
+                _buildReservationButton(restaurant.id),
               ],
             ),
           ),
@@ -141,7 +142,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
   /// Renders "Make Reservation" only for authenticated customers.
   ///
   /// Owners see their own dashboard; unauthenticated users cannot book.
-  Widget _buildReservationButton() {
+  Widget _buildReservationButton(String restaurantId) {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
         final isCustomer = state is AuthAuthenticated &&
@@ -149,8 +150,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
         if (!isCustomer) return const SizedBox.shrink();
 
         return FilledButton.icon(
-          // TODO: Phase 15 — open reservation create sheet
-          onPressed: () {},
+          onPressed: () => ReservationCreateSheet.show(context, restaurantId),
           icon: const Icon(Icons.calendar_today),
           label: const Text('Make Reservation'),
         );
