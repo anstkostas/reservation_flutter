@@ -1,0 +1,124 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
+
+import '../constants/user_role.dart';
+import '../cubits/auth/auth_bloc.dart';
+import '../cubits/restaurants/restaurant_cubit.dart';
+import '../screens/loading_screen.dart';
+import 'go_router_refresh_stream.dart';
+
+final _getIt = GetIt.instance;
+
+/// App router — all routes and auth guard in one place.
+///
+/// [GoRouter.redirect] fires on every navigation event and whenever
+/// [GoRouterRefreshStream] notifies a change (i.e. every [AuthState] emission).
+/// Auth state changes therefore automatically re-evaluate the guard without
+/// manual navigation calls in BlocListeners.
+final appRouter = GoRouter(
+  initialLocation: '/loading',
+
+  // Re-evaluate redirect on every AuthState change.
+  refreshListenable: GoRouterRefreshStream(_getIt<AuthBloc>().stream),
+
+  redirect: _redirect,
+
+  routes: [
+    GoRoute(
+      path: '/loading',
+      builder: (context, state) => const LoadingScreen(),
+    ),
+    GoRoute(
+      path: '/login',
+      builder: (context, state) =>
+          const Placeholder(), // implemented in Phase 13
+    ),
+    GoRoute(
+      path: '/signup',
+      builder: (context, state) => BlocProvider(
+        // UnownedRestaurantCubit is scoped here — it only exists during signup.
+        // Providing it at app level would keep it alive unnecessarily.
+        create: (_) => _getIt<UnownedRestaurantCubit>(),
+        child: const Placeholder(), // implemented in Phase 13
+      ),
+    ),
+    GoRoute(
+      path: '/restaurants',
+      builder: (context, state) =>
+          const Placeholder(), // implemented in Phase 14
+      routes: [
+        GoRoute(
+          path: ':id',
+          builder: (context, state) =>
+              const Placeholder(), // implemented in Phase 14
+        ),
+      ],
+    ),
+    GoRoute(
+      path: '/reservations',
+      builder: (context, state) =>
+          const Placeholder(), // implemented in Phase 15
+    ),
+    GoRoute(
+      path: '/owner',
+      builder: (context, state) =>
+          const Placeholder(), // implemented in Phase 16
+    ),
+  ],
+);
+
+String? _redirect(BuildContext context, GoRouterState state) {
+  final authState = _getIt<AuthBloc>().state;
+  final location = state.matchedLocation;
+
+  return switch (authState) {
+    // Session check in progress — hold on /loading until AuthBloc resolves.
+    AuthInitial() => location == '/loading' ? null : '/loading',
+
+    // Login/signup request in-flight — let the screen handle the loading UI.
+    AuthLoading() => null,
+
+    // Login/signup failed — let the screen display the error message.
+    AuthFailure() => null,
+
+    // No valid session — allow public routes only; redirect everything else to /login.
+    AuthUnauthenticated() => _unauthenticatedRedirect(location),
+
+    // Valid session — bounce away from auth screens; enforce role-based access.
+    AuthAuthenticated(:final user) => _authenticatedRedirect(
+      location,
+      user.role,
+    ),
+  };
+}
+
+/// Allows public routes; redirects protected routes to /login.
+String? _unauthenticatedRedirect(String location) {
+  final isPublic =
+      location == '/login' ||
+      location == '/signup' ||
+      location.startsWith('/restaurants');
+  return isPublic ? null : '/login';
+}
+
+/// Redirects authenticated users away from auth screens and enforces role access.
+String? _authenticatedRedirect(String location, UserRole role) {
+  // Bounce away from auth/loading screens to the user's home.
+  if (location == '/login' || location == '/signup' || location == '/loading') {
+    return role == UserRole.customer ? '/restaurants' : '/owner';
+  }
+
+  // Customer trying to reach an owner-only route.
+  if (location.startsWith('/owner') && role != UserRole.owner) {
+    return '/restaurants';
+  }
+
+  // Owner trying to reach a customer-only route.
+  if (location.startsWith('/reservations') && role != UserRole.customer) {
+    return '/owner';
+  }
+
+  return null;
+}
