@@ -6,6 +6,8 @@ import 'package:go_router/go_router.dart';
 import '../constants/user_role.dart';
 import '../cubits/auth/auth_bloc.dart';
 import '../cubits/restaurants/restaurant_cubit.dart';
+import '../screens/auth/login_screen.dart';
+import '../screens/auth/signup_screen.dart';
 import '../screens/loading_screen.dart';
 import 'go_router_refresh_stream.dart';
 
@@ -32,8 +34,7 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: '/login',
-      builder: (context, state) =>
-          const Placeholder(), // implemented in Phase 13
+      builder: (context, state) => const LoginScreen(),
     ),
     GoRoute(
       path: '/signup',
@@ -41,7 +42,7 @@ final appRouter = GoRouter(
         // UnownedRestaurantCubit is scoped here — it only exists during signup.
         // Providing it at app level would keep it alive unnecessarily.
         create: (_) => _getIt<UnownedRestaurantCubit>(),
-        child: const Placeholder(), // implemented in Phase 13
+        child: const SignupScreen(),
       ),
     ),
     GoRoute(
