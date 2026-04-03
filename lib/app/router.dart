@@ -9,6 +9,8 @@ import '../cubits/restaurants/restaurant_cubit.dart';
 import '../screens/auth/login_screen.dart';
 import '../screens/auth/signup_screen.dart';
 import '../screens/loading_screen.dart';
+import '../screens/restaurants/restaurant_detail_screen.dart';
+import '../screens/restaurants/restaurant_list_screen.dart';
 import 'go_router_refresh_stream.dart';
 
 final _getIt = GetIt.instance;
@@ -47,13 +49,13 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: '/restaurants',
-      builder: (context, state) =>
-          const Placeholder(), // implemented in Phase 14
+      builder: (context, state) => const RestaurantListScreen(),
       routes: [
         GoRoute(
           path: ':id',
-          builder: (context, state) =>
-              const Placeholder(), // implemented in Phase 14
+          builder: (context, state) => RestaurantDetailScreen(
+            restaurantId: state.pathParameters['id']!,
+          ),
         ),
       ],
     ),
