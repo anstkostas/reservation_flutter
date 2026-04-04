@@ -26,14 +26,13 @@ class ReservationTableMobile extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       itemCount: reservations.length,
       separatorBuilder: (_, _) => const SizedBox(height: 8),
-      itemBuilder: (context, index) =>
-          _buildCard(context, reservations[index]),
+      itemBuilder: (context, index) => _buildCard(context, reservations[index]),
     );
   }
 
   Widget _buildCard(BuildContext context, ReservationModel reservation) {
-    final date = DateFormat.yMMMd().format(reservation.scheduledAt);
-    final time = DateFormat.Hm().format(reservation.scheduledAt);
+    final date = DateFormat.yMMMd().format(reservation.scheduledAt.toLocal());
+    final time = DateFormat.Hm().format(reservation.scheduledAt.toLocal());
     final customerName = reservation.customer != null
         ? '${reservation.customer!.firstname} ${reservation.customer!.lastname}'
         : '—';
@@ -103,9 +102,7 @@ class ReservationTableMobile extends StatelessWidget {
       context: context,
       builder: (_) => AlertDialog(
         title: const Text('Resolve Reservation'),
-        content: const Text(
-          'Mark this reservation as completed or no-show?',
-        ),
+        content: const Text('Mark this reservation as completed or no-show?'),
         actions: [
           TextButton(
             onPressed: () =>
@@ -113,8 +110,7 @@ class ReservationTableMobile extends StatelessWidget {
             child: const Text('Completed'),
           ),
           TextButton(
-            onPressed: () =>
-                Navigator.pop(context, ReservationStatus.noShow),
+            onPressed: () => Navigator.pop(context, ReservationStatus.noShow),
             child: const Text('No-show'),
           ),
           TextButton(

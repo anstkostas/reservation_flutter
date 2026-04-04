@@ -11,7 +11,7 @@ class CreateReservationRequest {
   /// Serializes to the shape expected by the backend create reservation endpoint.
   /// [scheduledAt] is converted to ISO 8601 format.
   Map<String, dynamic> toMap() => {
-    'scheduledAt': scheduledAt.toIso8601String(),
+    'scheduledAt': scheduledAt.toUtc().toIso8601String(),
     'people': people,
   };
 }

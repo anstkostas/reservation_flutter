@@ -96,9 +96,7 @@ class _ReservationDetailSheetState extends State<ReservationDetailSheet> {
             },
             child: Text(
               'Cancel reservation',
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.error,
-              ),
+              style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
           ),
         ],
@@ -114,9 +112,9 @@ class _ReservationDetailSheetState extends State<ReservationDetailSheet> {
           Navigator.of(context).pop();
         }
         if (state is CustomerReservationFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.message)),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
         }
       },
       builder: (context, state) {
@@ -138,8 +136,8 @@ class _ReservationDetailSheetState extends State<ReservationDetailSheet> {
 
   Widget _buildView(BuildContext context, bool isLoading) {
     final r = widget.reservation;
-    final date = DateFormat.yMMMd().format(r.scheduledAt);
-    final time = DateFormat.Hm().format(r.scheduledAt);
+    final date = DateFormat.yMMMd().format(r.scheduledAt.toLocal());
+    final time = DateFormat.Hm().format(r.scheduledAt.toLocal());
     final guestLabel = r.people == 1 ? '1 guest' : '${r.people} guests';
     final isActive = r.status == ReservationStatus.active;
 
@@ -172,8 +170,9 @@ class _ReservationDetailSheetState extends State<ReservationDetailSheet> {
             children: [
               Expanded(
                 child: OutlinedButton(
-                  onPressed:
-                      isLoading ? null : () => setState(() => _isEditing = true),
+                  onPressed: isLoading
+                      ? null
+                      : () => setState(() => _isEditing = true),
                   child: const Text('Edit'),
                 ),
               ),
@@ -184,8 +183,9 @@ class _ReservationDetailSheetState extends State<ReservationDetailSheet> {
                     backgroundColor: Theme.of(context).colorScheme.error,
                     foregroundColor: Theme.of(context).colorScheme.onError,
                   ),
-                  onPressed:
-                      isLoading ? null : () => _onCancelConfirmation(context),
+                  onPressed: isLoading
+                      ? null
+                      : () => _onCancelConfirmation(context),
                   child: const Text('Cancel'),
                 ),
               ),
@@ -213,7 +213,7 @@ class _ReservationDetailSheetState extends State<ReservationDetailSheet> {
           FormBuilderDateTimePicker(
             name: 'date',
             inputType: InputType.date,
-            initialValue: r.scheduledAt,
+            initialValue: r.scheduledAt.toLocal(),
             firstDate: DateTime.now(),
             lastDate: DateTime.now().add(const Duration(days: 62)),
             decoration: const InputDecoration(
@@ -229,7 +229,7 @@ class _ReservationDetailSheetState extends State<ReservationDetailSheet> {
             inputType: InputType.time,
             // initialValue seeds both date and time pickers from scheduledAt;
             // each picker uses only its relevant part (date or hour/minute).
-            initialValue: r.scheduledAt,
+            initialValue: r.scheduledAt.toLocal(),
             decoration: const InputDecoration(
               labelText: 'Time',
               border: OutlineInputBorder(),
@@ -251,8 +251,9 @@ class _ReservationDetailSheetState extends State<ReservationDetailSheet> {
             children: [
               Expanded(
                 child: OutlinedButton(
-                  onPressed:
-                      isLoading ? null : () => setState(() => _isEditing = false),
+                  onPressed: isLoading
+                      ? null
+                      : () => setState(() => _isEditing = false),
                   child: const Text('Discard'),
                 ),
               ),

@@ -34,13 +34,14 @@ class DioClient {
   /// service locator setup in [main].
   Future<void> initialize() async {
     final baseUrl = dotenv.env['API_BASE_URL'];
-    assert(
-      baseUrl != null && baseUrl.isNotEmpty,
-      'API_BASE_URL is not set in .env — DioClient cannot initialize.',
-    );
+    if (baseUrl == null || baseUrl.isEmpty) {
+      throw StateError(
+        'API_BASE_URL is not set in .env — DioClient cannot initialize.',
+      );
+    }
 
     _dio.options = BaseOptions(
-      baseUrl: baseUrl!,
+      baseUrl: baseUrl,
       connectTimeout: const Duration(seconds: 10),
       receiveTimeout: const Duration(seconds: 10),
       // Web: tells the browser to include cookies in cross-origin requests.

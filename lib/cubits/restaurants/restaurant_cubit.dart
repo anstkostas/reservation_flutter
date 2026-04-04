@@ -59,8 +59,10 @@ class UnownedRestaurantCubit extends Cubit<UnownedRestaurantState> {
     emit(const UnownedLoading());
     try {
       final restaurants = await _repository.getUnowned();
+      if (isClosed) return;
       emit(UnownedLoaded(restaurants));
     } on AppException catch (e) {
+      if (isClosed) return;
       emit(UnownedFailure(e.message));
     }
   }
