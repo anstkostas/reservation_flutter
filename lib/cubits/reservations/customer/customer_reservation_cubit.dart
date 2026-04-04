@@ -30,8 +30,10 @@ class CustomerReservationCubit extends Cubit<CustomerReservationState> {
     emit(const CustomerReservationLoading());
     try {
       final reservations = await _repository.getMyReservations();
+      if (isClosed) return;
       emit(CustomerReservationLoaded(reservations));
     } on AppException catch (e) {
+      if (isClosed) return;
       emit(CustomerReservationFailure(e.message));
     }
   }
@@ -52,10 +54,13 @@ class CustomerReservationCubit extends Cubit<CustomerReservationState> {
         scheduledAt: scheduledAt,
         people: people,
       );
+      if (isClosed) return;
       emit(const CustomerReservationActionSuccess());
       final reservations = await _repository.getMyReservations();
+      if (isClosed) return;
       emit(CustomerReservationLoaded(reservations));
     } on AppException catch (e) {
+      if (isClosed) return;
       emit(CustomerReservationFailure(e.message));
     }
   }
@@ -77,10 +82,13 @@ class CustomerReservationCubit extends Cubit<CustomerReservationState> {
         scheduledAt: scheduledAt,
         people: people,
       );
+      if (isClosed) return;
       emit(const CustomerReservationActionSuccess());
       final reservations = await _repository.getMyReservations();
+      if (isClosed) return;
       emit(CustomerReservationLoaded(reservations));
     } on AppException catch (e) {
+      if (isClosed) return;
       emit(CustomerReservationFailure(e.message));
     }
   }
@@ -93,10 +101,13 @@ class CustomerReservationCubit extends Cubit<CustomerReservationState> {
     emit(const CustomerReservationLoading());
     try {
       await _repository.cancel(id);
+      if (isClosed) return;
       emit(const CustomerReservationActionSuccess());
       final reservations = await _repository.getMyReservations();
+      if (isClosed) return;
       emit(CustomerReservationLoaded(reservations));
     } on AppException catch (e) {
+      if (isClosed) return;
       emit(CustomerReservationFailure(e.message));
     }
   }

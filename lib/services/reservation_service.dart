@@ -26,7 +26,8 @@ class ReservationService {
       return response.data['data'] as List<dynamic>;
     } on DioException catch (e) {
       _logger.e('getMyReservations failed', error: e.error);
-      throw e.error as AppException;
+      final error = e.error;
+      throw error is AppException ? error : const AppException(message: 'Unexpected error', statusCode: 0);
     }
   }
 
@@ -40,7 +41,8 @@ class ReservationService {
       return response.data['data'] as List<dynamic>;
     } on DioException catch (e) {
       _logger.e('getOwnerReservations failed', error: e.error);
-      throw e.error as AppException;
+      final error = e.error;
+      throw error is AppException ? error : const AppException(message: 'Unexpected error', statusCode: 0);
     }
   }
 
@@ -60,7 +62,8 @@ class ReservationService {
       return response.data['data'] as Map<String, dynamic>;
     } on DioException catch (e) {
       _logger.e('create reservation failed', error: e.error);
-      throw e.error as AppException;
+      final error = e.error;
+      throw error is AppException ? error : const AppException(message: 'Unexpected error', statusCode: 0);
     }
   }
 
@@ -80,7 +83,8 @@ class ReservationService {
       return response.data['data'] as Map<String, dynamic>;
     } on DioException catch (e) {
       _logger.e('update reservation failed', error: e.error);
-      throw e.error as AppException;
+      final error = e.error;
+      throw error is AppException ? error : const AppException(message: 'Unexpected error', statusCode: 0);
     }
   }
 
@@ -93,7 +97,8 @@ class ReservationService {
       await _client.dio.delete(ApiConstants.cancelReservation(id));
     } on DioException catch (e) {
       _logger.e('cancel reservation failed', error: e.error);
-      throw e.error as AppException;
+      final error = e.error;
+      throw error is AppException ? error : const AppException(message: 'Unexpected error', statusCode: 0);
     }
   }
 
@@ -113,7 +118,8 @@ class ReservationService {
       return response.data['data'] as Map<String, dynamic>;
     } on DioException catch (e) {
       _logger.e('resolve reservation failed', error: e.error);
-      throw e.error as AppException;
+      final error = e.error;
+      throw error is AppException ? error : const AppException(message: 'Unexpected error', statusCode: 0);
     }
   }
 }

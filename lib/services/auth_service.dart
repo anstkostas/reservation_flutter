@@ -31,7 +31,8 @@ class AuthService {
       return response.data['data'] as Map<String, dynamic>;
     } on DioException catch (e) {
       _logger.e('login failed', error: e.error);
-      throw e.error as AppException;
+      final error = e.error;
+      throw error is AppException ? error : const AppException(message: 'Unexpected error', statusCode: 0);
     }
   }
 
@@ -50,7 +51,8 @@ class AuthService {
       return response.data['data'] as Map<String, dynamic>;
     } on DioException catch (e) {
       _logger.e('signup failed', error: e.error);
-      throw e.error as AppException;
+      final error = e.error;
+      throw error is AppException ? error : const AppException(message: 'Unexpected error', statusCode: 0);
     }
   }
 
@@ -62,7 +64,8 @@ class AuthService {
       await _client.dio.post(ApiConstants.logout);
     } on DioException catch (e) {
       _logger.e('logout failed', error: e.error);
-      throw e.error as AppException;
+      final error = e.error;
+      throw error is AppException ? error : const AppException(message: 'Unexpected error', statusCode: 0);
     }
   }
 
@@ -76,7 +79,8 @@ class AuthService {
       return response.data['data'] as Map<String, dynamic>;
     } on DioException catch (e) {
       _logger.e('getMe failed', error: e.error);
-      throw e.error as AppException;
+      final error = e.error;
+      throw error is AppException ? error : const AppException(message: 'Unexpected error', statusCode: 0);
     }
   }
 }

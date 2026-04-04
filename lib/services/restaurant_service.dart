@@ -23,7 +23,8 @@ class RestaurantService {
       return response.data['data'] as List<dynamic>;
     } on DioException catch (e) {
       _logger.e('getAll restaurants failed', error: e.error);
-      throw e.error as AppException;
+      final error = e.error;
+      throw error is AppException ? error : const AppException(message: 'Unexpected error', statusCode: 0);
     }
   }
 
@@ -36,7 +37,8 @@ class RestaurantService {
       return response.data['data'] as Map<String, dynamic>;
     } on DioException catch (e) {
       _logger.e('getById restaurant failed', error: e.error);
-      throw e.error as AppException;
+      final error = e.error;
+      throw error is AppException ? error : const AppException(message: 'Unexpected error', statusCode: 0);
     }
   }
 
@@ -50,7 +52,8 @@ class RestaurantService {
       return response.data['data'] as List<dynamic>;
     } on DioException catch (e) {
       _logger.e('getUnowned restaurants failed', error: e.error);
-      throw e.error as AppException;
+      final error = e.error;
+      throw error is AppException ? error : const AppException(message: 'Unexpected error', statusCode: 0);
     }
   }
 }

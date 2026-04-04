@@ -23,8 +23,10 @@ class RestaurantCubit extends Cubit<RestaurantState> {
     emit(const RestaurantLoading());
     try {
       final restaurants = await _repository.getAll();
+      if (isClosed) return;
       emit(RestaurantLoaded(restaurants));
     } on AppException catch (e) {
+      if (isClosed) return;
       emit(RestaurantFailure(e.message));
     }
   }
@@ -36,8 +38,10 @@ class RestaurantCubit extends Cubit<RestaurantState> {
     emit(const RestaurantLoading());
     try {
       final restaurant = await _repository.getById(id);
+      if (isClosed) return;
       emit(RestaurantDetailLoaded(restaurant));
     } on AppException catch (e) {
+      if (isClosed) return;
       emit(RestaurantFailure(e.message));
     }
   }

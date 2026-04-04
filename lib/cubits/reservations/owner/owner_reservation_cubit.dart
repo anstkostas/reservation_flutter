@@ -28,8 +28,10 @@ class OwnerReservationCubit extends Cubit<OwnerReservationState> {
     emit(const OwnerReservationLoading());
     try {
       final reservations = await _repository.getOwnerReservations();
+      if (isClosed) return;
       emit(OwnerReservationLoaded(reservations));
     } on AppException catch (e) {
+      if (isClosed) return;
       emit(OwnerReservationFailure(e.message));
     }
   }
@@ -45,10 +47,13 @@ class OwnerReservationCubit extends Cubit<OwnerReservationState> {
     emit(const OwnerReservationLoading());
     try {
       await _repository.resolve(id: id, status: status);
+      if (isClosed) return;
       emit(const OwnerReservationActionSuccess());
       final reservations = await _repository.getOwnerReservations();
+      if (isClosed) return;
       emit(OwnerReservationLoaded(reservations));
     } on AppException catch (e) {
+      if (isClosed) return;
       emit(OwnerReservationFailure(e.message));
     }
   }
