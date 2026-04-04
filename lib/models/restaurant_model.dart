@@ -9,6 +9,9 @@ part 'restaurant_model.g.dart';
 /// Maps to the backend `restaurantOutputDTO` shape. Note: `address` and
 /// `phone` are intentionally omitted — the backend DTO does not expose
 /// them on restaurant list/detail endpoints.
+///
+/// [ownerId] is nullable because unowned restaurants exist in the system —
+/// they appear in the owner signup flow so a new owner can claim one.
 @freezed
 abstract class RestaurantModel with _$RestaurantModel {
   const factory RestaurantModel({

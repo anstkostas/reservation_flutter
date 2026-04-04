@@ -69,6 +69,7 @@ abstract class FontSizes {
   double get headlineMedium;
 }
 
+/// Font sizes for the phone layout tier (shortestSide < 600px).
 class PhoneFontSizes implements FontSizes {
   const PhoneFontSizes();
 
@@ -97,6 +98,7 @@ class PhoneFontSizes implements FontSizes {
   double get headlineMedium => 24;
 }
 
+/// Font sizes for the tablet layout tier (600px ≤ shortestSide, width < 1024px).
 class TabletFontSizes implements FontSizes {
   const TabletFontSizes();
 
@@ -125,6 +127,7 @@ class TabletFontSizes implements FontSizes {
   double get headlineMedium => 26;
 }
 
+/// Font sizes for the desktop layout tier (width ≥ 1024px).
 class DesktopFontSizes implements FontSizes {
   const DesktopFontSizes();
 
