@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:logger/logger.dart';
 
 import '../constants/api_constants.dart';
 import '../models/app_exception.dart';
@@ -11,6 +12,7 @@ class RestaurantService {
   RestaurantService(this._client);
 
   final DioClient _client;
+  final Logger _logger = Logger();
 
   /// GET [ApiConstants.restaurants] and return the raw restaurant list.
   ///
@@ -20,6 +22,7 @@ class RestaurantService {
       final response = await _client.dio.get(ApiConstants.restaurants);
       return response.data['data'] as List<dynamic>;
     } on DioException catch (e) {
+      _logger.e('getAll restaurants failed', error: e.error);
       throw e.error as AppException;
     }
   }
@@ -32,6 +35,7 @@ class RestaurantService {
       final response = await _client.dio.get(ApiConstants.restaurantById(id));
       return response.data['data'] as Map<String, dynamic>;
     } on DioException catch (e) {
+      _logger.e('getById restaurant failed', error: e.error);
       throw e.error as AppException;
     }
   }
@@ -45,6 +49,7 @@ class RestaurantService {
       final response = await _client.dio.get(ApiConstants.unownedRestaurants);
       return response.data['data'] as List<dynamic>;
     } on DioException catch (e) {
+      _logger.e('getUnowned restaurants failed', error: e.error);
       throw e.error as AppException;
     }
   }

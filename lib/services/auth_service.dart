@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:logger/logger.dart';
 
 import '../constants/api_constants.dart';
 import '../models/app_exception.dart';
@@ -13,6 +14,7 @@ class AuthService {
   AuthService(this._client);
 
   final DioClient _client;
+  final Logger _logger = Logger();
 
   /// POST [ApiConstants.login] with [request] as the request body.
   ///
@@ -28,6 +30,7 @@ class AuthService {
       );
       return response.data['data'] as Map<String, dynamic>;
     } on DioException catch (e) {
+      _logger.e('login failed', error: e.error);
       throw e.error as AppException;
     }
   }
@@ -46,6 +49,7 @@ class AuthService {
       );
       return response.data['data'] as Map<String, dynamic>;
     } on DioException catch (e) {
+      _logger.e('signup failed', error: e.error);
       throw e.error as AppException;
     }
   }
@@ -57,6 +61,7 @@ class AuthService {
     try {
       await _client.dio.post(ApiConstants.logout);
     } on DioException catch (e) {
+      _logger.e('logout failed', error: e.error);
       throw e.error as AppException;
     }
   }
@@ -70,6 +75,7 @@ class AuthService {
       final response = await _client.dio.get(ApiConstants.me);
       return response.data['data'] as Map<String, dynamic>;
     } on DioException catch (e) {
+      _logger.e('getMe failed', error: e.error);
       throw e.error as AppException;
     }
   }
