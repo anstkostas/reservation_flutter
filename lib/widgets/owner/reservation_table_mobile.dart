@@ -6,6 +6,7 @@ import '../../constants/reservation_status.dart';
 import '../../cubits/reservations/owner/owner_reservation_cubit.dart';
 import '../../models/models.dart';
 import '../reservations/reservation_status_badge.dart';
+import 'resolve_dialog.dart';
 
 /// Mobile card list view of the owner's reservations.
 ///
@@ -97,30 +98,7 @@ class ReservationTableMobile extends StatelessWidget {
   ) async {
     // Capture cubit before the async gap — context may be stale after await.
     final cubit = context.read<OwnerReservationCubit>();
-
-    final result = await showDialog<ReservationStatus>(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: const Text('Resolve Reservation'),
-        content: const Text('Mark this reservation as completed or no-show?'),
-        actions: [
-          TextButton(
-            onPressed: () =>
-                Navigator.pop(context, ReservationStatus.completed),
-            child: const Text('Completed'),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(context, ReservationStatus.noShow),
-            child: const Text('No-show'),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel'),
-          ),
-        ],
-      ),
-    );
-
+    final result = await ResolveDialog.show(context);
     if (result != null) {
       await cubit.resolve(id: reservation.id, status: result);
     }

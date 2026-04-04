@@ -127,19 +127,47 @@ class _ReservationDetailSheetState extends State<ReservationDetailSheet> {
             bottom: 24 + MediaQuery.viewInsetsOf(context).bottom,
           ),
           child: _isEditing
-              ? _buildEditForm(isLoading)
-              : _buildView(context, isLoading),
+              ? _EditForm(
+                  formKey: _formKey,
+                  reservation: widget.reservation,
+                  isLoading: isLoading,
+                  onSave: _onSave,
+                  onDiscard: () => setState(() => _isEditing = false),
+                )
+              : _ViewMode(
+                  reservation: widget.reservation,
+                  isLoading: isLoading,
+                  onEdit: () => setState(() => _isEditing = true),
+                  onCancel: () => _onCancelConfirmation(context),
+                ),
         );
       },
     );
   }
 
-  Widget _buildView(BuildContext context, bool isLoading) {
-    final r = widget.reservation;
-    final date = DateFormat.yMMMd().format(r.scheduledAt.toLocal());
-    final time = DateFormat.Hm().format(r.scheduledAt.toLocal());
-    final guestLabel = r.people == 1 ? '1 guest' : '${r.people} guests';
-    final isActive = r.status == ReservationStatus.active;
+}
+
+/// View mode — shows reservation details with Edit and Cancel actions.
+class _ViewMode extends StatelessWidget {
+  const _ViewMode({
+    required this.reservation,
+    required this.isLoading,
+    required this.onEdit,
+    required this.onCancel,
+  });
+
+  final ReservationModel reservation;
+  final bool isLoading;
+  final VoidCallback onEdit;
+  final VoidCallback onCancel;
+
+  @override
+  Widget build(BuildContext context) {
+    final date = DateFormat.yMMMd().format(reservation.scheduledAt.toLocal());
+    final time = DateFormat.Hm().format(reservation.scheduledAt.toLocal());
+    final guestLabel =
+        reservation.people == 1 ? '1 guest' : '${reservation.people} guests';
+    final isActive = reservation.status == ReservationStatus.active;
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -149,13 +177,13 @@ class _ReservationDetailSheetState extends State<ReservationDetailSheet> {
           children: [
             Expanded(
               child: Text(
-                r.restaurantName ?? 'Restaurant',
+                reservation.restaurantName ?? 'Restaurant',
                 style: Theme.of(context).textTheme.titleLarge,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            ReservationStatusBadge(status: r.status),
+            ReservationStatusBadge(status: reservation.status),
           ],
         ),
         const SizedBox(height: 16),
@@ -170,9 +198,7 @@ class _ReservationDetailSheetState extends State<ReservationDetailSheet> {
             children: [
               Expanded(
                 child: OutlinedButton(
-                  onPressed: isLoading
-                      ? null
-                      : () => setState(() => _isEditing = true),
+                  onPressed: isLoading ? null : onEdit,
                   child: const Text('Edit'),
                 ),
               ),
@@ -183,9 +209,7 @@ class _ReservationDetailSheetState extends State<ReservationDetailSheet> {
                     backgroundColor: Theme.of(context).colorScheme.error,
                     foregroundColor: Theme.of(context).colorScheme.onError,
                   ),
-                  onPressed: isLoading
-                      ? null
-                      : () => _onCancelConfirmation(context),
+                  onPressed: isLoading ? null : onCancel,
                   child: const Text('Cancel'),
                 ),
               ),
@@ -195,12 +219,28 @@ class _ReservationDetailSheetState extends State<ReservationDetailSheet> {
       ],
     );
   }
+}
 
-  Widget _buildEditForm(bool isLoading) {
-    final r = widget.reservation;
+/// Edit mode — pre-filled form for updating scheduledAt and people.
+class _EditForm extends StatelessWidget {
+  const _EditForm({
+    required this.formKey,
+    required this.reservation,
+    required this.isLoading,
+    required this.onSave,
+    required this.onDiscard,
+  });
 
+  final GlobalKey<FormBuilderState> formKey;
+  final ReservationModel reservation;
+  final bool isLoading;
+  final VoidCallback onSave;
+  final VoidCallback onDiscard;
+
+  @override
+  Widget build(BuildContext context) {
     return FormBuilder(
-      key: _formKey,
+      key: formKey,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -213,7 +253,7 @@ class _ReservationDetailSheetState extends State<ReservationDetailSheet> {
           FormBuilderDateTimePicker(
             name: 'date',
             inputType: InputType.date,
-            initialValue: r.scheduledAt.toLocal(),
+            initialValue: reservation.scheduledAt.toLocal(),
             firstDate: DateTime.now(),
             lastDate: DateTime.now().add(const Duration(days: 62)),
             decoration: const InputDecoration(
@@ -229,7 +269,7 @@ class _ReservationDetailSheetState extends State<ReservationDetailSheet> {
             inputType: InputType.time,
             // initialValue seeds both date and time pickers from scheduledAt;
             // each picker uses only its relevant part (date or hour/minute).
-            initialValue: r.scheduledAt.toLocal(),
+            initialValue: reservation.scheduledAt.toLocal(),
             decoration: const InputDecoration(
               labelText: 'Time',
               border: OutlineInputBorder(),
@@ -241,7 +281,7 @@ class _ReservationDetailSheetState extends State<ReservationDetailSheet> {
           AppTextField(
             name: 'people',
             label: 'Number of guests',
-            initialValue: r.people.toString(),
+            initialValue: reservation.people.toString(),
             keyboardType: TextInputType.number,
             textInputAction: TextInputAction.done,
             validator: validatePersons,
@@ -251,16 +291,14 @@ class _ReservationDetailSheetState extends State<ReservationDetailSheet> {
             children: [
               Expanded(
                 child: OutlinedButton(
-                  onPressed: isLoading
-                      ? null
-                      : () => setState(() => _isEditing = false),
+                  onPressed: isLoading ? null : onDiscard,
                   child: const Text('Discard'),
                 ),
               ),
               const SizedBox(width: 12),
               Expanded(
                 child: FilledButton(
-                  onPressed: isLoading ? null : _onSave,
+                  onPressed: isLoading ? null : onSave,
                   child: isLoading
                       ? const SizedBox(
                           height: 20,
