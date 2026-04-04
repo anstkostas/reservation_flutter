@@ -9,6 +9,7 @@ import '../cubits/restaurants/restaurant_cubit.dart';
 import '../screens/auth/login_screen.dart';
 import '../screens/auth/signup_screen.dart';
 import '../screens/loading_screen.dart';
+import '../screens/owner/owner_dashboard_screen.dart';
 import '../screens/reservations/reservation_history_screen.dart';
 import '../screens/restaurants/restaurant_detail_screen.dart';
 import '../screens/restaurants/restaurant_list_screen.dart';
@@ -66,8 +67,7 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: '/owner',
-      builder: (context, state) =>
-          const Placeholder(), // implemented in Phase 16
+      builder: (context, state) => const OwnerDashboardScreen(),
     ),
   ],
 );
