@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:get_it/get_it.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
@@ -13,6 +14,9 @@ import 'cubits/auth/auth_bloc.dart';
 Future<void> main() async {
   // Required before any async work or plugin use.
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Use clean URLs on web (no # fragment) — dev server handles path routing.
+  usePathUrlStrategy();
 
   // Load environment variables from the bundled .env asset.
   await dotenv.load();
