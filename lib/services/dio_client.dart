@@ -69,7 +69,14 @@ class DioClient {
       // out and transitions the UI to the login screen. get_it is used here
       // because the interceptor has no BuildContext or BlocProvider access.
       // AuthBloc is a lazy singleton guaranteed to exist before any request fires.
-      GetIt.instance<AuthBloc>().add(const AuthLogoutRequested());
+      //
+      // Skip the dispatch for the logout endpoint itself — if the user is already
+      // unauthenticated, POST /auth/logout returns 401, which would re-trigger
+      // AuthLogoutRequested, which calls logout again — infinite loop.
+      final isLogoutRequest = e.requestOptions.path.contains('/auth/logout');
+      if (!isLogoutRequest) {
+        GetIt.instance<AuthBloc>().add(const AuthLogoutRequested());
+      }
       handler.reject(
         DioException(
           requestOptions: e.requestOptions,
