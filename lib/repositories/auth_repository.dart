@@ -20,7 +20,7 @@ class AuthRepository {
     final data = await _service.login(
       LoginRequest(email: email, password: password),
     );
-    return UserModel.fromJson(data['user'] as Map<String, dynamic>);
+    return UserModel.fromJson(data);
   }
 
   /// Creates a new user account and returns the created [UserModel].
@@ -45,7 +45,7 @@ class AuthRepository {
         restaurantId: restaurantId,
       ),
     );
-    return UserModel.fromJson(data['user'] as Map<String, dynamic>);
+    return UserModel.fromJson(data);
   }
 
   /// Clears the server-side auth cookie.

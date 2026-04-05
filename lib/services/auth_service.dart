@@ -32,7 +32,9 @@ class AuthService {
     } on DioException catch (e) {
       _logger.e('login failed', error: e.error);
       final error = e.error;
-      throw error is AppException ? error : const AppException(message: 'Unexpected error', statusCode: 0);
+      throw error is AppException
+          ? error
+          : const AppException(message: 'Unexpected error', statusCode: 0);
     }
   }
 
@@ -52,7 +54,9 @@ class AuthService {
     } on DioException catch (e) {
       _logger.e('signup failed', error: e.error);
       final error = e.error;
-      throw error is AppException ? error : const AppException(message: 'Unexpected error', statusCode: 0);
+      throw error is AppException
+          ? error
+          : const AppException(message: 'Unexpected error', statusCode: 0);
     }
   }
 
@@ -65,7 +69,9 @@ class AuthService {
     } on DioException catch (e) {
       _logger.e('logout failed', error: e.error);
       final error = e.error;
-      throw error is AppException ? error : const AppException(message: 'Unexpected error', statusCode: 0);
+      throw error is AppException
+          ? error
+          : const AppException(message: 'Unexpected error', statusCode: 0);
     }
   }
 
@@ -80,7 +86,9 @@ class AuthService {
     } on DioException catch (e) {
       _logger.e('getMe failed', error: e.error);
       final error = e.error;
-      throw error is AppException ? error : const AppException(message: 'Unexpected error', statusCode: 0);
+      throw error is AppException
+          ? error
+          : const AppException(message: 'Unexpected error', statusCode: 0);
     }
   }
 }

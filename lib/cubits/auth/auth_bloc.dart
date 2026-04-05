@@ -59,8 +59,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       // No active session — expected on first launch or after expiry.
       // Emit AuthUnauthenticated, not AuthFailure — this is not an error.
       emit(const AuthUnauthenticated());
-    } on AppException catch (e) {
-      emit(AuthFailure(e.message));
+    } on AppException {
+      // Any non-401 error during session check (network, 404, etc.) still
+      // means the user is not authenticated — emit AuthUnauthenticated, not
+      // AuthFailure. AuthFailure is reserved for login/signup form errors.
+      emit(const AuthUnauthenticated());
     }
   }
 
