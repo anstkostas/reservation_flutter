@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../constants/breakpoints.dart';
 import '../../cubits/reservations/owner/owner_reservation_cubit.dart';
+import '../../layouts/app_navbar.dart';
 import '../../widgets/error_display.dart';
 import '../../widgets/loading_indicator.dart';
 import '../../widgets/owner/reservation_table.dart';
@@ -29,7 +30,7 @@ class _OwnerDashboardScreenState extends State<OwnerDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Reservations')),
+      appBar: const AppNavbar(),
       body: BlocConsumer<OwnerReservationCubit, OwnerReservationState>(
         // Only trigger the snackbar on action success — failures surface inside
         // the resolve dialog at the cubit level (OwnerReservationFailure).

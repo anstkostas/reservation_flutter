@@ -21,16 +21,15 @@ class RestaurantCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       clipBehavior: Clip.antiAlias,
-      child: InkWell(
-        onTap: onTap,
-        child: Column(
+      child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AspectRatio(
-              aspectRatio: 16 / 9,
+            SizedBox(
+              height: 192,
               child: CachedNetworkImage(
                 imageUrl: restaurant.logoUrl,
-                fit: BoxFit.cover,
+                width: double.infinity,
+                fit: BoxFit.contain,
                 placeholder: (context, url) => const ColoredBox(
                   color: Colors.black12,
                   child: Center(child: CircularProgressIndicator()),
@@ -60,18 +59,28 @@ class RestaurantCard extends StatelessWidget {
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 8),
-                  Chip(
-                    avatar: const Icon(Icons.table_restaurant, size: 16),
-                    label: Text('${restaurant.capacity} tables'),
-                    visualDensity: VisualDensity.compact,
-                    padding: EdgeInsets.zero,
+                  Text(
+                    'Capacity: ${restaurant.capacity} Tables',
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Theme.of(context)
+                              .colorScheme
+                              .onSurface
+                              .withValues(alpha: 0.6),
+                        ),
+                  ),
+                  const SizedBox(height: 12),
+                  SizedBox(
+                    width: double.infinity,
+                    child: FilledButton(
+                      onPressed: onTap,
+                      child: const Text('View Details & Book'),
+                    ),
                   ),
                 ],
               ),
             ),
           ],
         ),
-      ),
     );
   }
 }

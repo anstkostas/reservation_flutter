@@ -24,48 +24,66 @@ class ReservationCard extends StatelessWidget {
     final time = DateFormat.Hm().format(reservation.scheduledAt);
 
     return Card(
+      clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: onTap,
-        borderRadius: BorderRadius.circular(12),
-        child: Padding(
-          padding: const EdgeInsets.all(16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      reservation.restaurantName ?? 'Restaurant',
-                      style: Theme.of(context).textTheme.titleMedium,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Left accent stripe — mirrors React's border-l-4 border-l-primary.
+            Container(
+              width: 4,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
+                            reservation.restaurantName ?? 'Restaurant',
+                            style: Theme.of(context).textTheme.titleMedium,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        ReservationStatusBadge(status: reservation.status),
+                      ],
                     ),
-                  ),
-                  ReservationStatusBadge(status: reservation.status),
-                ],
+                    const SizedBox(height: 8),
+                    Row(
+                      children: [
+                        const Icon(Icons.calendar_today, size: 16),
+                        const SizedBox(width: 6),
+                        Text(
+                          date,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        const SizedBox(width: 16),
+                        const Icon(Icons.access_time, size: 16),
+                        const SizedBox(width: 6),
+                        Text(
+                          time,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                        const SizedBox(width: 16),
+                        const Icon(Icons.person, size: 16),
+                        const SizedBox(width: 6),
+                        Text(
+                          '${reservation.people}',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-              const SizedBox(height: 8),
-              Row(
-                children: [
-                  const Icon(Icons.calendar_today, size: 16),
-                  const SizedBox(width: 6),
-                  Text(date, style: Theme.of(context).textTheme.bodyMedium),
-                  const SizedBox(width: 16),
-                  const Icon(Icons.access_time, size: 16),
-                  const SizedBox(width: 6),
-                  Text(time, style: Theme.of(context).textTheme.bodyMedium),
-                  const SizedBox(width: 16),
-                  const Icon(Icons.person, size: 16),
-                  const SizedBox(width: 6),
-                  Text(
-                    '${reservation.people}',
-                    style: Theme.of(context).textTheme.bodyMedium,
-                  ),
-                ],
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
