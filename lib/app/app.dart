@@ -6,7 +6,7 @@ import 'package:get_it/get_it.dart';
 import '../cubits/auth/auth_bloc.dart';
 import '../cubits/reservations/customer/customer_reservation_cubit.dart';
 import '../cubits/reservations/owner/owner_reservation_cubit.dart';
-import '../cubits/restaurants/restaurant_cubit.dart';
+import '../cubits/restaurants/restaurant_list_cubit.dart';
 import 'router.dart';
 import 'theme.dart';
 
@@ -29,7 +29,7 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(value: _getIt<AuthBloc>()),
-        BlocProvider(create: (_) => _getIt<RestaurantCubit>()),
+        BlocProvider(create: (_) => _getIt<RestaurantListCubit>()),
         BlocProvider(create: (_) => _getIt<CustomerReservationCubit>()),
         BlocProvider(create: (_) => _getIt<OwnerReservationCubit>()),
       ],

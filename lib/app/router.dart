@@ -6,7 +6,9 @@ import 'package:go_router/go_router.dart';
 import '../constants/user_role.dart';
 import '../cubits/auth/auth_bloc.dart';
 import '../cubits/restaurants/restaurant_cubit.dart';
+import '../cubits/restaurants/restaurant_detail_cubit.dart';
 import '../screens/auth/login_screen.dart';
+import '../screens/splash_screen.dart';
 import '../screens/auth/signup_screen.dart';
 import '../screens/loading_screen.dart';
 import '../screens/owner/owner_dashboard_screen.dart';
@@ -33,6 +35,10 @@ final appRouter = GoRouter(
 
   routes: [
     GoRoute(
+      path: '/',
+      builder: (context, state) => const SplashScreen(),
+    ),
+    GoRoute(
       path: '/loading',
       builder: (context, state) => const LoadingScreen(),
     ),
@@ -55,8 +61,14 @@ final appRouter = GoRouter(
       routes: [
         GoRoute(
           path: ':id',
-          builder: (context, state) => RestaurantDetailScreen(
-            restaurantId: state.pathParameters['id']!,
+          builder: (context, state) => BlocProvider(
+            // RestaurantDetailCubit is scoped to this route — fresh instance
+            // per visit so stale data from a previous detail page never bleeds
+            // into a new one.
+            create: (_) => _getIt<RestaurantDetailCubit>(),
+            child: RestaurantDetailScreen(
+              restaurantId: state.pathParameters['id']!,
+            ),
           ),
         ),
       ],
@@ -99,7 +111,11 @@ String? _redirect(BuildContext context, GoRouterState state) {
 
 /// Allows public routes; redirects protected routes to /login.
 String? _unauthenticatedRedirect(String location) {
+  // Session check completed with no valid session — land on splash, not login.
+  if (location == '/loading') return '/';
+
   final isPublic =
+      location == '/' ||
       location == '/login' ||
       location == '/signup' ||
       location.startsWith('/restaurants');

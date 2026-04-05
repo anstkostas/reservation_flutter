@@ -4,6 +4,8 @@ import '../cubits/auth/auth_bloc.dart';
 import '../cubits/reservations/customer/customer_reservation_cubit.dart';
 import '../cubits/reservations/owner/owner_reservation_cubit.dart';
 import '../cubits/restaurants/restaurant_cubit.dart';
+import '../cubits/restaurants/restaurant_detail_cubit.dart';
+import '../cubits/restaurants/restaurant_list_cubit.dart';
 import '../repositories/repositories.dart';
 import '../services/services.dart';
 
@@ -61,8 +63,11 @@ Future<void> setupServiceLocator() async {
   );
 
   // Cubits — factories so BlocProvider gets a fresh instance per subtree
-  getIt.registerFactory<RestaurantCubit>(
-    () => RestaurantCubit(getIt<RestaurantRepository>()),
+  getIt.registerFactory<RestaurantListCubit>(
+    () => RestaurantListCubit(getIt<RestaurantRepository>()),
+  );
+  getIt.registerFactory<RestaurantDetailCubit>(
+    () => RestaurantDetailCubit(getIt<RestaurantRepository>()),
   );
   getIt.registerFactory<CustomerReservationCubit>(
     () => CustomerReservationCubit(getIt<ReservationRepository>()),

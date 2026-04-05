@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../constants/user_role.dart';
 import '../../cubits/auth/auth_bloc.dart';
-import '../../cubits/restaurants/restaurant_cubit.dart';
+import '../../cubits/restaurants/restaurant_detail_cubit.dart';
 import '../../models/models.dart';
 import '../../widgets/error_display.dart';
 import '../../widgets/loading_indicator.dart';
@@ -12,9 +12,9 @@ import '../../widgets/reservations/reservation_create_sheet.dart';
 
 /// Shows full details for a single restaurant.
 ///
-/// Calls [RestaurantCubit.fetchById] on mount using [restaurantId] from the
-/// route. Uses [buildWhen] to ignore [RestaurantLoaded] emissions — those come
-/// from the list screen which shares the same [RestaurantCubit] instance.
+/// Calls [RestaurantDetailCubit.fetchById] on mount using [restaurantId] from
+/// the route. The cubit is scoped to this route — a fresh instance is provided
+/// by the router on every navigation to `/restaurants/:id`.
 ///
 /// The "Make Reservation" button is only rendered for authenticated customers —
 /// owners and unauthenticated users see nothing in its place.
@@ -32,30 +32,25 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<RestaurantCubit>().fetchById(widget.restaurantId);
+    context.read<RestaurantDetailCubit>().fetchById(widget.restaurantId);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: BlocBuilder<RestaurantCubit, RestaurantState>(
-        // Ignore RestaurantLoaded — emitted by the list screen using the same
-        // cubit. Without this, the list refreshing would wipe the detail view.
-        buildWhen: (_, current) => current is! RestaurantLoaded,
+      body: BlocBuilder<RestaurantDetailCubit, RestaurantDetailState>(
         builder: (context, state) {
           return switch (state) {
-            RestaurantInitial() || RestaurantLoading() =>
+            RestaurantDetailInitial() || RestaurantDetailLoading() =>
               const LoadingIndicator(),
-            RestaurantFailure(:final message) => ErrorDisplay(
+            RestaurantDetailFailure(:final message) => ErrorDisplay(
                 message: message,
                 onRetry: () => context
-                    .read<RestaurantCubit>()
+                    .read<RestaurantDetailCubit>()
                     .fetchById(widget.restaurantId),
               ),
             RestaurantDetailLoaded(:final restaurant) =>
               _buildDetail(restaurant),
-            // RestaurantLoaded is excluded by buildWhen — never reached.
-            _ => const SizedBox.shrink(),
           };
         },
       ),
