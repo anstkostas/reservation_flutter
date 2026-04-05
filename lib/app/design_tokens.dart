@@ -7,15 +7,58 @@ import 'package:flutter/material.dart';
 /// this file directly.
 abstract final class DesignTokens {
   // ─── Colour palette ──────────────────────────────────────────────────────
+  //
+  // Source: reservation_react/src/index.css — Shadcn/UI slate theme.
+  // OKLCH values converted to hex; Tailwind slate scale used as the reference.
+  //
+  // React var              → Flutter role             → Tailwind / hex
+  // --primary              → primary                  → slate-800  #1E293B
+  // --primary-foreground   → onPrimary                → slate-50   #F8FAFC
+  // --background           → surface                  → white      #FFFFFF
+  // --foreground           → onSurface                → slate-900  #0F172A
+  // --secondary / --muted  → secondary                → slate-100  #F1F5F9
+  // --secondary-foreground → onSecondary              → slate-800  #1E293B
+  // --muted                → surfaceContainerHighest  → slate-100  #F1F5F9
+  // --destructive          → error                    → red-500    #EF4444
+  // --border / --input     → outline                  → slate-200  #E2E8F0
+  // (no direct React var)  → outlineVariant           → slate-300  #CBD5E1
+  //
+  // Not mapped (no equivalent Flutter ColorScheme role):
+  // --muted-foreground (#64748B slate-500) — approximated in widgets via
+  //   colorScheme.onSurface.withValues(alpha: 0.6)
+  // --ring (#94A3B8 slate-400) — focus ring; Material handles this internally
+  // --card / --popover — same value as --background; surface covers them
 
-  /// Primary brand colour — slate-800 (#1E293B).
-  /// Matches the React frontend's Shadcn primary.
+  /// slate-800 — React --primary
   static const Color primary = Color(0xFF1E293B);
+
+  /// slate-50 — React --primary-foreground
+  static const Color onPrimary = Color(0xFFF8FAFC);
+
+  /// white — React --background / --card / --popover
+  static const Color surface = Color(0xFFFFFFFF);
+
+  /// slate-900 — React --foreground
+  static const Color onSurface = Color(0xFF0F172A);
+
+  /// slate-100 — React --secondary / --muted
+  static const Color secondary = Color(0xFFF1F5F9);
+
+  /// slate-800 — React --secondary-foreground (same value as primary)
+  static const Color onSecondary = Color(0xFF1E293B);
+
+  /// slate-200 — React --border / --input
+  static const Color outline = Color(0xFFE2E8F0);
+
+  /// slate-300 — no direct React var; used for subtler dividers
+  static const Color outlineVariant = Color(0xFFCBD5E1);
+
+  /// red-500 — React --destructive
+  static const Color error = Color(0xFFEF4444);
 
   /// Semantic colours used for status indicators and alerts.
   static const Color success = Color(0xFF16A34A); // green-600
   static const Color warning = Color(0xFFD97706); // amber-600
-  static const Color error = Color(0xFFDC2626); // red-600
   static const Color info = Color(0xFF2563EB); // blue-600
 
   // ─── Typography ──────────────────────────────────────────────────────────

@@ -36,9 +36,25 @@ abstract final class AppTheme {
       LayoutType.desktop => DesignTokens.desktop,
     };
 
+    // Generate the full Material 3 tonal palette from the primary seed, then
+    // override every role that has a direct React CSS variable equivalent.
+    // Roles without a React mapping (containerVariants, state layers, etc.)
+    // remain algorithmically generated — close enough given the slate seed.
     final colorScheme = ColorScheme.fromSeed(
       seedColor: DesignTokens.primary,
       brightness: Brightness.light,
+    ).copyWith(
+      primary:                 DesignTokens.primary,         // --primary
+      onPrimary:               DesignTokens.onPrimary,       // --primary-foreground
+      secondary:               DesignTokens.secondary,       // --secondary / --muted
+      onSecondary:             DesignTokens.onSecondary,     // --secondary-foreground
+      surface:                 DesignTokens.surface,         // --background
+      onSurface:               DesignTokens.onSurface,       // --foreground
+      surfaceContainerHighest: DesignTokens.secondary,       // --muted
+      error:                   DesignTokens.error,           // --destructive
+      onError:                 DesignTokens.surface,         // white on red
+      outline:                 DesignTokens.outline,         // --border / --input
+      outlineVariant:          DesignTokens.outlineVariant,  // slate-300
     );
 
     // Build text theme from Google Fonts base, then override each role's
@@ -108,7 +124,23 @@ abstract final class AppTheme {
             vertical: DesignTokens.spacingMd,
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(DesignTokens.radiusMedium),
+            borderRadius: BorderRadius.circular(DesignTokens.radiusSmall),
+          ),
+          textStyle: GoogleFonts.lato(
+            fontSize: sizes.labelLarge,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+
+      filledButtonTheme: FilledButtonThemeData(
+        style: FilledButton.styleFrom(
+          padding: const EdgeInsets.symmetric(
+            horizontal: DesignTokens.spacingLg,
+            vertical: DesignTokens.spacingMd,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(DesignTokens.radiusSmall),
           ),
           textStyle: GoogleFonts.lato(
             fontSize: sizes.labelLarge,
@@ -125,7 +157,19 @@ abstract final class AppTheme {
             vertical: DesignTokens.spacingMd,
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(DesignTokens.radiusMedium),
+            borderRadius: BorderRadius.circular(DesignTokens.radiusSmall),
+          ),
+          textStyle: GoogleFonts.lato(
+            fontSize: sizes.labelLarge,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(DesignTokens.radiusSmall),
           ),
           textStyle: GoogleFonts.lato(
             fontSize: sizes.labelLarge,
