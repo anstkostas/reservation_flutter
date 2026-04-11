@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 
 import '../cubits/auth/auth_bloc.dart';
+import '../cubits/locale/locale_cubit.dart';
 import '../cubits/reservations/customer/customer_reservation_cubit.dart';
 import '../cubits/reservations/owner/owner_reservation_cubit.dart';
 import '../cubits/restaurants/restaurant_list_cubit.dart';
@@ -22,13 +23,16 @@ final _getIt = GetIt.instance;
 /// All other cubits use [BlocProvider] with a factory registration so each
 /// [BlocProvider] creates a fresh instance from [GetIt].
 class App extends StatelessWidget {
-  const App({super.key});
+  const App({super.key, required this.localeCubit});
+
+  final LocaleCubit localeCubit;
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(value: _getIt<AuthBloc>()),
+        BlocProvider.value(value: localeCubit),
         BlocProvider(create: (_) => _getIt<RestaurantListCubit>()),
         BlocProvider(create: (_) => _getIt<CustomerReservationCubit>()),
         BlocProvider(create: (_) => _getIt<OwnerReservationCubit>()),

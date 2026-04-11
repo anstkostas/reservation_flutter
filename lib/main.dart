@@ -10,6 +10,7 @@ import 'app/app.dart';
 import 'app/app_bloc_observer.dart';
 import 'app/service_locator.dart';
 import 'cubits/auth/auth_bloc.dart';
+import 'cubits/locale/locale_cubit.dart';
 
 Future<void> main() async {
   // Required before any async work or plugin use.
@@ -34,7 +35,14 @@ Future<void> main() async {
   // Must complete before runApp so the widget tree can access dependencies.
   await setupServiceLocator();
 
-  runApp(const App());
+  // Create LocaleCubit and restore the saved locale before the widget tree
+  // builds — avoids a locale flash on startup.
+  final localeCubit = LocaleCubit();
+  await localeCubit.loadSavedLocale(
+    WidgetsBinding.instance.platformDispatcher.locale,
+  );
+
+  runApp(App(localeCubit: localeCubit));
 
   // Dispatch session restore after runApp so AuthBloc is in the widget tree
   // and GoRouter's refreshListenable is already wired before the state changes.
