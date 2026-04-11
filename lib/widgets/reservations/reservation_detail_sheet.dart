@@ -168,6 +168,8 @@ class _ViewMode extends StatelessWidget {
     final guestLabel =
         reservation.people == 1 ? '1 guest' : '${reservation.people} guests';
     final isActive = reservation.status == ReservationStatus.active;
+    // A past active reservation can't be rescheduled — only canceled.
+    final isPast = reservation.scheduledAt.isBefore(DateTime.now());
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -196,13 +198,15 @@ class _ViewMode extends StatelessWidget {
           const SizedBox(height: 24),
           Row(
             children: [
-              Expanded(
-                child: OutlinedButton(
-                  onPressed: isLoading ? null : onEdit,
-                  child: const Text('Edit'),
+              if (!isPast) ...[
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: isLoading ? null : onEdit,
+                    child: const Text('Edit'),
+                  ),
                 ),
-              ),
-              const SizedBox(width: 12),
+                const SizedBox(width: 12),
+              ],
               Expanded(
                 child: FilledButton(
                   style: FilledButton.styleFrom(

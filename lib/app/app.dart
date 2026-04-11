@@ -38,6 +38,9 @@ class App extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         routerConfig: appRouter,
 
+        /// INFO: builder is a special hook that wraps the entire navigator — it sits just
+        /// above every route but just below MaterialApp itself. The child it
+        /// receives is GoRouter's full navigator widget.
         // Responsive theme — reads screen size from MediaQuery and builds a
         // TextTheme with font sizes appropriate for the current layout tier.
         // Widgets consume Theme.of(context) as normal — no LayoutBuilder needed.

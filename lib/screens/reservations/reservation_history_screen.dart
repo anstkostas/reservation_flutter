@@ -10,6 +10,7 @@ import '../../widgets/error_display.dart';
 import '../../widgets/loading_indicator.dart';
 import '../../widgets/reservations/reservation_card.dart';
 import '../../layouts/app_navbar.dart';
+import '../../layouts/container_body.dart';
 import '../../widgets/reservations/reservation_detail_sheet.dart';
 
 /// Displays the authenticated customer's reservations in two tabs: Upcoming and History.
@@ -125,7 +126,8 @@ class _ReservationHistoryScreenState extends State<ReservationHistoryScreen> {
         .toList()
       ..sort((a, b) => b.scheduledAt.compareTo(a.scheduledAt));
 
-    return Column(
+    return ContainerBody(
+      child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
@@ -184,6 +186,7 @@ class _ReservationHistoryScreenState extends State<ReservationHistoryScreen> {
           ),
         ),
       ],
+      ),
     );
   }
 

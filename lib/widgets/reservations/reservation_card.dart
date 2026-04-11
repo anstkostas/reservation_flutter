@@ -20,8 +20,8 @@ class ReservationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final date = DateFormat.yMMMd().format(reservation.scheduledAt);
-    final time = DateFormat.Hm().format(reservation.scheduledAt);
+    final date = DateFormat.yMMMd().format(reservation.scheduledAt.toLocal());
+    final time = DateFormat.Hm().format(reservation.scheduledAt.toLocal());
 
     return Card(
       clipBehavior: Clip.antiAlias,

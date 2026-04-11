@@ -29,7 +29,7 @@ class RestaurantCard extends StatelessWidget {
               child: CachedNetworkImage(
                 imageUrl: restaurant.logoUrl,
                 width: double.infinity,
-                fit: BoxFit.contain,
+                fit: BoxFit.cover,
                 placeholder: (context, url) => const ColoredBox(
                   color: Colors.black12,
                   child: Center(child: CircularProgressIndicator()),

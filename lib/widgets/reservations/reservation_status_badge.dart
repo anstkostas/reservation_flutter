@@ -17,7 +17,7 @@ class ReservationStatusBadge extends StatelessWidget {
         'Completed',
         Theme.of(context).colorScheme.primary,
       ),
-      ReservationStatus.noShow => ('No-show', Colors.orange),
+      ReservationStatus.noShow => ('No-show', Colors.red),
     };
 
     return Chip(

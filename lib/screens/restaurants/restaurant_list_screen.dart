@@ -34,16 +34,17 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
       body: BlocBuilder<RestaurantListCubit, RestaurantListState>(
         builder: (context, state) {
           return switch (state) {
-            RestaurantListInitial() || RestaurantListLoading() =>
-              const LoadingIndicator(),
+            RestaurantListInitial() ||
+            RestaurantListLoading() => const LoadingIndicator(),
             RestaurantListFailure(:final message) => ErrorDisplay(
-                message: message,
-                onRetry: () => context.read<RestaurantListCubit>().fetchAll(),
-              ),
+              message: message,
+              onRetry: () => context.read<RestaurantListCubit>().fetchAll(),
+            ),
             RestaurantListLoaded(:final restaurants) when restaurants.isEmpty =>
               const Center(child: Text('No restaurants available.')),
-            RestaurantListLoaded(:final restaurants) =>
-              _buildContent(restaurants),
+            RestaurantListLoaded(:final restaurants) => _buildContent(
+              restaurants,
+            ),
           };
         },
       ),
@@ -51,12 +52,17 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
   }
 
   Widget _buildContent(List<RestaurantModel> restaurants) {
-    final layout = Breakpoints.layoutOf(MediaQuery.sizeOf(context));
-    final hPadding = switch (layout) {
-      LayoutType.phone => 16.0,
-      LayoutType.tablet => 24.0,
-      LayoutType.desktop => 32.0,
-    };
+    final width = MediaQuery.sizeOf(context).width;
+    // Same centering thresholds as ContainerBody — translates the max-width
+    // constraint into symmetric padding so the scrollbar can stay full-width.
+    final maxWidth = width >= Breakpoints.lg
+        ? Breakpoints.xxl
+        : width >= Breakpoints.md
+            ? Breakpoints.md
+            : double.infinity;
+    final hPadding = maxWidth.isFinite
+        ? ((width - maxWidth) / 2).clamp(0.0, double.infinity) + 16.0
+        : 16.0;
 
     return CustomScrollView(
       slivers: [
@@ -65,34 +71,34 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
           sliver: SliverToBoxAdapter(
             child: Text(
               'Available Restaurants',
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineSmall
-                  ?.copyWith(fontWeight: FontWeight.bold),
+              style: Theme.of(
+                context,
+              ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
             ),
           ),
         ),
         SliverPadding(
           padding: EdgeInsets.symmetric(horizontal: hPadding, vertical: 16),
-          sliver: _buildGrid(restaurants, layout),
+          sliver: _buildGrid(restaurants),
         ),
       ],
     );
   }
 
-  SliverGrid _buildGrid(List<RestaurantModel> restaurants, LayoutType layout) {
+  SliverGrid _buildGrid(List<RestaurantModel> restaurants) {
     final size = MediaQuery.sizeOf(context);
-    final crossAxisCount = Breakpoints.is2xl(size) ? 4 : switch (layout) {
-      LayoutType.phone => 1,
-      LayoutType.tablet => 2,
-      LayoutType.desktop => 3,
-    };
-    // Matches React's gap-6 (24px) on mobile/tablet and lg:gap-12 (48px) on desktop.
-    final gap = switch (layout) {
-      LayoutType.phone => 24.0,
-      LayoutType.tablet => 24.0,
-      LayoutType.desktop => 48.0,
-    };
+    // Width-only breakpoints — mirrors React's md/lg/2xl grid-cols thresholds.
+    // layoutOf (shortestSide-based) is intentionally not used here: on web,
+    // a narrow browser window height would misclassify tablet widths as phone.
+    final crossAxisCount = Breakpoints.is2xl(size)
+        ? 4
+        : Breakpoints.isDesktop(size)
+        ? 3
+        : size.width >= Breakpoints.md
+        ? 2
+        : 1;
+    // Matches React's gap-6 (24px) below lg and lg:gap-12 (48px) at lg+.
+    final gap = Breakpoints.isDesktop(size) ? 48.0 : 24.0;
 
     return SliverGrid.builder(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

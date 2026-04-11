@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
+import '../constants/breakpoints.dart';
 import '../constants/user_role.dart';
 import '../cubits/auth/auth_bloc.dart';
+import '../layouts/container_body.dart';
 import '../models/models.dart';
 
 /// Global navigation bar — mirrors the React web client layout.
@@ -22,9 +24,8 @@ class AppNavbar extends StatelessWidget implements PreferredSizeWidget {
   final PreferredSizeWidget? bottom;
 
   @override
-  Size get preferredSize => Size.fromHeight(
-        kToolbarHeight + (bottom?.preferredSize.height ?? 0),
-      );
+  Size get preferredSize =>
+      Size.fromHeight(kToolbarHeight + (bottom?.preferredSize.height ?? 0));
 
   @override
   Widget build(BuildContext context) {
@@ -42,21 +43,32 @@ class AppNavbar extends StatelessWidget implements PreferredSizeWidget {
 
         return AppBar(
           automaticallyImplyLeading: false,
-          leadingWidth: 56,
-          leading: const _LogoButton(),
-          title: const _RestaurantsLink(),
-          centerTitle: true,
+          leadingWidth: 0,
+          titleSpacing: 0,
+          // scrolledUnderElevation gives a subtle visual separator when content
+          // scrolls under the bar — Flutter-native alternative to border-b.
+          scrolledUnderElevation: 1,
           bottom: bottom,
-          actions: [
-            if (user != null)
-              _UserMenuButton(user: user)
-            else if (!isLoginPage)
-              TextButton(
-                onPressed: () => context.go('/login'),
-                child: const Text('Log in'),
+          title: ContainerBody(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                spacing: 8,
+                children: [
+                  const _LogoButton(),
+                  const _RestaurantsLink(),
+                  if (user != null)
+                    _UserMenuButton(user: user)
+                  else if (!isLoginPage)
+                    TextButton(
+                      onPressed: () => context.go('/login'),
+                      child: const Text('Log in'),
+                    ),
+                ],
               ),
-            const SizedBox(width: 8),
-          ],
+            ),
+          ),
         );
       },
     );
@@ -73,11 +85,7 @@ class _LogoButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(8),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),
-        child: SvgPicture.asset(
-          'assets/logo.svg',
-          width: 28,
-          height: 28,
-        ),
+        child: SvgPicture.asset('assets/logo.svg', width: 28, height: 28),
       ),
     );
   }
@@ -115,13 +123,17 @@ class _UserMenuButton extends StatelessWidget {
         ? user.firstname[0].toUpperCase()
         : '?';
 
+    final colorScheme = Theme.of(context).colorScheme;
+    final iconSize = Breakpoints.isDesktop(MediaQuery.sizeOf(context)) ? 18.0 : 16.0;
+
     return PopupMenuButton<String>(
       offset: const Offset(0, 44),
+      constraints: const BoxConstraints(minWidth: 224),
+      // Match app background — prevents the elevated surfaceContainer default
+      color: colorScheme.surface,
       onSelected: (value) {
         if (value == 'nav') {
-          context.go(
-            user.role == UserRole.owner ? '/owner' : '/reservations',
-          );
+          context.go(user.role == UserRole.owner ? '/owner' : '/reservations');
         } else if (value == 'logout') {
           context.read<AuthBloc>().add(const AuthLogoutRequested());
         }
@@ -136,28 +148,26 @@ class _UserMenuButton extends StatelessWidget {
             children: [
               Text(
                 '${user.firstname} ${user.lastname}',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium
-                    ?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 2),
               Text(
                 user.email,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      color: Theme.of(context)
-                          .colorScheme
-                          .onSurface
-                          .withValues(alpha: 0.6),
-                    ),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withValues(alpha: 0.6),
+                ),
               ),
               const SizedBox(height: 4),
               Text(
                 user.role.name.toUpperCase(),
                 style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: Theme.of(context).colorScheme.primary,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  color: Theme.of(context).colorScheme.primary,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
@@ -171,38 +181,45 @@ class _UserMenuButton extends StatelessWidget {
                 user.role == UserRole.owner
                     ? Icons.dashboard
                     : Icons.calendar_today,
-                size: 18,
+                size: iconSize,
               ),
               const SizedBox(width: 8),
               Text(
-                user.role == UserRole.owner
-                    ? 'Dashboard'
-                    : 'My Reservations',
+                user.role == UserRole.owner ? 'Dashboard' : 'Reservations',
               ),
             ],
           ),
         ),
-        const PopupMenuDivider(),
-        const PopupMenuItem<String>(
+        PopupMenuItem<String>(
           value: 'logout',
           child: Row(
             children: [
-              Icon(Icons.logout, size: 18, color: Colors.red),
-              SizedBox(width: 8),
-              Text('Log out', style: TextStyle(color: Colors.red)),
+              Icon(Icons.logout, size: iconSize, color: colorScheme.error),
+              const SizedBox(width: 8),
+              Text('Logout', style: TextStyle(color: colorScheme.error)),
             ],
           ),
         ),
       ],
-      child: CircleAvatar(
-        radius: 18,
-        backgroundColor:
-            Theme.of(context).colorScheme.primary.withValues(alpha: 0.15),
-        child: Text(
-          initial,
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.primary,
-            fontWeight: FontWeight.bold,
+      child: Container(
+        width: 36,
+        height: 36,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          // Matches Shadcn AvatarFallback: bg-muted + border border-primary/20
+          color: Theme.of(context).colorScheme.surfaceContainerHighest,
+          border: Border.all(
+            color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
+          ),
+        ),
+        child: Center(
+          child: Text(
+            initial,
+            style: TextStyle(
+              // Matches Shadcn text-muted-foreground
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),

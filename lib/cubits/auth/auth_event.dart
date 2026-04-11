@@ -9,7 +9,6 @@ part of 'auth_bloc.dart';
 /// interceptor when any API call returns 401:
 ///
 /// ```dart
-/// // In DioClient._onError — no BuildContext or BlocProvider available:
 /// getIt<AuthBloc>().add(const AuthLogoutRequested());
 /// ```
 ///
