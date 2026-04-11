@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 
+import '../constants/supported_locale.dart';
 import '../cubits/auth/auth_bloc.dart';
 import '../cubits/locale/locale_cubit.dart';
 import '../l10n/app_localizations.dart';
@@ -75,7 +76,9 @@ class App extends StatelessWidget {
               GlobalWidgetsLocalizations.delegate,
               GlobalCupertinoLocalizations.delegate,
             ],
-            supportedLocales: const [Locale('en'), Locale('el')],
+            // Derived from SupportedLocale enum — add languages there, not here.
+            supportedLocales:
+                SupportedLocale.values.map((e) => e.locale).toList(),
           );
         },
       ),

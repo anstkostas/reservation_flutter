@@ -4,8 +4,11 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
 import '../constants/breakpoints.dart';
+import '../constants/supported_locale.dart';
 import '../constants/user_role.dart';
 import '../cubits/auth/auth_bloc.dart';
+import '../cubits/locale/locale_cubit.dart';
+import '../l10n/app_localizations.dart';
 import '../layouts/container_body.dart';
 import '../models/models.dart';
 
@@ -58,13 +61,20 @@ class AppNavbar extends StatelessWidget implements PreferredSizeWidget {
                 children: [
                   const _LogoButton(),
                   const _RestaurantsLink(),
-                  if (user != null)
-                    _UserMenuButton(user: user)
-                  else if (!isLoginPage)
-                    TextButton(
-                      onPressed: () => context.go('/login'),
-                      child: const Text('Log in'),
-                    ),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const _LanguageMenuButton(),
+                      const SizedBox(width: 4),
+                      if (user != null)
+                        _UserMenuButton(user: user)
+                      else if (!isLoginPage)
+                        TextButton(
+                          onPressed: () => context.go('/login'),
+                          child: Text(AppLocalizations.of(context)!.navLogIn),
+                        ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -108,6 +118,42 @@ class _RestaurantsLink extends StatelessWidget {
             ? Theme.of(context).colorScheme.primary
             : Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
       ),
+    );
+  }
+}
+
+/// Language selector — flag emoji dropdown, no label.
+///
+/// Reads the active locale from [LocaleCubit] and rebuilds when it changes.
+/// To add a new language, add an entry to [SupportedLocale] — no changes needed here.
+class _LanguageMenuButton extends StatelessWidget {
+  const _LanguageMenuButton();
+
+  @override
+  Widget build(BuildContext context) {
+    final currentLocale = context.watch<LocaleCubit>().state;
+    final current = SupportedLocale.fromLocale(currentLocale);
+
+    return PopupMenuButton<Locale>(
+      offset: const Offset(0, 44),
+      tooltip: '', // suppress default tooltip on flag button
+      color: Theme.of(context).colorScheme.surface,
+      onSelected: (locale) => context.read<LocaleCubit>().setLocale(locale),
+      itemBuilder: (_) => SupportedLocale.values
+          .map(
+            (entry) => PopupMenuItem<Locale>(
+              value: entry.locale,
+              child: Row(
+                children: [
+                  Text(entry.flag, style: const TextStyle(fontSize: 20)),
+                  const SizedBox(width: 10),
+                  Text(entry.displayName),
+                ],
+              ),
+            ),
+          )
+          .toList(),
+      child: Text(current.flag, style: const TextStyle(fontSize: 22)),
     );
   }
 }
