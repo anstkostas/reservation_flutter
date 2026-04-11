@@ -1,4 +1,181 @@
 {
   "@@locale": "en",
-  "appTitle": "Antigravity"
+
+  "appTitle": "Antigravity",
+
+  "navRestaurants": "Restaurants",
+  "navLogIn": "Log in",
+  "navDashboard": "Dashboard",
+  "navReservations": "Reservations",
+  "navLogout": "Logout",
+
+  "splashHeadline": "Reservation App",
+  "splashSubtitle": "Book, manage, and explore your favorite restaurants seamlessly.",
+  "splashCtaExplore": "Explore Restaurants",
+  "splashCtaDashboard": "Dashboard",
+  "splashCtaMyReservations": "My Reservations",
+
+  "loginTitle": "Welcome back",
+  "loginSubtitle": "Sign in to your account",
+  "loginEmailLabel": "Email",
+  "loginEmailHint": "you@example.com",
+  "loginPasswordLabel": "Password",
+  "loginSubmitButton": "Sign in",
+  "loginNoAccount": "Don't have an account?",
+  "loginSignUpLink": "Sign up",
+
+  "signupTitle": "Create account",
+  "signupSubtitle": "Fill in the details below to get started",
+  "signupFirstNameLabel": "First name",
+  "signupLastNameLabel": "Last name",
+  "signupEmailLabel": "Email",
+  "signupEmailHint": "you@example.com",
+  "signupPasswordLabel": "Password",
+  "signupRolePrompt": "I am signing up as a:",
+  "signupRoleCustomer": "Customer",
+  "signupRoleOwner": "Restaurant owner",
+  "signupSubmitButton": "Create account",
+  "signupHaveAccount": "Already have an account?",
+  "signupSignInLink": "Sign in",
+  "signupRestaurantPickerLabel": "Select your restaurant",
+  "signupRestaurantPickerRequired": "Select a restaurant to claim",
+  "signupNoRestaurantsAvailable": "No restaurants available to claim. Sign up as a customer instead.",
+  "signupRetry": "Retry",
+
+  "restaurantListTitle": "Available Restaurants",
+  "restaurantListEmpty": "No restaurants available.",
+  "restaurantCardCapacity": "Capacity: {capacity} Tables",
+  "@restaurantCardCapacity": {
+    "placeholders": {
+      "capacity": { "type": "int" }
+    }
+  },
+  "restaurantCardViewButton": "View Details & Book",
+
+  "restaurantDetailAbout": "About",
+  "restaurantDetailCapacityChip": "Capacity: {capacity} Tables",
+  "@restaurantDetailCapacityChip": {
+    "placeholders": {
+      "capacity": { "type": "int" }
+    }
+  },
+  "restaurantDetailMakeReservationTitle": "Make a Reservation",
+  "restaurantDetailMakeReservationSubtitle": "Secure your table for an unforgettable dining experience.",
+  "restaurantDetailBookButton": "Book a Table",
+
+  "reservationHistoryTitle": "My Reservations",
+  "reservationHistorySubtitle": "View and manage your dining bookings.",
+  "reservationHistoryBookButton": "Book a Table",
+  "reservationHistoryTabUpcoming": "Upcoming ({count})",
+  "@reservationHistoryTabUpcoming": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "reservationHistoryTabHistory": "History ({count})",
+  "@reservationHistoryTabHistory": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "reservationHistoryEmptyUpcomingTitle": "No upcoming reservations",
+  "reservationHistoryEmptyUpcomingDetail": "You don't have any active bookings at the moment. Explore restaurants and book your next meal!",
+  "reservationHistoryEmptyPastTitle": "No past reservations",
+  "reservationHistoryEmptyPastDetail": "No reservation history yet.",
+  "reservationUpdatedSnackbar": "Reservation updated.",
+
+  "ownerDashboardTitle": "Dashboard",
+  "ownerDashboardSubtitle": "Manage your restaurant's reservations.",
+  "ownerDashboardTabActive": "Active ({count})",
+  "@ownerDashboardTabActive": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "ownerDashboardTabHistory": "History ({count})",
+  "@ownerDashboardTabHistory": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "ownerDashboardSearchHint": "Search by name or email...",
+  "ownerDashboardNoReservations": "No reservations found.",
+  "ownerResolvedSnackbar": "Reservation resolved.",
+
+  "ownerTableColumnCustomer": "Customer",
+  "ownerTableColumnDate": "Date",
+  "ownerTableColumnTime": "Time",
+  "ownerTableColumnPeople": "People",
+  "ownerTableColumnStatus": "Status",
+  "ownerTableColumnActions": "Actions",
+  "ownerTableMarkCompleted": "Mark as completed",
+  "ownerTableMarkNoShow": "Mark as no-show",
+  "ownerTableArrivingSoon": "Arriving soon",
+
+  "ownerMobileComplete": "Complete",
+  "ownerMobileNoShow": "No-show",
+  "ownerMobilePeopleLabel": "{count} People",
+  "@ownerMobilePeopleLabel": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+
+  "reservationCreateTitle": "Make a Reservation",
+  "reservationCreateDateLabel": "Date",
+  "reservationCreateTimeLabel": "Time",
+  "reservationCreateGuestsLabel": "Number of guests",
+  "reservationCreateConfirmButton": "Confirm",
+  "reservationCreateSelectDate": "Select a date",
+  "reservationCreateSelectTime": "Select a time",
+
+  "reservationEditTitle": "Edit Reservation",
+  "reservationEditDateLabel": "Date",
+  "reservationEditTimeLabel": "Time",
+  "reservationEditGuestsLabel": "Number of guests",
+  "reservationEditDiscardButton": "Discard",
+  "reservationEditSaveButton": "Save changes",
+  "reservationEditSelectDate": "Select a date",
+  "reservationEditSelectTime": "Select a time",
+
+  "reservationCancelDialogTitle": "Cancel reservation?",
+  "reservationCancelDialogContent": "This cannot be undone.",
+  "reservationCancelDialogKeep": "Keep it",
+  "reservationCancelDialogConfirm": "Cancel reservation",
+
+  "reservationDetailEditButton": "Edit",
+  "reservationDetailCancelButton": "Cancel",
+  "reservationDetailGuestSingular": "1 guest",
+  "reservationDetailGuestPlural": "{count} guests",
+  "@reservationDetailGuestPlural": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "reservationDetailRestaurantFallback": "Restaurant",
+
+  "statusActive": "Active",
+  "statusCanceled": "Canceled",
+  "statusCompleted": "Completed",
+  "statusNoShow": "No-show",
+
+  "errorRetry": "Retry",
+
+  "validatorEmailRequired": "Email is required",
+  "validatorEmailInvalid": "Enter a valid email address",
+  "validatorPasswordRequired": "Password is required",
+  "validatorPasswordTooShort": "Password must be at least 6 characters",
+  "validatorFieldRequired": "{fieldName} is required",
+  "@validatorFieldRequired": {
+    "placeholders": {
+      "fieldName": { "type": "String" }
+    }
+  },
+  "validatorGuestsRequired": "Number of guests is required",
+  "validatorGuestsInvalidNumber": "Enter a valid number",
+  "validatorGuestsTooFew": "Must be at least 1 guest",
+  "validatorGuestsTooMany": "Cannot exceed 20 guests",
+
+  "languageSelectorEnglish": "English",
+  "languageSelectorGreek": "Greek"
 }
