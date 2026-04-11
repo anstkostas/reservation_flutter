@@ -1,3 +1,12 @@
+// Localisation convention used across this app:
+//
+// In widget build methods, AppLocalizations is accessed as:
+//   final l10n = AppLocalizations.of(context)!;
+//
+// "l10n" is a numeronym — shorthand for "localisation"
+// (the letter 'l', 10 letters, the letter 'n').
+// Same convention as "i18n" for "internationalisation".
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';

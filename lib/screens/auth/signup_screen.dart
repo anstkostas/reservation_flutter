@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../constants/user_role.dart';
 import '../../cubits/auth/auth_bloc.dart';
+import '../../l10n/app_localizations.dart';
 import '../../cubits/restaurants/restaurant_cubit.dart';
 import '../../utils/validators.dart';
 import '../../widgets/app_text_field.dart';
@@ -79,6 +80,7 @@ class _SignupScreenState extends State<SignupScreen> {
   }
 
   Widget _buildForm() {
+    final l10n = AppLocalizations.of(context)!;
     return SafeArea(
       child: Center(
         child: SingleChildScrollView(
@@ -91,33 +93,33 @@ class _SignupScreenState extends State<SignupScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    'Create account',
+                    l10n.signupTitle,
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Fill in the details below to get started',
+                    l10n.signupSubtitle,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const SizedBox(height: 32),
                   AppTextField(
                     name: 'firstname',
-                    label: 'First name',
+                    label: l10n.signupFirstNameLabel,
                     textInputAction: TextInputAction.next,
                     validator: (v) => validateRequired(v, 'First name'),
                   ),
                   const SizedBox(height: 16),
                   AppTextField(
                     name: 'lastname',
-                    label: 'Last name',
+                    label: l10n.signupLastNameLabel,
                     textInputAction: TextInputAction.next,
                     validator: (v) => validateRequired(v, 'Last name'),
                   ),
                   const SizedBox(height: 16),
                   AppTextField(
                     name: 'email',
-                    label: 'Email',
-                    hint: 'you@example.com',
+                    label: l10n.signupEmailLabel,
+                    hint: l10n.signupEmailHint,
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
                     validator: validateEmail,
@@ -125,28 +127,28 @@ class _SignupScreenState extends State<SignupScreen> {
                   const SizedBox(height: 16),
                   AppTextField(
                     name: 'password',
-                    label: 'Password',
+                    label: l10n.signupPasswordLabel,
                     obscureText: true,
                     textInputAction: TextInputAction.done,
                     validator: validatePassword,
                   ),
                   const SizedBox(height: 24),
                   Text(
-                    'I am signing up as a:',
+                    l10n.signupRolePrompt,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const SizedBox(height: 8),
                   SegmentedButton<UserRole>(
-                    segments: const [
+                    segments: [
                       ButtonSegment(
                         value: UserRole.customer,
-                        label: Text('Customer'),
-                        icon: Icon(Icons.person),
+                        label: Text(l10n.signupRoleCustomer),
+                        icon: const Icon(Icons.person),
                       ),
                       ButtonSegment(
                         value: UserRole.owner,
-                        label: Text('Restaurant owner'),
-                        icon: Icon(Icons.storefront),
+                        label: Text(l10n.signupRoleOwner),
+                        icon: const Icon(Icons.storefront),
                       ),
                     ],
                     selected: {_selectedRole},
@@ -159,16 +161,16 @@ class _SignupScreenState extends State<SignupScreen> {
                   const SizedBox(height: 24),
                   FilledButton(
                     onPressed: _onSubmit,
-                    child: const Text('Create account'),
+                    child: Text(l10n.signupSubmitButton),
                   ),
                   const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text('Already have an account?'),
+                      Text(l10n.signupHaveAccount),
                       TextButton(
                         onPressed: () => context.go('/login'),
-                        child: const Text('Sign in'),
+                        child: Text(l10n.signupSignInLink),
                       ),
                     ],
                   ),
@@ -186,6 +188,7 @@ class _SignupScreenState extends State<SignupScreen> {
   /// Shows a loading spinner while fetching, an error with retry on failure,
   /// and a [DropdownButtonFormField] once the list is loaded.
   Widget _buildRestaurantPicker() {
+    final l10n = AppLocalizations.of(context)!;
     return BlocBuilder<UnownedRestaurantCubit, UnownedRestaurantState>(
       builder: (context, state) {
         return switch (state) {
@@ -205,20 +208,20 @@ class _SignupScreenState extends State<SignupScreen> {
                 TextButton(
                   onPressed: () =>
                       context.read<UnownedRestaurantCubit>().fetchUnowned(),
-                  child: const Text('Retry'),
+                  child: Text(l10n.signupRetry),
                 ),
               ],
             ),
           UnownedLoaded(:final restaurants) when restaurants.isEmpty =>
             Text(
-              'No restaurants available to claim. Sign up as a customer instead.',
+              l10n.signupNoRestaurantsAvailable,
               style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
           UnownedLoaded(:final restaurants) => DropdownButtonFormField<String>(
               initialValue: _selectedRestaurantId,
-              decoration: const InputDecoration(
-                labelText: 'Select your restaurant',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: l10n.signupRestaurantPickerLabel,
+                border: const OutlineInputBorder(),
               ),
               items: restaurants
                   .map(
@@ -228,7 +231,7 @@ class _SignupScreenState extends State<SignupScreen> {
               onChanged: (value) =>
                   setState(() => _selectedRestaurantId = value),
               validator: (value) =>
-                  value == null ? 'Select a restaurant to claim' : null,
+                  value == null ? l10n.signupRestaurantPickerRequired : null,
             ),
         };
       },

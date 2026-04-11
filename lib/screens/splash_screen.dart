@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../app/design_tokens.dart';
 import '../constants/user_role.dart';
 import '../cubits/auth/auth_bloc.dart';
+import '../l10n/app_localizations.dart';
 import '../layouts/app_navbar.dart';
 
 /// Full-screen hero landing page — mirrors React's SplashPage.
@@ -59,7 +60,7 @@ class SplashScreen extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          'Reservation App',
+                          AppLocalizations.of(context)!.splashHeadline,
                           style: Theme.of(context).textTheme.displayLarge
                               ?.copyWith(
                                 color: Theme.of(context).colorScheme.secondary,
@@ -72,7 +73,7 @@ class SplashScreen extends StatelessWidget {
                         ),
                         const SizedBox(height: 16),
                         Text(
-                          'Book, manage, and explore your favorite restaurants seamlessly.',
+                          AppLocalizations.of(context)!.splashSubtitle,
                           style: Theme.of(context).textTheme.titleLarge
                               ?.copyWith(
                                 color: Colors.grey[200],
@@ -104,10 +105,10 @@ class SplashScreen extends StatelessWidget {
                           ),
                           child: Text(
                             user == null
-                                ? 'Explore Restaurants'
+                                ? AppLocalizations.of(context)!.splashCtaExplore
                                 : user.role == UserRole.owner
-                                ? 'Dashboard'
-                                : 'My Reservations',
+                                ? AppLocalizations.of(context)!.splashCtaDashboard
+                                : AppLocalizations.of(context)!.splashCtaMyReservations,
                           ),
                         ),
                       ],

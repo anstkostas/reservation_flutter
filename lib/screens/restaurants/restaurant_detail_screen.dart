@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../constants/breakpoints.dart';
 import '../../constants/user_role.dart';
+import '../../l10n/app_localizations.dart';
 import '../../cubits/auth/auth_bloc.dart';
 import '../../cubits/restaurants/restaurant_detail_cubit.dart';
 import '../../layouts/app_navbar.dart';
@@ -221,7 +222,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('About', style: Theme.of(context).textTheme.titleLarge),
+            Text(AppLocalizations.of(context)!.restaurantDetailAbout, style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 12),
             Text(
               restaurant.description,
@@ -235,7 +236,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
             const SizedBox(height: 16),
             Chip(
               avatar: const Icon(Icons.table_restaurant, size: 16),
-              label: Text('Capacity: ${restaurant.capacity} Tables'),
+              label: Text(AppLocalizations.of(context)!.restaurantDetailCapacityChip(restaurant.capacity)),
             ),
           ],
         ),
@@ -260,12 +261,12 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Make a Reservation',
+                  AppLocalizations.of(context)!.restaurantDetailMakeReservationTitle,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  'Secure your table for an unforgettable dining experience.',
+                  AppLocalizations.of(context)!.restaurantDetailMakeReservationSubtitle,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
                         color: Theme.of(context)
                             .colorScheme
@@ -282,7 +283,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                             ReservationCreateSheet.show(context, restaurantId)
                         : () => context.go('/login'),
                     icon: const Icon(Icons.calendar_today),
-                    label: const Text('Book a Table'),
+                    label: Text(AppLocalizations.of(context)!.restaurantDetailBookButton),
                   ),
                 ),
               ],

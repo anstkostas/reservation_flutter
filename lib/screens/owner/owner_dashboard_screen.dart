@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../constants/breakpoints.dart';
 import '../../constants/reservation_status.dart';
+import '../../l10n/app_localizations.dart';
 import '../../cubits/reservations/owner/owner_reservation_cubit.dart';
 import '../../layouts/app_navbar.dart';
 import '../../models/models.dart';
@@ -87,7 +88,7 @@ class _OwnerDashboardScreenState extends State<OwnerDashboardScreen> {
                         children: [
                           const Icon(Icons.calendar_today, size: 16),
                           const SizedBox(width: 6),
-                          Text('Active ($activeCount)'),
+                          Text(AppLocalizations.of(context)!.ownerDashboardTabActive(activeCount)),
                         ],
                       ),
                     ),
@@ -97,7 +98,7 @@ class _OwnerDashboardScreenState extends State<OwnerDashboardScreen> {
                         children: [
                           const Icon(Icons.history, size: 16),
                           const SizedBox(width: 6),
-                          Text('History ($historyCount)'),
+                          Text(AppLocalizations.of(context)!.ownerDashboardTabHistory(historyCount)),
                         ],
                       ),
                     ),
@@ -112,7 +113,7 @@ class _OwnerDashboardScreenState extends State<OwnerDashboardScreen> {
                 current is OwnerReservationActionSuccess,
             listener: (context, state) {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Reservation resolved.')),
+                SnackBar(content: Text(AppLocalizations.of(context)!.ownerResolvedSnackbar)),
               );
             },
             buildWhen: (_, current) =>
@@ -192,14 +193,14 @@ class _OwnerDashboardScreenState extends State<OwnerDashboardScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Dashboard',
+          AppLocalizations.of(context)!.ownerDashboardTitle,
           style: Theme.of(
             context,
           ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 4),
         Text(
-          "Manage your restaurant's reservations.",
+          AppLocalizations.of(context)!.ownerDashboardSubtitle,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
             color: Theme.of(
               context,
@@ -215,7 +216,7 @@ class _OwnerDashboardScreenState extends State<OwnerDashboardScreen> {
       controller: _searchController,
       onChanged: (value) => setState(() => _searchTerm = value),
       decoration: InputDecoration(
-        hintText: 'Search by name or email...',
+        hintText: AppLocalizations.of(context)!.ownerDashboardSearchHint,
         prefixIcon: const Icon(Icons.search, size: 20),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
         contentPadding: const EdgeInsets.symmetric(

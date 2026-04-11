@@ -4,6 +4,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../cubits/auth/auth_bloc.dart';
+import '../../l10n/app_localizations.dart';
 import '../../utils/validators.dart';
 import '../../widgets/app_text_field.dart';
 import '../../widgets/loading_indicator.dart';
@@ -56,6 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _buildForm() {
+    final l10n = AppLocalizations.of(context)!;
     return SafeArea(
       child: Center(
         child: SingleChildScrollView(
@@ -68,19 +70,19 @@ class _LoginScreenState extends State<LoginScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(
-                    'Welcome back',
+                    l10n.loginTitle,
                     style: Theme.of(context).textTheme.headlineMedium,
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Sign in to your account',
+                    l10n.loginSubtitle,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                   const SizedBox(height: 32),
                   AppTextField(
                     name: 'email',
-                    label: 'Email',
-                    hint: 'you@example.com',
+                    label: l10n.loginEmailLabel,
+                    hint: l10n.loginEmailHint,
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
                     validator: validateEmail,
@@ -88,7 +90,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 16),
                   AppTextField(
                     name: 'password',
-                    label: 'Password',
+                    label: l10n.loginPasswordLabel,
                     obscureText: true,
                     textInputAction: TextInputAction.done,
                     validator: validatePassword,
@@ -96,16 +98,16 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(height: 24),
                   FilledButton(
                     onPressed: _onSubmit,
-                    child: const Text('Sign in'),
+                    child: Text(l10n.loginSubmitButton),
                   ),
                   const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Don't have an account?"),
+                      Text(l10n.loginNoAccount),
                       TextButton(
                         onPressed: () => context.go('/signup'),
-                        child: const Text('Sign up'),
+                        child: Text(l10n.loginSignUpLink),
                       ),
                     ],
                   ),

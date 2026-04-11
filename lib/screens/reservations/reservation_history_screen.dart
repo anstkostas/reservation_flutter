@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../constants/breakpoints.dart';
 import '../../constants/reservation_status.dart';
+import '../../l10n/app_localizations.dart';
 import '../../cubits/reservations/customer/customer_reservation_cubit.dart';
 import '../../models/models.dart';
 import '../../widgets/error_display.dart';
@@ -64,7 +65,7 @@ class _ReservationHistoryScreenState extends State<ReservationHistoryScreen> {
                         children: [
                           const Icon(Icons.calendar_today, size: 16),
                           const SizedBox(width: 6),
-                          Text('Upcoming ($active)'),
+                          Text(AppLocalizations.of(context)!.reservationHistoryTabUpcoming(active)),
                         ],
                       ),
                     ),
@@ -74,7 +75,7 @@ class _ReservationHistoryScreenState extends State<ReservationHistoryScreen> {
                         children: [
                           const Icon(Icons.history, size: 16),
                           const SizedBox(width: 6),
-                          Text('History ($past)'),
+                          Text(AppLocalizations.of(context)!.reservationHistoryTabHistory(past)),
                         ],
                       ),
                     ),
@@ -89,7 +90,7 @@ class _ReservationHistoryScreenState extends State<ReservationHistoryScreen> {
               current is CustomerReservationActionSuccess,
           listener: (context, state) {
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Reservation updated.')),
+              SnackBar(content: Text(AppLocalizations.of(context)!.reservationUpdatedSnackbar)),
             );
           },
           buildWhen: (_, current) =>
@@ -116,6 +117,7 @@ class _ReservationHistoryScreenState extends State<ReservationHistoryScreen> {
   }
 
   Widget _buildContent(List<ReservationModel> reservations) {
+    final l10n = AppLocalizations.of(context)!;
     final active = reservations
         .where((r) => r.status == ReservationStatus.active)
         .toList()
@@ -140,7 +142,7 @@ class _ReservationHistoryScreenState extends State<ReservationHistoryScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'My Reservations',
+                      l10n.reservationHistoryTitle,
                       style: Theme.of(context)
                           .textTheme
                           .headlineSmall
@@ -148,7 +150,7 @@ class _ReservationHistoryScreenState extends State<ReservationHistoryScreen> {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'View and manage your dining bookings.',
+                      l10n.reservationHistorySubtitle,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             color: Theme.of(context)
                                 .colorScheme
@@ -163,7 +165,7 @@ class _ReservationHistoryScreenState extends State<ReservationHistoryScreen> {
               FilledButton.icon(
                 onPressed: () => context.go('/restaurants'),
                 icon: const Icon(Icons.restaurant_menu, size: 16),
-                label: const Text('Book a Table'),
+                label: Text(l10n.reservationHistoryBookButton),
               ),
             ],
           ),
@@ -173,14 +175,13 @@ class _ReservationHistoryScreenState extends State<ReservationHistoryScreen> {
             children: [
               _buildGrid(
                 active,
-                emptyMessage: 'No upcoming reservations',
-                emptyDetail:
-                    "You don't have any active bookings at the moment. Explore restaurants and book your next meal!",
+                emptyMessage: l10n.reservationHistoryEmptyUpcomingTitle,
+                emptyDetail: l10n.reservationHistoryEmptyUpcomingDetail,
               ),
               _buildGrid(
                 past,
-                emptyMessage: 'No past reservations',
-                emptyDetail: 'No reservation history yet.',
+                emptyMessage: l10n.reservationHistoryEmptyPastTitle,
+                emptyDetail: l10n.reservationHistoryEmptyPastDetail,
               ),
             ],
           ),

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../constants/breakpoints.dart';
 import '../../cubits/restaurants/restaurant_list_cubit.dart';
+import '../../l10n/app_localizations.dart';
 import '../../models/models.dart';
 import '../../widgets/error_display.dart';
 import '../../widgets/loading_indicator.dart';
@@ -41,7 +42,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
               onRetry: () => context.read<RestaurantListCubit>().fetchAll(),
             ),
             RestaurantListLoaded(:final restaurants) when restaurants.isEmpty =>
-              const Center(child: Text('No restaurants available.')),
+              Center(child: Text(AppLocalizations.of(context)!.restaurantListEmpty)),
             RestaurantListLoaded(:final restaurants) => _buildContent(
               restaurants,
             ),
@@ -70,7 +71,7 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
           padding: EdgeInsets.fromLTRB(hPadding, 24, hPadding, 8),
           sliver: SliverToBoxAdapter(
             child: Text(
-              'Available Restaurants',
+              AppLocalizations.of(context)!.restaurantListTitle,
               style: Theme.of(
                 context,
               ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),

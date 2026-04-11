@@ -112,7 +112,7 @@ class _RestaurantsLink extends StatelessWidget {
     return TextButton.icon(
       onPressed: () => context.go('/restaurants'),
       icon: const Icon(Icons.restaurant_menu, size: 18),
-      label: const Text('Restaurants'),
+      label: Text(AppLocalizations.of(context)!.navRestaurants),
       style: TextButton.styleFrom(
         foregroundColor: isActive
             ? Theme.of(context).colorScheme.primary
@@ -231,7 +231,9 @@ class _UserMenuButton extends StatelessWidget {
               ),
               const SizedBox(width: 8),
               Text(
-                user.role == UserRole.owner ? 'Dashboard' : 'Reservations',
+                user.role == UserRole.owner
+                    ? AppLocalizations.of(menuContext)!.navDashboard
+                    : AppLocalizations.of(menuContext)!.navReservations,
               ),
             ],
           ),
@@ -242,7 +244,7 @@ class _UserMenuButton extends StatelessWidget {
             children: [
               Icon(Icons.logout, size: iconSize, color: colorScheme.error),
               const SizedBox(width: 8),
-              Text('Logout', style: TextStyle(color: colorScheme.error)),
+              Text(AppLocalizations.of(menuContext)!.navLogout, style: TextStyle(color: colorScheme.error)),
             ],
           ),
         ),
