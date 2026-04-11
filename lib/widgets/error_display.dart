@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../l10n/app_localizations.dart';
+
 /// Shared error state — message with an optional retry button.
 ///
 /// Used in BlocBuilder failure branches across all feature screens.
@@ -34,7 +36,7 @@ class ErrorDisplay extends StatelessWidget {
               OutlinedButton.icon(
                 onPressed: onRetry,
                 icon: const Icon(Icons.refresh),
-                label: const Text('Retry'),
+                label: Text(AppLocalizations.of(context)!.errorRetry),
               ),
             ],
           ],

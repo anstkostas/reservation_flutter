@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../../constants/reservation_status.dart';
 import '../../cubits/reservations/owner/owner_reservation_cubit.dart';
+import '../../l10n/app_localizations.dart';
 import '../../models/models.dart';
 import '../reservations/reservation_status_badge.dart';
 
@@ -28,10 +29,12 @@ class ReservationTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     if (reservations.isEmpty) {
       return Center(
         child: Text(
-          'No reservations found.',
+          l10n.ownerDashboardNoReservations,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
             color: Theme.of(
               context,
@@ -47,12 +50,12 @@ class ReservationTable extends StatelessWidget {
         columnSpacing: 20,
         horizontalMargin: 16,
         columns: [
-          DataColumn(label: SizedBox(width: 160, child: Text('Customer'))),
-          DataColumn(label: SizedBox(width: 110, child: Text('Date'))),
-          const DataColumn(label: Text('Time')),
-          const DataColumn(label: Text('People')),
-          const DataColumn(label: Text('Status')),
-          if (showActions) const DataColumn(label: Text('Actions')),
+          DataColumn(label: SizedBox(width: 160, child: Text(l10n.ownerTableColumnCustomer))),
+          DataColumn(label: SizedBox(width: 110, child: Text(l10n.ownerTableColumnDate))),
+          DataColumn(label: Text(l10n.ownerTableColumnTime)),
+          DataColumn(label: Text(l10n.ownerTableColumnPeople)),
+          DataColumn(label: Text(l10n.ownerTableColumnStatus)),
+          if (showActions) DataColumn(label: Text(l10n.ownerTableColumnActions)),
         ],
         rows: reservations.map((r) => _buildRow(context, r)).toList(),
       ),
@@ -60,6 +63,7 @@ class ReservationTable extends StatelessWidget {
   }
 
   DataRow _buildRow(BuildContext context, ReservationModel reservation) {
+    final l10n = AppLocalizations.of(context)!;
     final date = DateFormat.yMMMd().format(reservation.scheduledAt.toLocal());
     final time = DateFormat.Hm().format(reservation.scheduledAt.toLocal());
     final customerName = reservation.customer != null
@@ -135,7 +139,7 @@ class ReservationTable extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Tooltip(
-                        message: 'Mark as completed',
+                        message: l10n.ownerTableMarkCompleted,
                         child: IconButton(
                           onPressed: () => _resolve(
                             context,
@@ -149,7 +153,7 @@ class ReservationTable extends StatelessWidget {
                         ),
                       ),
                       Tooltip(
-                        message: 'Mark as no-show',
+                        message: l10n.ownerTableMarkNoShow,
                         child: IconButton(
                           onPressed: () => _resolve(
                             context,
@@ -165,7 +169,7 @@ class ReservationTable extends StatelessWidget {
                     ],
                   )
                 : Text(
-                    'Arriving soon',
+                    l10n.ownerTableArrivingSoon,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                       fontStyle: FontStyle.italic,
                       color: mutedColor,

@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import '../../constants/breakpoints.dart';
 import '../../constants/reservation_status.dart';
 import '../../cubits/reservations/customer/customer_reservation_cubit.dart';
+import '../../l10n/app_localizations.dart';
 import '../../models/models.dart';
 import '../../utils/validators.dart';
 import '../app_text_field.dart';
@@ -76,18 +77,19 @@ class _ReservationDetailSheetState extends State<ReservationDetailSheet> {
   }
 
   void _onCancelConfirmation(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     // Capture the cubit before the dialog opens — the dialog's builder
     // context is a new route and may not inherit BlocProvider.
     final cubit = context.read<CustomerReservationCubit>();
     showDialog(
       context: context,
       builder: (dialogContext) => AlertDialog(
-        title: const Text('Cancel reservation?'),
-        content: const Text('This cannot be undone.'),
+        title: Text(l10n.reservationCancelDialogTitle),
+        content: Text(l10n.reservationCancelDialogContent),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(dialogContext),
-            child: const Text('Keep it'),
+            child: Text(l10n.reservationCancelDialogKeep),
           ),
           TextButton(
             onPressed: () {
@@ -95,7 +97,7 @@ class _ReservationDetailSheetState extends State<ReservationDetailSheet> {
               cubit.cancel(widget.reservation.id);
             },
             child: Text(
-              'Cancel reservation',
+              l10n.reservationCancelDialogConfirm,
               style: TextStyle(color: Theme.of(context).colorScheme.error),
             ),
           ),
@@ -163,10 +165,12 @@ class _ViewMode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final date = DateFormat.yMMMd().format(reservation.scheduledAt.toLocal());
     final time = DateFormat.Hm().format(reservation.scheduledAt.toLocal());
-    final guestLabel =
-        reservation.people == 1 ? '1 guest' : '${reservation.people} guests';
+    final guestLabel = reservation.people == 1
+        ? l10n.reservationDetailGuestSingular
+        : l10n.reservationDetailGuestPlural(reservation.people);
     final isActive = reservation.status == ReservationStatus.active;
     // A past active reservation can't be rescheduled — only canceled.
     final isPast = reservation.scheduledAt.isBefore(DateTime.now());
@@ -179,7 +183,7 @@ class _ViewMode extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-                reservation.restaurantName ?? 'Restaurant',
+                reservation.restaurantName ?? l10n.reservationDetailRestaurantFallback,
                 style: Theme.of(context).textTheme.titleLarge,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
@@ -202,7 +206,7 @@ class _ViewMode extends StatelessWidget {
                 Expanded(
                   child: OutlinedButton(
                     onPressed: isLoading ? null : onEdit,
-                    child: const Text('Edit'),
+                    child: Text(l10n.reservationDetailEditButton),
                   ),
                 ),
                 const SizedBox(width: 12),
@@ -214,7 +218,7 @@ class _ViewMode extends StatelessWidget {
                     foregroundColor: Theme.of(context).colorScheme.onError,
                   ),
                   onPressed: isLoading ? null : onCancel,
-                  child: const Text('Cancel'),
+                  child: Text(l10n.reservationDetailCancelButton),
                 ),
               ),
             ],
@@ -243,6 +247,7 @@ class _EditForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return FormBuilder(
       key: formKey,
       child: Column(
@@ -250,7 +255,7 @@ class _EditForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Text(
-            'Edit Reservation',
+            l10n.reservationEditTitle,
             style: Theme.of(context).textTheme.titleLarge,
           ),
           const SizedBox(height: 24),
@@ -260,12 +265,13 @@ class _EditForm extends StatelessWidget {
             initialValue: reservation.scheduledAt.toLocal(),
             firstDate: DateTime.now(),
             lastDate: DateTime.now().add(const Duration(days: 62)),
-            decoration: const InputDecoration(
-              labelText: 'Date',
-              border: OutlineInputBorder(),
-              prefixIcon: Icon(Icons.calendar_today),
+            decoration: InputDecoration(
+              labelText: l10n.reservationEditDateLabel,
+              border: const OutlineInputBorder(),
+              prefixIcon: const Icon(Icons.calendar_today),
             ),
-            validator: (value) => value == null ? 'Select a date' : null,
+            validator: (value) =>
+                value == null ? l10n.reservationEditSelectDate : null,
           ),
           const SizedBox(height: 16),
           FormBuilderDateTimePicker(
@@ -274,17 +280,18 @@ class _EditForm extends StatelessWidget {
             // initialValue seeds both date and time pickers from scheduledAt;
             // each picker uses only its relevant part (date or hour/minute).
             initialValue: reservation.scheduledAt.toLocal(),
-            decoration: const InputDecoration(
-              labelText: 'Time',
-              border: OutlineInputBorder(),
-              prefixIcon: Icon(Icons.access_time),
+            decoration: InputDecoration(
+              labelText: l10n.reservationEditTimeLabel,
+              border: const OutlineInputBorder(),
+              prefixIcon: const Icon(Icons.access_time),
             ),
-            validator: (value) => value == null ? 'Select a time' : null,
+            validator: (value) =>
+                value == null ? l10n.reservationEditSelectTime : null,
           ),
           const SizedBox(height: 16),
           AppTextField(
             name: 'people',
-            label: 'Number of guests',
+            label: l10n.reservationEditGuestsLabel,
             initialValue: reservation.people.toString(),
             keyboardType: TextInputType.number,
             textInputAction: TextInputAction.done,
@@ -296,7 +303,7 @@ class _EditForm extends StatelessWidget {
               Expanded(
                 child: OutlinedButton(
                   onPressed: isLoading ? null : onDiscard,
-                  child: const Text('Discard'),
+                  child: Text(l10n.reservationEditDiscardButton),
                 ),
               ),
               const SizedBox(width: 12),
@@ -309,7 +316,7 @@ class _EditForm extends StatelessWidget {
                           width: 20,
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
-                      : const Text('Save changes'),
+                      : Text(l10n.reservationEditSaveButton),
                 ),
               ),
             ],

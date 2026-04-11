@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../models/models.dart';
 
 /// A card displaying a restaurant's logo, name, description, and capacity.
@@ -19,6 +20,7 @@ class RestaurantCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Card(
       clipBehavior: Clip.antiAlias,
       child: Column(
@@ -60,7 +62,7 @@ class RestaurantCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    'Capacity: ${restaurant.capacity} Tables',
+                    l10n.restaurantCardCapacity(restaurant.capacity),
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           color: Theme.of(context)
                               .colorScheme
@@ -73,7 +75,7 @@ class RestaurantCard extends StatelessWidget {
                     width: double.infinity,
                     child: FilledButton(
                       onPressed: onTap,
-                      child: const Text('View Details & Book'),
+                      child: Text(l10n.restaurantCardViewButton),
                     ),
                   ),
                 ],

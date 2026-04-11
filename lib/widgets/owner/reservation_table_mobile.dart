@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 
 import '../../constants/reservation_status.dart';
 import '../../cubits/reservations/owner/owner_reservation_cubit.dart';
+import '../../l10n/app_localizations.dart';
 import '../../models/models.dart';
 import '../reservations/reservation_status_badge.dart';
 
@@ -48,7 +49,7 @@ class ReservationTableMobile extends StatelessWidget {
               ),
             ),
             child: Text(
-              'No reservations found.',
+              AppLocalizations.of(context)!.ownerDashboardNoReservations,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Theme.of(context)
                         .colorScheme
@@ -72,6 +73,7 @@ class ReservationTableMobile extends StatelessWidget {
   }
 
   Widget _buildCard(BuildContext context, ReservationModel reservation) {
+    final l10n = AppLocalizations.of(context)!;
     final date = DateFormat.yMMMd().format(reservation.scheduledAt.toLocal());
     final time = DateFormat.Hm().format(reservation.scheduledAt.toLocal());
     final customerName = reservation.customer != null
@@ -139,7 +141,7 @@ class ReservationTableMobile extends StatelessWidget {
             const SizedBox(height: 8),
             _InfoChip(
               icon: Icons.people,
-              label: '${reservation.people} People',
+              label: l10n.ownerMobilePeopleLabel(reservation.people),
               fullWidth: true,
             ),
 
@@ -161,9 +163,9 @@ class ReservationTableMobile extends StatelessWidget {
                           size: 16,
                           color: Colors.green,
                         ),
-                        label: const Text(
-                          'Complete',
-                          style: TextStyle(color: Colors.green),
+                        label: Text(
+                          l10n.ownerMobileComplete,
+                          style: const TextStyle(color: Colors.green),
                         ),
                         style: OutlinedButton.styleFrom(
                           side: const BorderSide(color: Colors.green),
@@ -183,9 +185,9 @@ class ReservationTableMobile extends StatelessWidget {
                           size: 16,
                           color: Colors.red,
                         ),
-                        label: const Text(
-                          'No-show',
-                          style: TextStyle(color: Colors.red),
+                        label: Text(
+                          l10n.ownerMobileNoShow,
+                          style: const TextStyle(color: Colors.red),
                         ),
                         style: OutlinedButton.styleFrom(
                           side: const BorderSide(color: Colors.red),
@@ -197,7 +199,7 @@ class ReservationTableMobile extends StatelessWidget {
               else
                 Center(
                   child: Text(
-                    'Arriving soon',
+                    l10n.ownerTableArrivingSoon,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           fontStyle: FontStyle.italic,
                           color: Theme.of(context)

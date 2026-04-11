@@ -4,6 +4,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import '../../constants/breakpoints.dart';
 import '../../cubits/reservations/customer/customer_reservation_cubit.dart';
+import '../../l10n/app_localizations.dart';
 import '../../utils/validators.dart';
 import '../app_text_field.dart';
 
@@ -90,6 +91,7 @@ class _ReservationCreateSheetState extends State<ReservationCreateSheet> {
         }
       },
       builder: (context, state) {
+        final l10n = AppLocalizations.of(context)!;
         final isLoading = state is CustomerReservationLoading;
         return Padding(
           // Push content above the keyboard on mobile.
@@ -106,7 +108,7 @@ class _ReservationCreateSheetState extends State<ReservationCreateSheet> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Text(
-                  'Make a Reservation',
+                  l10n.reservationCreateTitle,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 24),
@@ -115,28 +117,30 @@ class _ReservationCreateSheetState extends State<ReservationCreateSheet> {
                   inputType: InputType.date,
                   firstDate: DateTime.now(),
                   lastDate: DateTime.now().add(const Duration(days: 62)),
-                  decoration: const InputDecoration(
-                    labelText: 'Date',
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.calendar_today),
+                  decoration: InputDecoration(
+                    labelText: l10n.reservationCreateDateLabel,
+                    border: const OutlineInputBorder(),
+                    prefixIcon: const Icon(Icons.calendar_today),
                   ),
-                  validator: (value) => value == null ? 'Select a date' : null,
+                  validator: (value) =>
+                      value == null ? l10n.reservationCreateSelectDate : null,
                 ),
                 const SizedBox(height: 16),
                 FormBuilderDateTimePicker(
                   name: 'time',
                   inputType: InputType.time,
-                  decoration: const InputDecoration(
-                    labelText: 'Time',
-                    border: OutlineInputBorder(),
-                    prefixIcon: Icon(Icons.access_time),
+                  decoration: InputDecoration(
+                    labelText: l10n.reservationCreateTimeLabel,
+                    border: const OutlineInputBorder(),
+                    prefixIcon: const Icon(Icons.access_time),
                   ),
-                  validator: (value) => value == null ? 'Select a time' : null,
+                  validator: (value) =>
+                      value == null ? l10n.reservationCreateSelectTime : null,
                 ),
                 const SizedBox(height: 16),
                 AppTextField(
                   name: 'people',
-                  label: 'Number of guests',
+                  label: l10n.reservationCreateGuestsLabel,
                   keyboardType: TextInputType.number,
                   textInputAction: TextInputAction.done,
                   validator: validatePersons,
@@ -150,7 +154,7 @@ class _ReservationCreateSheetState extends State<ReservationCreateSheet> {
                           width: 20,
                           child: CircularProgressIndicator(strokeWidth: 2),
                         )
-                      : const Text('Confirm'),
+                      : Text(l10n.reservationCreateConfirmButton),
                 ),
               ],
             ),
