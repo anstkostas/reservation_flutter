@@ -106,14 +106,18 @@ class _SignupScreenState extends State<SignupScreen> {
                     name: 'firstname',
                     label: l10n.signupFirstNameLabel,
                     textInputAction: TextInputAction.next,
-                    validator: (v) => validateRequired(v, 'First name'),
+                    validator: requiredFieldValidator(
+                      requiredMessage: l10n.validatorFieldRequired(l10n.signupFirstNameLabel),
+                    ),
                   ),
                   const SizedBox(height: 16),
                   AppTextField(
                     name: 'lastname',
                     label: l10n.signupLastNameLabel,
                     textInputAction: TextInputAction.next,
-                    validator: (v) => validateRequired(v, 'Last name'),
+                    validator: requiredFieldValidator(
+                      requiredMessage: l10n.validatorFieldRequired(l10n.signupLastNameLabel),
+                    ),
                   ),
                   const SizedBox(height: 16),
                   AppTextField(
@@ -122,7 +126,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     hint: l10n.signupEmailHint,
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
-                    validator: validateEmail,
+                    validator: emailValidator(
+                      requiredMessage: l10n.validatorEmailRequired,
+                      invalidMessage: l10n.validatorEmailInvalid,
+                    ),
                   ),
                   const SizedBox(height: 16),
                   AppTextField(
@@ -130,7 +137,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     label: l10n.signupPasswordLabel,
                     obscureText: true,
                     textInputAction: TextInputAction.done,
-                    validator: validatePassword,
+                    validator: passwordValidator(
+                      requiredMessage: l10n.validatorPasswordRequired,
+                      tooShortMessage: l10n.validatorPasswordTooShort,
+                    ),
                   ),
                   const SizedBox(height: 24),
                   Text(

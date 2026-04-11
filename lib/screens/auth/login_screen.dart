@@ -85,7 +85,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     hint: l10n.loginEmailHint,
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
-                    validator: validateEmail,
+                    validator: emailValidator(
+                      requiredMessage: l10n.validatorEmailRequired,
+                      invalidMessage: l10n.validatorEmailInvalid,
+                    ),
                   ),
                   const SizedBox(height: 16),
                   AppTextField(
@@ -93,7 +96,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     label: l10n.loginPasswordLabel,
                     obscureText: true,
                     textInputAction: TextInputAction.done,
-                    validator: validatePassword,
+                    validator: passwordValidator(
+                      requiredMessage: l10n.validatorPasswordRequired,
+                      tooShortMessage: l10n.validatorPasswordTooShort,
+                    ),
                   ),
                   const SizedBox(height: 24),
                   FilledButton(

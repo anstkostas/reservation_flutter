@@ -295,7 +295,12 @@ class _EditForm extends StatelessWidget {
             initialValue: reservation.people.toString(),
             keyboardType: TextInputType.number,
             textInputAction: TextInputAction.done,
-            validator: validatePersons,
+            validator: personsValidator(
+              requiredMessage: l10n.validatorGuestsRequired,
+              invalidNumberMessage: l10n.validatorGuestsInvalidNumber,
+              tooFewMessage: l10n.validatorGuestsTooFew,
+              tooManyMessage: l10n.validatorGuestsTooMany,
+            ),
           ),
           const SizedBox(height: 24),
           Row(

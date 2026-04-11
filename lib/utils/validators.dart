@@ -1,58 +1,68 @@
-/// Form validator functions for use with [TextFormField.validator].
+/// Validator factories for use with [FormBuilderField.validator] /
+/// [TextFormField.validator].
 ///
-/// Each function returns null on valid input, or an error string to display.
-/// Pass these directly to the `validator` parameter — no wrapper needed.
+/// Each factory accepts localised error strings and returns a closure with the
+/// standard `String? Function(String?)` signature, compatible with
+/// `flutter_form_builder` and plain `TextFormField`.
+///
+/// Usage:
+/// ```dart
+/// final l10n = AppLocalizations.of(context)!;
+/// AppTextField(
+///   validator: emailValidator(
+///     requiredMessage: l10n.validatorEmailRequired,
+///     invalidMessage:  l10n.validatorEmailInvalid,
+///   ),
+/// )
+/// ```
 library;
 
-/// Validates that [value] is a non-empty, well-formed email address.
-String? validateEmail(String? value) {
-  if (value == null || value.trim().isEmpty) {
-    return 'Email is required';
-  }
-  final emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
-  if (!emailRegex.hasMatch(value.trim())) {
-    return 'Enter a valid email address';
-  }
-  return null;
-}
+/// Returns a validator for email fields using the provided error strings.
+String? Function(String?) emailValidator({
+  required String requiredMessage,
+  required String invalidMessage,
+}) =>
+    (value) {
+      if (value == null || value.trim().isEmpty) return requiredMessage;
+      final emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
+      if (!emailRegex.hasMatch(value.trim())) return invalidMessage;
+      return null;
+    };
 
-/// Validates that [value] meets minimum password requirements.
-String? validatePassword(String? value) {
-  if (value == null || value.isEmpty) {
-    return 'Password is required';
-  }
-  if (value.length < 6) {
-    return 'Password must be at least 6 characters';
-  }
-  return null;
-}
+/// Returns a validator for password fields using the provided error strings.
+String? Function(String?) passwordValidator({
+  required String requiredMessage,
+  required String tooShortMessage,
+}) =>
+    (value) {
+      if (value == null || value.isEmpty) return requiredMessage;
+      if (value.length < 6) return tooShortMessage;
+      return null;
+    };
 
-/// Validates that [value] is non-empty.
-///
-/// [fieldName] is shown in the error message, e.g. "First name is required".
-String? validateRequired(String? value, String fieldName) {
-  if (value == null || value.trim().isEmpty) {
-    return '$fieldName is required';
-  }
-  return null;
-}
+/// Returns a validator for a required text field using the provided error string.
+String? Function(String?) requiredFieldValidator({
+  required String requiredMessage,
+}) =>
+    (value) {
+      if (value == null || value.trim().isEmpty) return requiredMessage;
+      return null;
+    };
 
-/// Validates that [value] is a valid number of persons (1–20).
+/// Returns a validator for guest count fields using the provided error strings.
 ///
 /// Upper bound of 20 matches the backend `.max(20)` sanity cap.
-String? validatePersons(String? value) {
-  if (value == null || value.trim().isEmpty) {
-    return 'Number of guests is required';
-  }
-  final parsed = int.tryParse(value.trim());
-  if (parsed == null) {
-    return 'Enter a valid number';
-  }
-  if (parsed < 1) {
-    return 'Must be at least 1 guest';
-  }
-  if (parsed > 20) {
-    return 'Cannot exceed 20 guests';
-  }
-  return null;
-}
+String? Function(String?) personsValidator({
+  required String requiredMessage,
+  required String invalidNumberMessage,
+  required String tooFewMessage,
+  required String tooManyMessage,
+}) =>
+    (value) {
+      if (value == null || value.trim().isEmpty) return requiredMessage;
+      final parsed = int.tryParse(value.trim());
+      if (parsed == null) return invalidNumberMessage;
+      if (parsed < 1) return tooFewMessage;
+      if (parsed > 20) return tooManyMessage;
+      return null;
+    };
