@@ -1,11 +1,8 @@
 import 'package:get_it/get_it.dart';
 
 import '../cubits/auth/auth_bloc.dart';
-import '../cubits/reservations/customer/customer_reservation_cubit.dart';
-import '../cubits/reservations/owner/owner_reservation_cubit.dart';
 import '../cubits/restaurants/restaurant_cubit.dart';
 import '../cubits/restaurants/restaurant_detail_cubit.dart';
-import '../cubits/restaurants/restaurant_list_cubit.dart';
 import '../repositories/repositories.dart';
 import '../services/services.dart';
 
@@ -62,18 +59,12 @@ Future<void> setupServiceLocator() async {
     () => AuthBloc(getIt<AuthRepository>()),
   );
 
-  // Cubits — factories so BlocProvider gets a fresh instance per subtree
-  getIt.registerFactory<RestaurantListCubit>(
-    () => RestaurantListCubit(getIt<RestaurantRepository>()),
-  );
+  // Route-scoped cubits — factories so the router gets a fresh instance per
+  // navigation. App-level cubits (RestaurantListCubit, CustomerReservationCubit,
+  // OwnerReservationCubit) are instantiated directly in app.dart's BlocProvider
+  // and do not need a getIt registration.
   getIt.registerFactory<RestaurantDetailCubit>(
     () => RestaurantDetailCubit(getIt<RestaurantRepository>()),
-  );
-  getIt.registerFactory<CustomerReservationCubit>(
-    () => CustomerReservationCubit(getIt<ReservationRepository>()),
-  );
-  getIt.registerFactory<OwnerReservationCubit>(
-    () => OwnerReservationCubit(getIt<ReservationRepository>()),
   );
   getIt.registerFactory<UnownedRestaurantCubit>(
     () => UnownedRestaurantCubit(getIt<RestaurantRepository>()),

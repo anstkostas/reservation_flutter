@@ -6,10 +6,11 @@ import 'package:get_it/get_it.dart';
 import '../constants/supported_locale.dart';
 import '../cubits/auth/auth_bloc.dart';
 import '../cubits/locale/locale_cubit.dart';
-import '../l10n/app_localizations.dart';
 import '../cubits/reservations/customer/customer_reservation_cubit.dart';
 import '../cubits/reservations/owner/owner_reservation_cubit.dart';
 import '../cubits/restaurants/restaurant_list_cubit.dart';
+import '../l10n/app_localizations.dart';
+import '../repositories/repositories.dart';
 import 'router.dart';
 import 'theme.dart';
 
@@ -22,8 +23,9 @@ final _getIt = GetIt.instance;
 /// bloc when this widget is removed — ownership stays with [GetIt], which keeps
 /// the Dio 401 interceptor and the widget tree sharing the exact same instance.
 ///
-/// All other cubits use [BlocProvider] with a factory registration so each
-/// [BlocProvider] creates a fresh instance from [GetIt].
+/// App-level cubits are instantiated directly in [BlocProvider.create] — no
+/// getIt registration needed since [BlocProvider] already provides a fresh
+/// instance and nothing outside the widget tree depends on them.
 class App extends StatelessWidget {
   const App({super.key, required this.localeCubit});
 
@@ -35,9 +37,9 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider.value(value: _getIt<AuthBloc>()),
         BlocProvider.value(value: localeCubit),
-        BlocProvider(create: (_) => _getIt<RestaurantListCubit>()),
-        BlocProvider(create: (_) => _getIt<CustomerReservationCubit>()),
-        BlocProvider(create: (_) => _getIt<OwnerReservationCubit>()),
+        BlocProvider(create: (_) => RestaurantListCubit(_getIt<RestaurantRepository>())),
+        BlocProvider(create: (_) => CustomerReservationCubit(_getIt<ReservationRepository>())),
+        BlocProvider(create: (_) => OwnerReservationCubit(_getIt<ReservationRepository>())),
       ],
       // BlocBuilder must sit here — inside MultiBlocProvider's subtree — so its
       // context can reach LocaleCubit. App.build's own context is above the
