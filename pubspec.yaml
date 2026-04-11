@@ -69,6 +69,9 @@ dependencies:
   # Date/time formatting
   intl: ^0.20.2
 
+  # Localisation
+  shared_preferences: ^2.3.5
+
   # Logging
   logger: ^2.5.0
 
@@ -96,6 +99,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
+  generate: true  # enables flutter gen-l10n for .arb → Dart codegen
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
