@@ -26,8 +26,8 @@ class LocaleCubit extends Cubit<Locale> {
   /// Falls back to the device locale if it is 'en' or 'el'; otherwise defaults
   /// to 'en'. Call this once in [main] after [setupServiceLocator].
   Future<void> loadSavedLocale(Locale deviceLocale) async {
-    final prefs = await SharedPreferences.getInstance();
-    final saved = prefs.getString(_kLocaleKey);
+    final prefs = SharedPreferencesAsync();
+    final saved = await prefs.getString(_kLocaleKey);
     if (saved != null) {
       if (!isClosed) emit(Locale(saved));
       return;
@@ -42,7 +42,7 @@ class LocaleCubit extends Cubit<Locale> {
 
   /// Persists [locale] to SharedPreferences and emits the new state.
   Future<void> setLocale(Locale locale) async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = SharedPreferencesAsync();
     await prefs.setString(_kLocaleKey, locale.languageCode);
     if (!isClosed) emit(locale);
   }
