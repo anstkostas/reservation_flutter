@@ -1,4 +1,4 @@
-part of 'restaurant_cubit.dart';
+part of 'unowned_restaurant_cubit.dart';
 
 /// All states [UnownedRestaurantCubit] can emit.
 sealed class UnownedRestaurantState extends Equatable {

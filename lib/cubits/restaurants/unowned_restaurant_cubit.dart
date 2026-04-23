@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 import '../../models/models.dart';
 import '../../repositories/restaurant_repository.dart';
 
-part 'restaurant_state.dart';
+part 'unowned_restaurant_state.dart';
 
 /// Fetches and holds the list of restaurants that have no owner.
 ///

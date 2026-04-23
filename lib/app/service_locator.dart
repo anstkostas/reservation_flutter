@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 
 import '../cubits/auth/auth_bloc.dart';
-import '../cubits/restaurants/restaurant_cubit.dart';
+import '../cubits/restaurants/unowned_restaurant_cubit.dart';
 import '../cubits/restaurants/restaurant_detail_cubit.dart';
 import '../repositories/repositories.dart';
 import '../services/services.dart';

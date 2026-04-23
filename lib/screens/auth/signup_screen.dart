@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 import '../../constants/user_role.dart';
 import '../../cubits/auth/auth_bloc.dart';
 import '../../l10n/app_localizations.dart';
-import '../../cubits/restaurants/restaurant_cubit.dart';
+import '../../cubits/restaurants/unowned_restaurant_cubit.dart';
 import '../../utils/validators.dart';
 import '../../widgets/app_text_field.dart';
 import '../../widgets/loading_indicator.dart';

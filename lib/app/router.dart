@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../constants/user_role.dart';
 import '../cubits/auth/auth_bloc.dart';
-import '../cubits/restaurants/restaurant_cubit.dart';
+import '../cubits/restaurants/unowned_restaurant_cubit.dart';
 import '../cubits/restaurants/restaurant_detail_cubit.dart';
 import '../screens/auth/login_screen.dart';
 import '../screens/splash_screen.dart';
@@ -34,18 +34,12 @@ final appRouter = GoRouter(
   redirect: _redirect,
 
   routes: [
-    GoRoute(
-      path: '/',
-      builder: (context, state) => const SplashScreen(),
-    ),
+    GoRoute(path: '/', builder: (context, state) => const SplashScreen()),
     GoRoute(
       path: '/loading',
       builder: (context, state) => const LoadingScreen(),
     ),
-    GoRoute(
-      path: '/login',
-      builder: (context, state) => const LoginScreen(),
-    ),
+    GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
     GoRoute(
       path: '/signup',
       builder: (context, state) => BlocProvider(
