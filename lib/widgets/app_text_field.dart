@@ -7,7 +7,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 /// password visibility toggling. The [name] parameter is the [FormBuilder]
 /// field key — use it to retrieve the value via `_formKey.currentState!.value`.
 ///
-/// Pass validator functions directly from `lib/utils/validators.dart`.
+/// Pass any `FormFieldValidator<String>` as [validator] — the widget applies no built-in validation.
 class AppTextField extends StatefulWidget {
   const AppTextField({
     super.key,
