@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 import 'package:antigravity_client/app/app.dart';
+import 'package:antigravity_client/app/router.dart';
 import 'package:antigravity_client/cubits/auth/auth_bloc.dart';
 import 'package:antigravity_client/cubits/locale/locale_cubit.dart';
 import 'package:antigravity_client/cubits/restaurants/restaurant_detail_cubit.dart';
@@ -13,6 +14,26 @@ import 'package:antigravity_client/repositories/reservation_repository.dart';
 import 'package:antigravity_client/repositories/restaurant_repository.dart';
 
 import 'mock_repositories.dart';
+
+/// Pumps [tester] in fixed [step] increments until [finder] matches at least
+/// one widget. Throws if the widget is not found within [maxTries] steps.
+///
+/// Use instead of [pumpAndSettle] whenever a continuous animation
+/// (e.g. CircularProgressIndicator) would prevent pumpAndSettle from settling.
+Future<void> pumpUntilFound(
+  WidgetTester tester,
+  Finder finder, {
+  Duration step = const Duration(milliseconds: 100),
+  int maxTries = 50,
+}) async {
+  for (int i = 0; i < maxTries; i++) {
+    await tester.pump(step);
+    if (finder.evaluate().isNotEmpty) return;
+  }
+  throw Exception(
+    'pumpUntilFound: widget not found after ${maxTries * step.inMilliseconds}ms',
+  );
+}
 
 /// Boots the app for integration tests with mock repositories injected via GetIt.
 ///
@@ -52,5 +73,12 @@ Future<void> pumpApp(
 
   final localeCubit = LocaleCubit();
   await tester.pumpWidget(App(localeCubit: localeCubit));
+  // Mirror main.dart: dispatch the startup auth check so AuthBloc leaves
+  // AuthInitial and the router evaluates its redirect guard.
+  GetIt.instance<AuthBloc>().add(const AuthCheckRequested());
+  await tester.pumpAndSettle();
+  // Force router redirect re-evaluation — needed after GetIt.reset() which
+  // invalidates the GoRouterRefreshStream subscription on the old AuthBloc stream.
+  appRouter.refresh();
   await tester.pumpAndSettle();
 }
