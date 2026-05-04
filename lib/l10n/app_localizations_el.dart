@@ -277,6 +277,9 @@ class AppLocalizationsEl extends AppLocalizations {
   String get reservationCreateSelectTime => 'Επιλέξτε ώρα';
 
   @override
+  String get reservationCreateSuccess => 'Η κράτηση επιβεβαιώθηκε!';
+
+  @override
   String get reservationEditTitle => 'Επεξεργασία Κράτησης';
 
   @override

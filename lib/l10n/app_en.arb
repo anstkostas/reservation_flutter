@@ -128,6 +128,7 @@
   "reservationCreateConfirmButton": "Confirm",
   "reservationCreateSelectDate": "Select a date",
   "reservationCreateSelectTime": "Select a time",
+  "reservationCreateSuccess": "Reservation confirmed!",
 
   "reservationEditTitle": "Edit Reservation",
   "reservationEditDateLabel": "Date",

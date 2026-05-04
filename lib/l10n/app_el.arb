@@ -93,6 +93,7 @@
   "reservationCreateConfirmButton": "Επιβεβαίωση",
   "reservationCreateSelectDate": "Επιλέξτε ημερομηνία",
   "reservationCreateSelectTime": "Επιλέξτε ώρα",
+  "reservationCreateSuccess": "Η κράτηση επιβεβαιώθηκε!",
 
   "reservationEditTitle": "Επεξεργασία Κράτησης",
   "reservationEditDateLabel": "Ημερομηνία",

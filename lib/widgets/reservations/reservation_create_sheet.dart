@@ -82,6 +82,11 @@ class _ReservationCreateSheetState extends State<ReservationCreateSheet> {
     return BlocConsumer<CustomerReservationCubit, CustomerReservationState>(
       listener: (context, state) {
         if (state is CustomerReservationActionSuccess) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(AppLocalizations.of(context)!.reservationCreateSuccess),
+            ),
+          );
           Navigator.of(context).pop();
         }
         if (state is CustomerReservationFailure) {

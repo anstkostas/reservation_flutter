@@ -272,6 +272,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reservationCreateSelectTime => 'Select a time';
 
   @override
+  String get reservationCreateSuccess => 'Reservation confirmed!';
+
+  @override
   String get reservationEditTitle => 'Edit Reservation';
 
   @override

@@ -584,6 +584,12 @@ abstract class AppLocalizations {
   /// **'Select a time'**
   String get reservationCreateSelectTime;
 
+  /// No description provided for @reservationCreateSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Reservation confirmed!'**
+  String get reservationCreateSuccess;
+
   /// No description provided for @reservationEditTitle.
   ///
   /// In en, this message translates to:
