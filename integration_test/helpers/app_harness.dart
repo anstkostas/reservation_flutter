@@ -35,13 +35,14 @@ Future<void> pumpUntilFound(
   );
 }
 
-/// Boots the app for integration tests with mock repositories injected via GetIt.
-///
-/// Stubs on [authRepo], [reservationRepo], and [restaurantRepo] must be
-/// configured by the caller **before** calling this function — the app settles
-/// fully (including the initial auth check) inside [pumpAndSettle].
-///
-/// Resets GetIt on every call so test registrations never bleed across tests.
+/// Boots the app for integration tests with mock
+/// repositories injected via GetIt.
+/// Stubs on [authRepo], [reservationRepo],
+/// and [restaurantRepo] must be
+/// configured by the caller **before** calling this function
+///  — the app settles fully (including the initial auth check)
+/// inside [pumpAndSettle]. Resets GetIt on every call so test
+/// registrations never bleed across tests.
 Future<void> pumpApp(
   WidgetTester tester, {
   required MockAuthRepository authRepo,
