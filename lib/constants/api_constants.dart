@@ -5,6 +5,7 @@ abstract final class ApiConstants {
   static const String login = '/auth/login';
   static const String signup = '/auth/signup';
   static const String logout = '/auth/logout';
+  static const String refresh = '/auth/refresh';
   static const String me = '/auth/me';
 
   // Restaurants

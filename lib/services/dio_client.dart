@@ -1,7 +1,10 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 
+import '../constants/api_constants.dart';
 import '../cubits/auth/auth_bloc.dart';
 import '../models/models.dart';
 import 'cookie_setup/cookie_setup.dart';
@@ -24,6 +27,8 @@ class DioClient {
   }
 
   late final Dio _dio;
+  bool _isRefreshing = false;
+  Completer<bool>? _refreshCompleter;
 
   /// Exposes the configured [Dio] instance to API services.
   Dio get dio => _dio;
@@ -57,26 +62,26 @@ class DioClient {
     _dio.interceptors.add(InterceptorsWrapper(onError: _onError));
   }
 
-  /// Normalizes all non-2xx Dio errors into [AppException] or [UnauthorizedException].
-  ///
-  /// The exception is stored in [DioException.error] so that services
-  /// can extract and rethrow it via `e.error as AppException`.
-  void _onError(DioException e, ErrorInterceptorHandler handler) {
+  /// On 401, attempts a silent token refresh before rejecting.
+  /// Auth endpoints always reject immediately — their 401s are intentional.
+  /// Concurrent 401s share one refresh call via a Completer lock.
+  Future<void> _onError(DioException e, ErrorInterceptorHandler handler) async {
     final statusCode = e.response?.statusCode;
 
-    if (statusCode == 401) {
-      // Dispatch to AuthBloc so any 401 — from any endpoint — logs the user
-      // out and transitions the UI to the login screen. get_it is used here
-      // because the interceptor has no BuildContext or BlocProvider access.
-      // AuthBloc is a lazy singleton guaranteed to exist before any request fires.
-      //
-      // Skip the dispatch for the logout endpoint itself — if the user is already
-      // unauthenticated, POST /auth/logout returns 401, which would re-trigger
-      // AuthLogoutRequested, which calls logout again — infinite loop.
-      final isLogoutRequest = e.requestOptions.path.contains('/auth/logout');
-      if (!isLogoutRequest) {
-        GetIt.instance<AuthBloc>().add(const AuthLogoutRequested());
-      }
+    if (statusCode != 401) {
+      _rejectWithAppException(e, handler);
+      return;
+    }
+
+    // Skip refresh for auth endpoints — they produce intentional 401s
+    final path = e.requestOptions.path;
+    final isAuthEndpoint =
+        path.contains('/auth/login') ||
+        path.contains('/auth/signup') ||
+        path.contains('/auth/refresh') ||
+        path.contains('/auth/logout');
+
+    if (isAuthEndpoint) {
       handler.reject(
         DioException(
           requestOptions: e.requestOptions,
@@ -88,18 +93,80 @@ class DioClient {
       return;
     }
 
-    if (e.response != null) {
-      final data = e.response!.data;
-      final message = data is Map<String, dynamic>
-          ? (data['message'] as String?) ?? 'An error occurred.'
-          : 'An error occurred.';
+    // Refresh lock — queue concurrent 401s behind a single refresh call
+    if (_isRefreshing) {
+      final refreshed = await _refreshCompleter!.future;
+      if (refreshed) {
+        try {
+          final retried = await _dio.fetch(e.requestOptions);
+          handler.resolve(retried);
+        } catch (_) {
+          handler.reject(e);
+        }
+      } else {
+        handler.reject(
+          DioException(
+            requestOptions: e.requestOptions,
+            response: e.response,
+            type: e.type,
+            error: const UnauthorizedException(),
+          ),
+        );
+      }
+      return;
+    }
 
+    _isRefreshing = true;
+    _refreshCompleter = Completer<bool>();
+
+    try {
+      await _dio.post(ApiConstants.refresh);
+      _refreshCompleter!.complete(true);
+      _isRefreshing = false;
+      _refreshCompleter = null;
+
+      try {
+        final retried = await _dio.fetch(e.requestOptions);
+        handler.resolve(retried);
+      } catch (_) {
+        handler.reject(e);
+      }
+    } catch (_) {
+      _refreshCompleter!.complete(false);
+      _isRefreshing = false;
+      _refreshCompleter = null;
+
+      GetIt.instance<AuthBloc>().add(const AuthLogoutRequested());
       handler.reject(
         DioException(
           requestOptions: e.requestOptions,
           response: e.response,
           type: e.type,
-          error: AppException(message: message, statusCode: statusCode ?? 500),
+          error: const UnauthorizedException(),
+        ),
+      );
+    }
+  }
+
+  /// Normalizes non-401 Dio errors into [AppException] stored in [DioException.error].
+  void _rejectWithAppException(
+    DioException e,
+    ErrorInterceptorHandler handler,
+  ) {
+    if (e.response != null) {
+      final data = e.response!.data;
+      final message = data is Map<String, dynamic>
+          ? (data['message'] as String?) ?? 'An error occurred.'
+          : 'An error occurred.';
+      handler.reject(
+        DioException(
+          requestOptions: e.requestOptions,
+          response: e.response,
+          type: e.type,
+          error: AppException(
+            message: message,
+            statusCode: e.response!.statusCode ?? 500,
+          ),
         ),
       );
       return;
