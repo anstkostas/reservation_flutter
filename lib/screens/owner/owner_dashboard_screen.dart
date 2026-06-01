@@ -160,8 +160,7 @@ class _OwnerDashboardScreenState extends State<OwnerDashboardScreen> {
         filtered.where((r) => r.status != ReservationStatus.active).toList()
           ..sort((a, b) => b.scheduledAt.compareTo(a.scheduledAt));
 
-    final isPhone =
-        Breakpoints.layoutOf(MediaQuery.sizeOf(context)) == LayoutType.phone;
+    final isPhone = MediaQuery.sizeOf(context).width < Breakpoints.md;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

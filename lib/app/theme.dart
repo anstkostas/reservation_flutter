@@ -25,16 +25,17 @@ import 'design_tokens.dart';
 abstract final class AppTheme {
   /// Builds [ThemeData] with font sizes appropriate for the given screen [size].
   ///
-  /// Uses [Breakpoints.layoutOf] to determine the layout tier, then picks
+  /// Uses width-based breakpoints to determine the layout tier, then picks
   /// the matching font size set from [DesignTokens].
   static ThemeData themeData(Size size) {
-    final layout = Breakpoints.layoutOf(size);
-
-    final FontSizes sizes = switch (layout) {
-      LayoutType.phone => DesignTokens.phone,
-      LayoutType.tablet => DesignTokens.tablet,
-      LayoutType.desktop => DesignTokens.desktop,
-    };
+    final FontSizes sizes;
+    if (size.width < Breakpoints.md) {
+      sizes = DesignTokens.phone;
+    } else if (size.width < Breakpoints.lg) {
+      sizes = DesignTokens.tablet;
+    } else {
+      sizes = DesignTokens.desktop;
+    }
 
     // Generate the full Material 3 tonal palette from the primary seed, then
     // override every role that has a direct React CSS variable equivalent.

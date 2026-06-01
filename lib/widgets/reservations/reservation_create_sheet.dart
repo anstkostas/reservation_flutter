@@ -26,7 +26,7 @@ class ReservationCreateSheet extends StatefulWidget {
   /// [CustomerReservationCubit] is accessible via [MultiBlocProvider] at the
   /// app root, so no extra [BlocProvider.value] wrapper is needed here.
   static void show(BuildContext context, String restaurantId) {
-    if (Breakpoints.isPhone(MediaQuery.sizeOf(context))) {
+    if (MediaQuery.sizeOf(context).width < Breakpoints.md) {
       showModalBottomSheet(
         context: context,
         isScrollControlled: true, // required for keyboard avoidance

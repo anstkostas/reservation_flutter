@@ -260,9 +260,7 @@ class _ReservationHistoryScreenState extends State<ReservationHistoryScreen> {
 
     final size = MediaQuery.sizeOf(context);
     // Phone: list (natural card height); tablet/desktop: 2/3-column grid.
-    final layout = Breakpoints.layoutOf(size);
-
-    if (layout == LayoutType.phone) {
+    if (size.width < Breakpoints.md) {
       return ListView.separated(
         padding: const EdgeInsets.all(16),
         itemCount: reservations.length,
@@ -275,7 +273,7 @@ class _ReservationHistoryScreenState extends State<ReservationHistoryScreen> {
       );
     }
 
-    final crossAxisCount = layout == LayoutType.tablet ? 2 : 3;
+    final crossAxisCount = size.width < Breakpoints.lg ? 2 : 3;
     return GridView.builder(
       padding: const EdgeInsets.all(16),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

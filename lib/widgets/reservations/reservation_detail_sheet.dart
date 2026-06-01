@@ -26,7 +26,7 @@ class ReservationDetailSheet extends StatefulWidget {
 
   /// Opens the sheet adaptively based on screen size.
   static void show(BuildContext context, ReservationModel reservation) {
-    if (Breakpoints.isPhone(MediaQuery.sizeOf(context))) {
+    if (MediaQuery.sizeOf(context).width < Breakpoints.md) {
       showModalBottomSheet(
         context: context,
         isScrollControlled: true,
