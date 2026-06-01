@@ -88,7 +88,11 @@ class _OwnerDashboardScreenState extends State<OwnerDashboardScreen> {
                         children: [
                           const Icon(Icons.calendar_today, size: 16),
                           const SizedBox(width: 6),
-                          Text(AppLocalizations.of(context)!.ownerDashboardTabActive(activeCount)),
+                          Text(
+                            AppLocalizations.of(
+                              context,
+                            )!.ownerDashboardTabActive(activeCount),
+                          ),
                         ],
                       ),
                     ),
@@ -98,7 +102,11 @@ class _OwnerDashboardScreenState extends State<OwnerDashboardScreen> {
                         children: [
                           const Icon(Icons.history, size: 16),
                           const SizedBox(width: 6),
-                          Text(AppLocalizations.of(context)!.ownerDashboardTabHistory(historyCount)),
+                          Text(
+                            AppLocalizations.of(
+                              context,
+                            )!.ownerDashboardTabHistory(historyCount),
+                          ),
                         ],
                       ),
                     ),
@@ -109,32 +117,34 @@ class _OwnerDashboardScreenState extends State<OwnerDashboardScreen> {
           ),
         ),
         body: BlocConsumer<OwnerReservationCubit, OwnerReservationState>(
-            listenWhen: (_, current) =>
-                current is OwnerReservationActionSuccess,
-            listener: (context, state) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(AppLocalizations.of(context)!.ownerResolvedSnackbar)),
-              );
-            },
-            buildWhen: (_, current) =>
-                current is! OwnerReservationActionSuccess,
-            builder: (context, state) {
-              return switch (state) {
-                OwnerReservationInitial() ||
-                OwnerReservationLoading() => const LoadingIndicator(),
-                OwnerReservationFailure(:final message) => ErrorDisplay(
-                  message: message,
-                  onRetry: () =>
-                      context.read<OwnerReservationCubit>().fetchOwner(),
+          listenWhen: (_, current) => current is OwnerReservationActionSuccess,
+          listener: (context, state) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  AppLocalizations.of(context)!.ownerResolvedSnackbar,
                 ),
-                OwnerReservationLoaded(:final reservations) => _buildContent(
-                  reservations,
-                ),
-                // ActionSuccess filtered by buildWhen — never reached.
-                _ => const SizedBox.shrink(),
-              };
-            },
-          ),
+              ),
+            );
+          },
+          buildWhen: (_, current) => current is! OwnerReservationActionSuccess,
+          builder: (context, state) {
+            return switch (state) {
+              OwnerReservationInitial() ||
+              OwnerReservationLoading() => const LoadingIndicator(),
+              OwnerReservationFailure(:final message) => ErrorDisplay(
+                message: message,
+                onRetry: () =>
+                    context.read<OwnerReservationCubit>().fetchOwner(),
+              ),
+              OwnerReservationLoaded(:final reservations) => _buildContent(
+                reservations,
+              ),
+              // ActionSuccess filtered by buildWhen — never reached.
+              _ => const SizedBox.shrink(),
+            };
+          },
+        ),
       ),
     );
   }

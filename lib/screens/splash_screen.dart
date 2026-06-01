@@ -98,7 +98,9 @@ class SplashScreen extends StatelessWidget {
                               vertical: 20,
                             ),
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(DesignTokens.radiusSmall),
+                              borderRadius: BorderRadius.circular(
+                                DesignTokens.radiusSmall,
+                              ),
                             ),
                             textStyle: Theme.of(context).textTheme.titleMedium
                                 ?.copyWith(fontWeight: FontWeight.w600),
@@ -107,8 +109,12 @@ class SplashScreen extends StatelessWidget {
                             user == null
                                 ? AppLocalizations.of(context)!.splashCtaExplore
                                 : user.role == UserRole.owner
-                                ? AppLocalizations.of(context)!.splashCtaDashboard
-                                : AppLocalizations.of(context)!.splashCtaMyReservations,
+                                ? AppLocalizations.of(
+                                    context,
+                                  )!.splashCtaDashboard
+                                : AppLocalizations.of(
+                                    context,
+                                  )!.splashCtaMyReservations,
                           ),
                         ),
                       ],

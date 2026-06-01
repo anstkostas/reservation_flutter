@@ -28,10 +28,10 @@ enum LayoutType { phone, tablet, desktop }
 /// ```
 abstract final class Breakpoints {
   // ─── Tailwind breakpoint constants (width-based) ──────────────────────────
-  static const double sm  =  640;
-  static const double md  =  768;
-  static const double lg  = 1024;
-  static const double xl  = 1280;
+  static const double sm = 640;
+  static const double md = 768;
+  static const double lg = 1024;
+  static const double xl = 1280;
   static const double xxl = 1536; // Tailwind's 2xl
 
   // ─── Main layout tier ─────────────────────────────────────────────────────
@@ -45,15 +45,15 @@ abstract final class Breakpoints {
     return LayoutType.desktop;
   }
 
-  static bool isPhone(Size size)   => size.shortestSide < md;
-  static bool isTablet(Size size)  => size.shortestSide >= md && size.width < lg;
+  static bool isPhone(Size size) => size.shortestSide < md;
+  static bool isTablet(Size size) => size.shortestSide >= md && size.width < lg;
   static bool isDesktop(Size size) => size.width >= lg;
 
   // ─── Fine-grained width helpers ───────────────────────────────────────────
 
   /// True when width ≥ 1280px (Tailwind xl). Use for subtle layout tweaks
   /// within the desktop tier — not as a fourth layout tier.
-  static bool isXl(Size size)  => size.width >= xl;
+  static bool isXl(Size size) => size.width >= xl;
 
   /// True when width ≥ 1536px (Tailwind 2xl). Used for the 4-column
   /// restaurant grid; available for future fine-grained use.

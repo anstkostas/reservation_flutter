@@ -27,8 +27,8 @@ class ContainerBody extends StatelessWidget {
     final maxWidth = width >= Breakpoints.lg
         ? Breakpoints.xxl
         : width >= Breakpoints.md
-            ? Breakpoints.md
-            : double.infinity;
+        ? Breakpoints.md
+        : double.infinity;
 
     return Center(
       child: ConstrainedBox(

@@ -40,22 +40,23 @@ abstract final class AppTheme {
     // override every role that has a direct React CSS variable equivalent.
     // Roles without a React mapping (containerVariants, state layers, etc.)
     // remain algorithmically generated — close enough given the slate seed.
-    final colorScheme = ColorScheme.fromSeed(
-      seedColor: DesignTokens.primary,
-      brightness: Brightness.light,
-    ).copyWith(
-      primary:                 DesignTokens.primary,         // --primary
-      onPrimary:               DesignTokens.onPrimary,       // --primary-foreground
-      secondary:               DesignTokens.secondary,       // --secondary / --muted
-      onSecondary:             DesignTokens.onSecondary,     // --secondary-foreground
-      surface:                 DesignTokens.surface,         // --background
-      onSurface:               DesignTokens.onSurface,       // --foreground
-      surfaceContainerHighest: DesignTokens.secondary,       // --muted
-      error:                   DesignTokens.error,           // --destructive
-      onError:                 DesignTokens.surface,         // white on red
-      outline:                 DesignTokens.outline,         // --border / --input
-      outlineVariant:          DesignTokens.outlineVariant,  // slate-300
-    );
+    final colorScheme =
+        ColorScheme.fromSeed(
+          seedColor: DesignTokens.primary,
+          brightness: Brightness.light,
+        ).copyWith(
+          primary: DesignTokens.primary, // --primary
+          onPrimary: DesignTokens.onPrimary, // --primary-foreground
+          secondary: DesignTokens.secondary, // --secondary / --muted
+          onSecondary: DesignTokens.onSecondary, // --secondary-foreground
+          surface: DesignTokens.surface, // --background
+          onSurface: DesignTokens.onSurface, // --foreground
+          surfaceContainerHighest: DesignTokens.secondary, // --muted
+          error: DesignTokens.error, // --destructive
+          onError: DesignTokens.surface, // white on red
+          outline: DesignTokens.outline, // --border / --input
+          outlineVariant: DesignTokens.outlineVariant, // slate-300
+        );
 
     // Build text theme from Google Fonts base, then override each role's
     // font size with the tier-appropriate value from DesignTokens.

@@ -10,7 +10,8 @@ class UpdateReservationRequest {
   /// Serializes to the shape expected by the backend update reservation endpoint.
   /// Null fields are omitted — the backend requires at least one field to be present.
   Map<String, dynamic> toMap() => {
-    if (scheduledAt != null) 'scheduledAt': scheduledAt!.toUtc().toIso8601String(),
+    if (scheduledAt != null)
+      'scheduledAt': scheduledAt!.toUtc().toIso8601String(),
     if (people != null) 'people': people,
   };
 }

@@ -24,7 +24,9 @@ class RestaurantService {
     } on DioException catch (e) {
       _logger.e('getAll restaurants failed', error: e.error);
       final error = e.error;
-      throw error is AppException ? error : const AppException(message: 'Unexpected error', statusCode: 0);
+      throw error is AppException
+          ? error
+          : const AppException(message: 'Unexpected error', statusCode: 0);
     }
   }
 
@@ -38,7 +40,9 @@ class RestaurantService {
     } on DioException catch (e) {
       _logger.e('getById restaurant failed', error: e.error);
       final error = e.error;
-      throw error is AppException ? error : const AppException(message: 'Unexpected error', statusCode: 0);
+      throw error is AppException
+          ? error
+          : const AppException(message: 'Unexpected error', statusCode: 0);
     }
   }
 
@@ -53,7 +57,9 @@ class RestaurantService {
     } on DioException catch (e) {
       _logger.e('getUnowned restaurants failed', error: e.error);
       final error = e.error;
-      throw error is AppException ? error : const AppException(message: 'Unexpected error', statusCode: 0);
+      throw error is AppException
+          ? error
+          : const AppException(message: 'Unexpected error', statusCode: 0);
     }
   }
 }

@@ -60,9 +60,7 @@ class _AppTextFieldState extends State<AppTextField> {
         // Only password fields get the toggle — avoids a pointless icon on plain text fields.
         suffixIcon: widget.obscureText
             ? IconButton(
-                icon: Icon(
-                  _obscure ? Icons.visibility_off : Icons.visibility,
-                ),
+                icon: Icon(_obscure ? Icons.visibility_off : Icons.visibility),
                 onPressed: () => setState(() => _obscure = !_obscure),
               )
             : null,

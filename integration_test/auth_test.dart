@@ -34,16 +34,18 @@ void main() {
       mockReservations = MockReservationRepository();
       mockRestaurants = MockRestaurantRepository();
       // Default: getMe() throws so the app starts unauthenticated (LoginScreen).
-      when(() => mockAuth.getMe()).thenThrow(
-        const UnauthorizedException(message: 'No session'),
-      );
+      when(
+        () => mockAuth.getMe(),
+      ).thenThrow(const UnauthorizedException(message: 'No session'));
     });
 
     testWidgets('login → restaurant list screen is visible', (tester) async {
       // Why: after successful login, AuthBloc emits AuthAuthenticated,
       // GoRouter's refreshListenable fires, and the redirect guard sends
       // the customer to /restaurants. This test confirms all three steps work.
-      when(() => mockAuth.login(any(), any())).thenAnswer((_) async => fakeCustomer);
+      when(
+        () => mockAuth.login(any(), any()),
+      ).thenAnswer((_) async => fakeCustomer);
       // Required: RestaurantListScreen.initState calls fetchAll() which calls getAll().
       when(() => mockRestaurants.getAll()).thenAnswer((_) async => []);
 

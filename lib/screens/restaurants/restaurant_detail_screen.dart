@@ -33,8 +33,7 @@ class RestaurantDetailScreen extends StatefulWidget {
   final String restaurantId;
 
   @override
-  State<RestaurantDetailScreen> createState() =>
-      _RestaurantDetailScreenState();
+  State<RestaurantDetailScreen> createState() => _RestaurantDetailScreenState();
 }
 
 class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
@@ -51,16 +50,17 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
       body: BlocBuilder<RestaurantDetailCubit, RestaurantDetailState>(
         builder: (context, state) {
           return switch (state) {
-            RestaurantDetailInitial() || RestaurantDetailLoading() =>
-              const LoadingIndicator(),
+            RestaurantDetailInitial() ||
+            RestaurantDetailLoading() => const LoadingIndicator(),
             RestaurantDetailFailure(:final message) => ErrorDisplay(
-                message: message,
-                onRetry: () => context
-                    .read<RestaurantDetailCubit>()
-                    .fetchById(widget.restaurantId),
+              message: message,
+              onRetry: () => context.read<RestaurantDetailCubit>().fetchById(
+                widget.restaurantId,
               ),
-            RestaurantDetailLoaded(:final restaurant) =>
-              _buildDetail(restaurant),
+            ),
+            RestaurantDetailLoaded(:final restaurant) => _buildDetail(
+              restaurant,
+            ),
           };
         },
       ),
@@ -91,8 +91,9 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
   }
 
   Widget _buildHero(RestaurantModel restaurant) {
-    final heroHeight =
-        MediaQuery.sizeOf(context).width >= Breakpoints.md ? 380.0 : 260.0;
+    final heroHeight = MediaQuery.sizeOf(context).width >= Breakpoints.md
+        ? 380.0
+        : 260.0;
 
     return ClipRRect(
       borderRadius: BorderRadius.circular(12),
@@ -124,11 +125,7 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.transparent,
-                    Colors.black54,
-                    Colors.black87,
-                  ],
+                  colors: [Colors.transparent, Colors.black54, Colors.black87],
                   stops: [0.4, 0.75, 1.0],
                 ),
               ),
@@ -143,23 +140,19 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                 children: [
                   Text(
                     restaurant.name,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineMedium
-                        ?.copyWith(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     restaurant.description,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge
-                        ?.copyWith(color: Colors.white70),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyLarge?.copyWith(color: Colors.white70),
                   ),
                 ],
               ),
@@ -222,21 +215,27 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(AppLocalizations.of(context)!.restaurantDetailAbout, style: Theme.of(context).textTheme.titleLarge),
+            Text(
+              AppLocalizations.of(context)!.restaurantDetailAbout,
+              style: Theme.of(context).textTheme.titleLarge,
+            ),
             const SizedBox(height: 12),
             Text(
               restaurant.description,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurface
-                        .withValues(alpha: 0.7),
-                  ),
+                color: Theme.of(
+                  context,
+                ).colorScheme.onSurface.withValues(alpha: 0.7),
+              ),
             ),
             const SizedBox(height: 16),
             Chip(
               avatar: const Icon(Icons.table_restaurant, size: 16),
-              label: Text(AppLocalizations.of(context)!.restaurantDetailCapacityChip(restaurant.capacity)),
+              label: Text(
+                AppLocalizations.of(
+                  context,
+                )!.restaurantDetailCapacityChip(restaurant.capacity),
+              ),
             ),
           ],
         ),
@@ -250,8 +249,8 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
   Widget _buildReservationCard(String restaurantId) {
     return BlocBuilder<AuthBloc, AuthState>(
       builder: (context, state) {
-        final isOwner = state is AuthAuthenticated &&
-            state.user.role == UserRole.owner;
+        final isOwner =
+            state is AuthAuthenticated && state.user.role == UserRole.owner;
         if (isOwner) return const SizedBox.shrink();
 
         return Card(
@@ -261,18 +260,21 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  AppLocalizations.of(context)!.restaurantDetailMakeReservationTitle,
+                  AppLocalizations.of(
+                    context,
+                  )!.restaurantDetailMakeReservationTitle,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  AppLocalizations.of(context)!.restaurantDetailMakeReservationSubtitle,
+                  AppLocalizations.of(
+                    context,
+                  )!.restaurantDetailMakeReservationSubtitle,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onSurface
-                            .withValues(alpha: 0.6),
-                      ),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withValues(alpha: 0.6),
+                  ),
                 ),
                 const SizedBox(height: 24),
                 SizedBox(
@@ -280,10 +282,12 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
                   child: FilledButton.icon(
                     onPressed: state is AuthAuthenticated
                         ? () =>
-                            ReservationCreateSheet.show(context, restaurantId)
+                              ReservationCreateSheet.show(context, restaurantId)
                         : () => context.go('/login'),
                     icon: const Icon(Icons.calendar_today),
-                    label: Text(AppLocalizations.of(context)!.restaurantDetailBookButton),
+                    label: Text(
+                      AppLocalizations.of(context)!.restaurantDetailBookButton,
+                    ),
                   ),
                 ),
               ],

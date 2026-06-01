@@ -56,8 +56,9 @@ void main() {
       when(() => mockAuth.logout()).thenAnswer((_) async {});
       // Authenticated customer lands on /restaurants first — stub getAll()
       // so RestaurantListCubit does not fail when initState calls fetchAll().
-      when(() => mockRestaurants.getAll())
-          .thenAnswer((_) async => [fakeRestaurant]);
+      when(
+        () => mockRestaurants.getAll(),
+      ).thenAnswer((_) async => [fakeRestaurant]);
     });
 
     testWidgets(
@@ -76,8 +77,9 @@ void main() {
         addTearDown(tester.view.resetPhysicalSize);
         addTearDown(tester.view.resetDevicePixelRatio);
 
-        when(() => mockReservations.getMyReservations())
-            .thenAnswer((_) async => [fakeActiveReservation]);
+        when(
+          () => mockReservations.getMyReservations(),
+        ).thenAnswer((_) async => [fakeActiveReservation]);
         when(() => mockReservations.cancel(any())).thenAnswer((_) async {});
 
         await pumpApp(
@@ -109,7 +111,9 @@ void main() {
         // SnackBar from ReservationHistoryScreen BlocConsumer confirms
         // ActionSuccess was emitted — reservationUpdatedSnackbar = "Reservation updated."
         expect(find.byType(SnackBar), findsOneWidget);
-        verify(() => mockReservations.cancel(fakeActiveReservation.id)).called(1);
+        verify(
+          () => mockReservations.cancel(fakeActiveReservation.id),
+        ).called(1);
       },
     );
 
@@ -132,17 +136,21 @@ void main() {
 
         final newReservation = fakeActiveReservation.copyWith(id: 'res-id-2');
 
-        when(() => mockRestaurants.getById('rest-id-1'))
-            .thenAnswer((_) async => fakeRestaurant);
-        when(() => mockReservations.create(
-              restaurantId: any(named: 'restaurantId'),
-              scheduledAt: any(named: 'scheduledAt'),
-              people: any(named: 'people'),
-            )).thenAnswer((_) async => newReservation);
+        when(
+          () => mockRestaurants.getById('rest-id-1'),
+        ).thenAnswer((_) async => fakeRestaurant);
+        when(
+          () => mockReservations.create(
+            restaurantId: any(named: 'restaurantId'),
+            scheduledAt: any(named: 'scheduledAt'),
+            people: any(named: 'people'),
+          ),
+        ).thenAnswer((_) async => newReservation);
         // Stubbed for the post-create re-fetch that CustomerReservationCubit
         // triggers automatically after ActionSuccess.
-        when(() => mockReservations.getMyReservations())
-            .thenAnswer((_) async => [fakeActiveReservation, newReservation]);
+        when(
+          () => mockReservations.getMyReservations(),
+        ).thenAnswer((_) async => [fakeActiveReservation, newReservation]);
 
         await pumpApp(
           tester,
@@ -178,8 +186,9 @@ void main() {
         // 26 hours from now is within the 2-month booking window and past any
         // minimum lead time enforced by the backend (mocked here anyway).
         final scheduledAt = DateTime.now().add(const Duration(hours: 26));
-        final formState =
-            tester.state<FormBuilderState>(find.byType(FormBuilder));
+        final formState = tester.state<FormBuilderState>(
+          find.byType(FormBuilder),
+        );
         formState.fields['date']!.didChange(scheduledAt);
         formState.fields['time']!.didChange(scheduledAt);
         formState.fields['people']!.didChange('2');
@@ -195,11 +204,13 @@ void main() {
         // (restaurantDetailMakeReservationTitle and reservationCreateTitle
         // share the same string, so that text is ambiguous.)
         expect(find.text('Book a Table'), findsOneWidget);
-        verify(() => mockReservations.create(
-              restaurantId: 'rest-id-1',
-              scheduledAt: any(named: 'scheduledAt'),
-              people: any(named: 'people'),
-            )).called(1);
+        verify(
+          () => mockReservations.create(
+            restaurantId: 'rest-id-1',
+            scheduledAt: any(named: 'scheduledAt'),
+            people: any(named: 'people'),
+          ),
+        ).called(1);
       },
     );
   });

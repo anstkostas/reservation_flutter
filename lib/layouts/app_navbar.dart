@@ -170,7 +170,9 @@ class _UserMenuButton extends StatelessWidget {
         : '?';
 
     final colorScheme = Theme.of(context).colorScheme;
-    final iconSize = Breakpoints.isDesktop(MediaQuery.sizeOf(context)) ? 18.0 : 16.0;
+    final iconSize = Breakpoints.isDesktop(MediaQuery.sizeOf(context))
+        ? 18.0
+        : 16.0;
 
     return PopupMenuButton<String>(
       offset: const Offset(0, 44),
@@ -244,7 +246,10 @@ class _UserMenuButton extends StatelessWidget {
             children: [
               Icon(Icons.logout, size: iconSize, color: colorScheme.error),
               const SizedBox(width: 8),
-              Text(AppLocalizations.of(menuContext)!.navLogout, style: TextStyle(color: colorScheme.error)),
+              Text(
+                AppLocalizations.of(menuContext)!.navLogout,
+                style: TextStyle(color: colorScheme.error),
+              ),
             ],
           ),
         ),

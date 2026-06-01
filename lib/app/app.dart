@@ -37,9 +37,16 @@ class App extends StatelessWidget {
       providers: [
         BlocProvider.value(value: _getIt<AuthBloc>()),
         BlocProvider.value(value: localeCubit),
-        BlocProvider(create: (_) => RestaurantListCubit(_getIt<RestaurantRepository>())),
-        BlocProvider(create: (_) => CustomerReservationCubit(_getIt<ReservationRepository>())),
-        BlocProvider(create: (_) => OwnerReservationCubit(_getIt<ReservationRepository>())),
+        BlocProvider(
+          create: (_) => RestaurantListCubit(_getIt<RestaurantRepository>()),
+        ),
+        BlocProvider(
+          create: (_) =>
+              CustomerReservationCubit(_getIt<ReservationRepository>()),
+        ),
+        BlocProvider(
+          create: (_) => OwnerReservationCubit(_getIt<ReservationRepository>()),
+        ),
       ],
       // BlocBuilder must sit here — inside MultiBlocProvider's subtree — so its
       // context can reach LocaleCubit. App.build's own context is above the
@@ -79,8 +86,9 @@ class App extends StatelessWidget {
               GlobalCupertinoLocalizations.delegate,
             ],
             // Derived from SupportedLocale enum — add languages there, not here.
-            supportedLocales:
-                SupportedLocale.values.map((e) => e.locale).toList(),
+            supportedLocales: SupportedLocale.values
+                .map((e) => e.locale)
+                .toList(),
           );
         },
       ),

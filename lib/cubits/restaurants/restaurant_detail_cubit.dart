@@ -14,7 +14,7 @@ part 'restaurant_detail_state.dart';
 /// bleeds into a new one.
 class RestaurantDetailCubit extends Cubit<RestaurantDetailState> {
   RestaurantDetailCubit(this._repository)
-      : super(const RestaurantDetailInitial());
+    : super(const RestaurantDetailInitial());
 
   final RestaurantRepository _repository;
 

@@ -52,8 +52,9 @@ class _SignupScreenState extends State<SignupScreen> {
         email: (values['email'] as String).trim(),
         password: values['password'] as String,
         // Role is derived server-side — providing restaurantId signals owner signup.
-        restaurantId:
-            _selectedRole == UserRole.owner ? _selectedRestaurantId : null,
+        restaurantId: _selectedRole == UserRole.owner
+            ? _selectedRestaurantId
+            : null,
       ),
     );
   }
@@ -64,9 +65,9 @@ class _SignupScreenState extends State<SignupScreen> {
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.message)),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(state.message)));
           }
           // AuthAuthenticated triggers GoRouterRefreshStream — the router
           // redirect fires automatically, no manual navigation needed.
@@ -107,7 +108,9 @@ class _SignupScreenState extends State<SignupScreen> {
                     label: l10n.signupFirstNameLabel,
                     textInputAction: TextInputAction.next,
                     validator: requiredFieldValidator(
-                      requiredMessage: l10n.validatorFieldRequired(l10n.signupFirstNameLabel),
+                      requiredMessage: l10n.validatorFieldRequired(
+                        l10n.signupFirstNameLabel,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -116,7 +119,9 @@ class _SignupScreenState extends State<SignupScreen> {
                     label: l10n.signupLastNameLabel,
                     textInputAction: TextInputAction.next,
                     validator: requiredFieldValidator(
-                      requiredMessage: l10n.validatorFieldRequired(l10n.signupLastNameLabel),
+                      requiredMessage: l10n.validatorFieldRequired(
+                        l10n.signupLastNameLabel,
+                      ),
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -203,46 +208,40 @@ class _SignupScreenState extends State<SignupScreen> {
       builder: (context, state) {
         return switch (state) {
           UnownedInitial() || UnownedLoading() => const Padding(
-              padding: EdgeInsets.symmetric(vertical: 8),
-              child: Center(child: CircularProgressIndicator()),
-            ),
+            padding: EdgeInsets.symmetric(vertical: 8),
+            child: Center(child: CircularProgressIndicator()),
+          ),
           UnownedFailure(:final message) => Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Text(
-                  message,
-                  style: TextStyle(
-                    color: Theme.of(context).colorScheme.error,
-                  ),
-                ),
-                TextButton(
-                  onPressed: () =>
-                      context.read<UnownedRestaurantCubit>().fetchUnowned(),
-                  child: Text(l10n.signupRetry),
-                ),
-              ],
-            ),
-          UnownedLoaded(:final restaurants) when restaurants.isEmpty =>
-            Text(
-              l10n.signupNoRestaurantsAvailable,
-              style: TextStyle(color: Theme.of(context).colorScheme.error),
-            ),
-          UnownedLoaded(:final restaurants) => DropdownButtonFormField<String>(
-              initialValue: _selectedRestaurantId,
-              decoration: InputDecoration(
-                labelText: l10n.signupRestaurantPickerLabel,
-                border: const OutlineInputBorder(),
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                message,
+                style: TextStyle(color: Theme.of(context).colorScheme.error),
               ),
-              items: restaurants
-                  .map(
-                    (r) => DropdownMenuItem(value: r.id, child: Text(r.name)),
-                  )
-                  .toList(),
-              onChanged: (value) =>
-                  setState(() => _selectedRestaurantId = value),
-              validator: (value) =>
-                  value == null ? l10n.signupRestaurantPickerRequired : null,
+              TextButton(
+                onPressed: () =>
+                    context.read<UnownedRestaurantCubit>().fetchUnowned(),
+                child: Text(l10n.signupRetry),
+              ),
+            ],
+          ),
+          UnownedLoaded(:final restaurants) when restaurants.isEmpty => Text(
+            l10n.signupNoRestaurantsAvailable,
+            style: TextStyle(color: Theme.of(context).colorScheme.error),
+          ),
+          UnownedLoaded(:final restaurants) => DropdownButtonFormField<String>(
+            initialValue: _selectedRestaurantId,
+            decoration: InputDecoration(
+              labelText: l10n.signupRestaurantPickerLabel,
+              border: const OutlineInputBorder(),
             ),
+            items: restaurants
+                .map((r) => DropdownMenuItem(value: r.id, child: Text(r.name)))
+                .toList(),
+            onChanged: (value) => setState(() => _selectedRestaurantId = value),
+            validator: (value) =>
+                value == null ? l10n.signupRestaurantPickerRequired : null,
+          ),
         };
       },
     );

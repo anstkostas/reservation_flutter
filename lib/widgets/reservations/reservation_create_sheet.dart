@@ -47,8 +47,7 @@ class ReservationCreateSheet extends StatefulWidget {
   }
 
   @override
-  State<ReservationCreateSheet> createState() =>
-      _ReservationCreateSheetState();
+  State<ReservationCreateSheet> createState() => _ReservationCreateSheetState();
 }
 
 class _ReservationCreateSheetState extends State<ReservationCreateSheet> {
@@ -84,15 +83,17 @@ class _ReservationCreateSheetState extends State<ReservationCreateSheet> {
         if (state is CustomerReservationActionSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(AppLocalizations.of(context)!.reservationCreateSuccess),
+              content: Text(
+                AppLocalizations.of(context)!.reservationCreateSuccess,
+              ),
             ),
           );
           Navigator.of(context).pop();
         }
         if (state is CustomerReservationFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(state.message)),
-          );
+          ScaffoldMessenger.of(
+            context,
+          ).showSnackBar(SnackBar(content: Text(state.message)));
         }
       },
       builder: (context, state) {

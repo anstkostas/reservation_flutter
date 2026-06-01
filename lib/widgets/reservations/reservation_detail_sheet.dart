@@ -146,7 +146,6 @@ class _ReservationDetailSheetState extends State<ReservationDetailSheet> {
       },
     );
   }
-
 }
 
 /// View mode — shows reservation details with Edit and Cancel actions.
@@ -183,7 +182,8 @@ class _ViewMode extends StatelessWidget {
           children: [
             Expanded(
               child: Text(
-                reservation.restaurantName ?? l10n.reservationDetailRestaurantFallback,
+                reservation.restaurantName ??
+                    l10n.reservationDetailRestaurantFallback,
                 style: Theme.of(context).textTheme.titleLarge,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,

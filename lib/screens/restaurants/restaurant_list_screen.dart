@@ -42,7 +42,9 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
               onRetry: () => context.read<RestaurantListCubit>().fetchAll(),
             ),
             RestaurantListLoaded(:final restaurants) when restaurants.isEmpty =>
-              Center(child: Text(AppLocalizations.of(context)!.restaurantListEmpty)),
+              Center(
+                child: Text(AppLocalizations.of(context)!.restaurantListEmpty),
+              ),
             RestaurantListLoaded(:final restaurants) => _buildContent(
               restaurants,
             ),
@@ -59,8 +61,8 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
     final maxWidth = width >= Breakpoints.lg
         ? Breakpoints.xxl
         : width >= Breakpoints.md
-            ? Breakpoints.md
-            : double.infinity;
+        ? Breakpoints.md
+        : double.infinity;
     final hPadding = maxWidth.isFinite
         ? ((width - maxWidth) / 2).clamp(0.0, double.infinity) + 16.0
         : 16.0;

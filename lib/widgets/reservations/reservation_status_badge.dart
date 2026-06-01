@@ -13,16 +13,16 @@ class ReservationStatusBadge extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final label = switch (status) {
-      ReservationStatus.active    => l10n.statusActive,
-      ReservationStatus.canceled  => l10n.statusCanceled,
+      ReservationStatus.active => l10n.statusActive,
+      ReservationStatus.canceled => l10n.statusCanceled,
       ReservationStatus.completed => l10n.statusCompleted,
-      ReservationStatus.noShow    => l10n.statusNoShow,
+      ReservationStatus.noShow => l10n.statusNoShow,
     };
     final color = switch (status) {
-      ReservationStatus.active    => Colors.green,
-      ReservationStatus.canceled  => Colors.grey,
+      ReservationStatus.active => Colors.green,
+      ReservationStatus.canceled => Colors.grey,
       ReservationStatus.completed => Theme.of(context).colorScheme.primary,
-      ReservationStatus.noShow    => Colors.red,
+      ReservationStatus.noShow => Colors.red,
     };
 
     return Chip(
@@ -30,7 +30,6 @@ class ReservationStatusBadge extends StatelessWidget {
         label,
         style: TextStyle(color: color, fontWeight: FontWeight.w600),
       ),
-      // withAlpha(38) ≈ 15% opacity — avoids the deprecated withOpacity()
       backgroundColor: color.withAlpha(38),
       side: BorderSide(color: color),
       visualDensity: VisualDensity.compact,

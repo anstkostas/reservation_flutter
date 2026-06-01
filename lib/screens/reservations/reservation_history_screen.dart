@@ -43,46 +43,59 @@ class _ReservationHistoryScreenState extends State<ReservationHistoryScreen> {
           // Wrap in PreferredSize so BlocBuilder can provide dynamic tab counts.
           bottom: PreferredSize(
             preferredSize: const Size.fromHeight(48),
-            child: BlocBuilder<CustomerReservationCubit, CustomerReservationState>(
-              buildWhen: (_, current) =>
-                  current is! CustomerReservationActionSuccess,
-              builder: (context, state) {
-                final active = state is CustomerReservationLoaded
-                    ? state.reservations
-                        .where((r) => r.status == ReservationStatus.active)
-                        .length
-                    : 0;
-                final past = state is CustomerReservationLoaded
-                    ? state.reservations
-                        .where((r) => r.status != ReservationStatus.active)
-                        .length
-                    : 0;
-                return TabBar(
-                  tabs: [
-                    Tab(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(Icons.calendar_today, size: 16),
-                          const SizedBox(width: 6),
-                          Text(AppLocalizations.of(context)!.reservationHistoryTabUpcoming(active)),
-                        ],
-                      ),
-                    ),
-                    Tab(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(Icons.history, size: 16),
-                          const SizedBox(width: 6),
-                          Text(AppLocalizations.of(context)!.reservationHistoryTabHistory(past)),
-                        ],
-                      ),
-                    ),
-                  ],
-                );
-              },
-            ),
+            child:
+                BlocBuilder<CustomerReservationCubit, CustomerReservationState>(
+                  buildWhen: (_, current) =>
+                      current is! CustomerReservationActionSuccess,
+                  builder: (context, state) {
+                    final active = state is CustomerReservationLoaded
+                        ? state.reservations
+                              .where(
+                                (r) => r.status == ReservationStatus.active,
+                              )
+                              .length
+                        : 0;
+                    final past = state is CustomerReservationLoaded
+                        ? state.reservations
+                              .where(
+                                (r) => r.status != ReservationStatus.active,
+                              )
+                              .length
+                        : 0;
+                    return TabBar(
+                      tabs: [
+                        Tab(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(Icons.calendar_today, size: 16),
+                              const SizedBox(width: 6),
+                              Text(
+                                AppLocalizations.of(
+                                  context,
+                                )!.reservationHistoryTabUpcoming(active),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Tab(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(Icons.history, size: 16),
+                              const SizedBox(width: 6),
+                              Text(
+                                AppLocalizations.of(
+                                  context,
+                                )!.reservationHistoryTabHistory(past),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    );
+                  },
+                ),
           ),
         ),
         body: BlocConsumer<CustomerReservationCubit, CustomerReservationState>(
@@ -90,7 +103,11 @@ class _ReservationHistoryScreenState extends State<ReservationHistoryScreen> {
               current is CustomerReservationActionSuccess,
           listener: (context, state) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(AppLocalizations.of(context)!.reservationUpdatedSnackbar)),
+              SnackBar(
+                content: Text(
+                  AppLocalizations.of(context)!.reservationUpdatedSnackbar,
+                ),
+              ),
             );
           },
           buildWhen: (_, current) =>
@@ -98,15 +115,15 @@ class _ReservationHistoryScreenState extends State<ReservationHistoryScreen> {
           builder: (context, state) {
             return switch (state) {
               CustomerReservationInitial() ||
-              CustomerReservationLoading() =>
-                const LoadingIndicator(),
+              CustomerReservationLoading() => const LoadingIndicator(),
               CustomerReservationFailure(:final message) => ErrorDisplay(
-                  message: message,
-                  onRetry: () =>
-                      context.read<CustomerReservationCubit>().fetchMine(),
-                ),
-              CustomerReservationLoaded(:final reservations) =>
-                _buildContent(reservations),
+                message: message,
+                onRetry: () =>
+                    context.read<CustomerReservationCubit>().fetchMine(),
+              ),
+              CustomerReservationLoaded(:final reservations) => _buildContent(
+                reservations,
+              ),
               // CustomerReservationActionSuccess filtered by buildWhen — never reached.
               _ => const SizedBox.shrink(),
             };
@@ -118,75 +135,70 @@ class _ReservationHistoryScreenState extends State<ReservationHistoryScreen> {
 
   Widget _buildContent(List<ReservationModel> reservations) {
     final l10n = AppLocalizations.of(context)!;
-    final active = reservations
-        .where((r) => r.status == ReservationStatus.active)
-        .toList()
-      ..sort((a, b) => a.scheduledAt.compareTo(b.scheduledAt));
+    final active =
+        reservations.where((r) => r.status == ReservationStatus.active).toList()
+          ..sort((a, b) => a.scheduledAt.compareTo(b.scheduledAt));
 
-    final past = reservations
-        .where((r) => r.status != ReservationStatus.active)
-        .toList()
-      ..sort((a, b) => b.scheduledAt.compareTo(a.scheduledAt));
+    final past =
+        reservations.where((r) => r.status != ReservationStatus.active).toList()
+          ..sort((a, b) => b.scheduledAt.compareTo(a.scheduledAt));
 
     return ContainerBody(
       child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      l10n.reservationHistoryTitle,
-                      style: Theme.of(context)
-                          .textTheme
-                          .headlineSmall
-                          ?.copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      l10n.reservationHistorySubtitle,
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                            color: Theme.of(context)
-                                .colorScheme
-                                .onSurface
-                                .withValues(alpha: 0.6),
-                          ),
-                    ),
-                  ],
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16, 24, 16, 16),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l10n.reservationHistoryTitle,
+                        style: Theme.of(context).textTheme.headlineSmall
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        l10n.reservationHistorySubtitle,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          color: Theme.of(
+                            context,
+                          ).colorScheme.onSurface.withValues(alpha: 0.6),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(width: 12),
-              FilledButton.icon(
-                onPressed: () => context.go('/restaurants'),
-                icon: const Icon(Icons.restaurant_menu, size: 16),
-                label: Text(l10n.reservationHistoryBookButton),
-              ),
-            ],
+                const SizedBox(width: 12),
+                FilledButton.icon(
+                  onPressed: () => context.go('/restaurants'),
+                  icon: const Icon(Icons.restaurant_menu, size: 16),
+                  label: Text(l10n.reservationHistoryBookButton),
+                ),
+              ],
+            ),
           ),
-        ),
-        Expanded(
-          child: TabBarView(
-            children: [
-              _buildGrid(
-                active,
-                emptyMessage: l10n.reservationHistoryEmptyUpcomingTitle,
-                emptyDetail: l10n.reservationHistoryEmptyUpcomingDetail,
-              ),
-              _buildGrid(
-                past,
-                emptyMessage: l10n.reservationHistoryEmptyPastTitle,
-                emptyDetail: l10n.reservationHistoryEmptyPastDetail,
-              ),
-            ],
+          Expanded(
+            child: TabBarView(
+              children: [
+                _buildGrid(
+                  active,
+                  emptyMessage: l10n.reservationHistoryEmptyUpcomingTitle,
+                  emptyDetail: l10n.reservationHistoryEmptyUpcomingDetail,
+                ),
+                _buildGrid(
+                  past,
+                  emptyMessage: l10n.reservationHistoryEmptyPastTitle,
+                  emptyDetail: l10n.reservationHistoryEmptyPastDetail,
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
       ),
     );
   }
@@ -203,16 +215,14 @@ class _ReservationHistoryScreenState extends State<ReservationHistoryScreen> {
           child: Container(
             padding: const EdgeInsets.all(32),
             decoration: BoxDecoration(
-              color: Theme.of(context)
-                  .colorScheme
-                  .surfaceContainerHighest
-                  .withValues(alpha: 0.5),
+              color: Theme.of(
+                context,
+              ).colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: Theme.of(context)
-                    .colorScheme
-                    .outline
-                    .withValues(alpha: 0.5),
+                color: Theme.of(
+                  context,
+                ).colorScheme.outline.withValues(alpha: 0.5),
                 width: 2,
               ),
             ),
@@ -222,10 +232,9 @@ class _ReservationHistoryScreenState extends State<ReservationHistoryScreen> {
                 Icon(
                   Icons.restaurant_menu,
                   size: 32,
-                  color: Theme.of(context)
-                      .colorScheme
-                      .onSurface
-                      .withValues(alpha: 0.4),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withValues(alpha: 0.4),
                 ),
                 const SizedBox(height: 12),
                 Text(
@@ -236,11 +245,10 @@ class _ReservationHistoryScreenState extends State<ReservationHistoryScreen> {
                 Text(
                   emptyDetail,
                   style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Theme.of(context)
-                            .colorScheme
-                            .onSurface
-                            .withValues(alpha: 0.6),
-                      ),
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withValues(alpha: 0.6),
+                  ),
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -279,8 +287,7 @@ class _ReservationHistoryScreenState extends State<ReservationHistoryScreen> {
       itemCount: reservations.length,
       itemBuilder: (context, index) => ReservationCard(
         reservation: reservations[index],
-        onTap: () =>
-            ReservationDetailSheet.show(context, reservations[index]),
+        onTap: () => ReservationDetailSheet.show(context, reservations[index]),
       ),
     );
   }

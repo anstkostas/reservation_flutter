@@ -21,33 +21,30 @@ library;
 String? Function(String?) emailValidator({
   required String requiredMessage,
   required String invalidMessage,
-}) =>
-    (value) {
-      if (value == null || value.trim().isEmpty) return requiredMessage;
-      final emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
-      if (!emailRegex.hasMatch(value.trim())) return invalidMessage;
-      return null;
-    };
+}) => (value) {
+  if (value == null || value.trim().isEmpty) return requiredMessage;
+  final emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
+  if (!emailRegex.hasMatch(value.trim())) return invalidMessage;
+  return null;
+};
 
 /// Returns a validator for password fields using the provided error strings.
 String? Function(String?) passwordValidator({
   required String requiredMessage,
   required String tooShortMessage,
-}) =>
-    (value) {
-      if (value == null || value.isEmpty) return requiredMessage;
-      if (value.length < 6) return tooShortMessage;
-      return null;
-    };
+}) => (value) {
+  if (value == null || value.isEmpty) return requiredMessage;
+  if (value.length < 6) return tooShortMessage;
+  return null;
+};
 
 /// Returns a validator for a required text field using the provided error string.
 String? Function(String?) requiredFieldValidator({
   required String requiredMessage,
-}) =>
-    (value) {
-      if (value == null || value.trim().isEmpty) return requiredMessage;
-      return null;
-    };
+}) => (value) {
+  if (value == null || value.trim().isEmpty) return requiredMessage;
+  return null;
+};
 
 /// Returns a validator for guest count fields using the provided error strings.
 ///
@@ -57,12 +54,11 @@ String? Function(String?) personsValidator({
   required String invalidNumberMessage,
   required String tooFewMessage,
   required String tooManyMessage,
-}) =>
-    (value) {
-      if (value == null || value.trim().isEmpty) return requiredMessage;
-      final parsed = int.tryParse(value.trim());
-      if (parsed == null) return invalidNumberMessage;
-      if (parsed < 1) return tooFewMessage;
-      if (parsed > 20) return tooManyMessage;
-      return null;
-    };
+}) => (value) {
+  if (value == null || value.trim().isEmpty) return requiredMessage;
+  final parsed = int.tryParse(value.trim());
+  if (parsed == null) return invalidNumberMessage;
+  if (parsed < 1) return tooFewMessage;
+  if (parsed > 20) return tooManyMessage;
+  return null;
+};

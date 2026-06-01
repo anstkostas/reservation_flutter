@@ -50,12 +50,20 @@ class ReservationTable extends StatelessWidget {
         columnSpacing: 20,
         horizontalMargin: 16,
         columns: [
-          DataColumn(label: SizedBox(width: 160, child: Text(l10n.ownerTableColumnCustomer))),
-          DataColumn(label: SizedBox(width: 110, child: Text(l10n.ownerTableColumnDate))),
+          DataColumn(
+            label: SizedBox(
+              width: 160,
+              child: Text(l10n.ownerTableColumnCustomer),
+            ),
+          ),
+          DataColumn(
+            label: SizedBox(width: 110, child: Text(l10n.ownerTableColumnDate)),
+          ),
           DataColumn(label: Text(l10n.ownerTableColumnTime)),
           DataColumn(label: Text(l10n.ownerTableColumnPeople)),
           DataColumn(label: Text(l10n.ownerTableColumnStatus)),
-          if (showActions) DataColumn(label: Text(l10n.ownerTableColumnActions)),
+          if (showActions)
+            DataColumn(label: Text(l10n.ownerTableColumnActions)),
         ],
         rows: reservations.map((r) => _buildRow(context, r)).toList(),
       ),

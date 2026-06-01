@@ -24,8 +24,7 @@ class ReservationTableMobile extends StatelessWidget {
   final bool showActions;
 
   /// Returns true when the scheduled time has arrived or passed.
-  bool _canUpdate(DateTime scheduledAt) =>
-      !scheduledAt.isAfter(DateTime.now());
+  bool _canUpdate(DateTime scheduledAt) => !scheduledAt.isAfter(DateTime.now());
 
   @override
   Widget build(BuildContext context) {
@@ -36,26 +35,23 @@ class ReservationTableMobile extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(32),
             decoration: BoxDecoration(
-              color: Theme.of(context)
-                  .colorScheme
-                  .surfaceContainerHighest
-                  .withValues(alpha: 0.4),
+              color: Theme.of(
+                context,
+              ).colorScheme.surfaceContainerHighest.withValues(alpha: 0.4),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: Theme.of(context)
-                    .colorScheme
-                    .outline
-                    .withValues(alpha: 0.4),
+                color: Theme.of(
+                  context,
+                ).colorScheme.outline.withValues(alpha: 0.4),
               ),
             ),
             child: Text(
               AppLocalizations.of(context)!.ownerDashboardNoReservations,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: Theme.of(context)
-                        .colorScheme
-                        .onSurface
-                        .withValues(alpha: 0.6),
-                  ),
+                color: Theme.of(
+                  context,
+                ).colorScheme.onSurface.withValues(alpha: 0.6),
+              ),
               textAlign: TextAlign.center,
             ),
           ),
@@ -67,8 +63,7 @@ class ReservationTableMobile extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       itemCount: reservations.length,
       separatorBuilder: (_, _) => const SizedBox(height: 8),
-      itemBuilder: (context, index) =>
-          _buildCard(context, reservations[index]),
+      itemBuilder: (context, index) => _buildCard(context, reservations[index]),
     );
   }
 
@@ -98,9 +93,7 @@ class ReservationTableMobile extends StatelessWidget {
                     children: [
                       Text(
                         customerName,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleMedium
+                        style: Theme.of(context).textTheme.titleMedium
                             ?.copyWith(fontWeight: FontWeight.w600),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
@@ -109,13 +102,12 @@ class ReservationTableMobile extends StatelessWidget {
                         const SizedBox(height: 2),
                         Text(
                           customerEmail,
-                          style:
-                              Theme.of(context).textTheme.bodySmall?.copyWith(
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .onSurface
-                                        .withValues(alpha: 0.6),
-                                  ),
+                          style: Theme.of(context).textTheme.bodySmall
+                              ?.copyWith(
+                                color: Theme.of(
+                                  context,
+                                ).colorScheme.onSurface.withValues(alpha: 0.6),
+                              ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -133,9 +125,13 @@ class ReservationTableMobile extends StatelessWidget {
             // Data chips — 2-column grid: date | time, then people full width
             Row(
               children: [
-                Expanded(child: _InfoChip(icon: Icons.calendar_today, label: date)),
+                Expanded(
+                  child: _InfoChip(icon: Icons.calendar_today, label: date),
+                ),
                 const SizedBox(width: 8),
-                Expanded(child: _InfoChip(icon: Icons.access_time, label: time)),
+                Expanded(
+                  child: _InfoChip(icon: Icons.access_time, label: time),
+                ),
               ],
             ),
             const SizedBox(height: 8),
@@ -201,12 +197,11 @@ class ReservationTableMobile extends StatelessWidget {
                   child: Text(
                     l10n.ownerTableArrivingSoon,
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          fontStyle: FontStyle.italic,
-                          color: Theme.of(context)
-                              .colorScheme
-                              .onSurface
-                              .withValues(alpha: 0.5),
-                        ),
+                      fontStyle: FontStyle.italic,
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onSurface.withValues(alpha: 0.5),
+                    ),
                   ),
                 ),
             ],
@@ -246,10 +241,9 @@ class _InfoChip extends StatelessWidget {
       width: fullWidth ? double.infinity : null,
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
       decoration: BoxDecoration(
-        color: Theme.of(context)
-            .colorScheme
-            .surfaceContainerHighest
-            .withValues(alpha: 0.5),
+        color: Theme.of(
+          context,
+        ).colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Row(
@@ -257,10 +251,7 @@ class _InfoChip extends StatelessWidget {
         children: [
           Icon(icon, size: 16, color: Theme.of(context).colorScheme.primary),
           const SizedBox(width: 8),
-          Text(
-            label,
-            style: const TextStyle(fontWeight: FontWeight.w500),
-          ),
+          Text(label, style: const TextStyle(fontWeight: FontWeight.w500)),
         ],
       ),
     );
