@@ -60,7 +60,11 @@ class AuthService {
     }
   }
 
-  /// POST [ApiConstants.logout] to clear the server-side auth cookie.
+  /// POST [ApiConstants.logout] to clear the server-side auth cookie,
+  /// then clears the local persistent cookie jar (mobile only; no-op on web).
+  ///
+  /// Cookie clearing runs in [finally] so local state is always wiped,
+  /// even if the API call fails.
   ///
   /// Throws [AppException] on any API or network error.
   Future<void> logout() async {
@@ -72,6 +76,8 @@ class AuthService {
       throw error is AppException
           ? error
           : const AppException(message: 'Unexpected error', statusCode: 0);
+    } finally {
+      await _client.clearCookies();
     }
   }
 

@@ -7,7 +7,7 @@ import 'package:get_it/get_it.dart';
 import '../constants/api_constants.dart';
 import '../cubits/auth/auth_bloc.dart';
 import '../models/models.dart';
-import 'cookie_setup/cookie_setup.dart';
+import 'cookie_setup/cookie_setup.dart' as cookie_setup;
 
 /// Single HTTP client for the app — all API calls go through this.
 ///
@@ -111,13 +111,19 @@ class DioClient {
       extra: {'withCredentials': true},
     );
 
-    final cookieInterceptor = await buildCookieInterceptor();
+    final cookieInterceptor = await cookie_setup.buildCookieInterceptor();
     if (cookieInterceptor != null) {
       _dio.interceptors.add(cookieInterceptor);
     }
 
     _dio.interceptors.add(InterceptorsWrapper(onError: _onError));
   }
+
+  /// Clears the persistent cookie jar (mobile only; no-op on web).
+  ///
+  /// Delegates to the platform-conditional [cookie_setup.clearCookies].
+  /// Called after logout so stale auth cookies do not survive the session.
+  Future<void> clearCookies() => cookie_setup.clearCookies();
 
   /// Error interceptor — routes every Dio failure to its appropriate handler.
   ///
