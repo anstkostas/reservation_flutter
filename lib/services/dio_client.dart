@@ -9,17 +9,62 @@ import '../cubits/auth/auth_bloc.dart';
 import '../models/models.dart';
 import 'cookie_setup/cookie_setup.dart';
 
-/// The single HTTP client for all API calls.
+/// Single HTTP client for the app — all API calls go through this.
 ///
-/// Must be initialized via [initialize] before any API method is called.
-/// [initialize] is async because cookie setup requires file system access
-/// on mobile. Register this as a lazy singleton in get_it and await
-/// [initialize] during service locator setup.
+/// ## Lifecycle
 ///
-/// Usage:
+/// 1. Construct: `final client = DioClient();` (synchronous).
+/// 2. Initialize: `await client.initialize();` (asynchronous — cookie setup
+///    on mobile needs file system access).
+/// 3. Register in `get_it` as a `lazySingleton`; await `initialize()` inside
+///    `service_locator` setup before any dependent service is constructed.
+///
+/// `lazySingleton` (not eager `singleton`) because [initialize] must be
+/// awaited — an eager registration would create the instance before its async
+/// setup could finish.
+///
+/// ## Interceptors (added in [initialize], in order)
+///
+/// 1. **Cookie interceptor** — mobile only; persists auth cookies to disk so
+///    the session survives app restarts. Web returns `null` from the factory
+///    and is skipped (the browser handles `Set-Cookie` natively).
+/// 2. **Error interceptor** — runs on every error response. Routes through
+///    [_onError], which either silently refreshes the session (for 401s) or
+///    normalises every other failure into [AppException].
+///
+/// ## Error contract
+///
+/// Every error reaching the layers above this client is an [AppException]
+/// stored in [DioException.error]. The repository layer unwraps it and
+/// re-throws. Callers never read raw Dio status codes or response bodies.
+///
+/// - Network / DNS / timeout failures → `AppException(statusCode: 0)`.
+/// - HTTP 4xx / 5xx → `AppException` carrying the backend's `message` and
+///   the actual status code.
+/// - HTTP 401 (auth endpoints, or non-auth after refresh fails) →
+///   [UnauthorizedException]. Subclass of [AppException] so type-based
+///   `catch` clauses can distinguish session loss from other failures.
+///
+/// ## Coupling to AuthBloc
+///
+/// On refresh failure this client dispatches `AuthLogoutRequested` on
+/// `AuthBloc` via `get_it`. The interceptor sits outside the widget tree and
+/// has no `BuildContext` — `context.read<AuthBloc>()` is not available here.
+/// `get_it` is the only way to reach the exact same `AuthBloc` instance that
+/// drives the UI and `GoRouterRefreshStream`.
+///
+/// This creates a documented `DioClient ↔ AuthBloc` circular dependency,
+/// resolved at runtime by initialization order in `service_locator`. Do not
+/// change that order.
+///
+/// ## Usage
+///
 /// ```dart
 /// final client = DioClient();
 /// await client.initialize();
+/// // ...later, via get_it:
+/// final dio = getIt<DioClient>().dio;
+/// final response = await dio.get(ApiConstants.restaurants);
 /// ```
 class DioClient {
   DioClient() {
@@ -27,7 +72,19 @@ class DioClient {
   }
 
   late final Dio _dio;
+
+  /// Synchronous gate for the concurrent-401 lock. The first 401 to arrive
+  /// sees this `false` and becomes the *leader* — it sets this to `true`,
+  /// creates [_refreshCompleter], and starts the refresh. Subsequent 401s see
+  /// `true` and become *followers* — they suspend on [_refreshCompleter]
+  /// instead of starting their own refresh. Reset to `false` immediately
+  /// after the refresh settles. See [_onError] for the full flow.
   bool _isRefreshing = false;
+
+  /// Rendezvous primitive followers await while the leader's refresh is in
+  /// flight. Created by the leader at the start of each refresh, completed
+  /// with the outcome (`true` = refresh succeeded, `false` = refresh failed),
+  /// then nulled out. See [_onError] for the full flow.
   Completer<bool>? _refreshCompleter;
 
   /// Exposes the configured [Dio] instance to API services.
@@ -62,9 +119,58 @@ class DioClient {
     _dio.interceptors.add(InterceptorsWrapper(onError: _onError));
   }
 
-  /// On 401, attempts a silent token refresh before rejecting.
-  /// Auth endpoints always reject immediately — their 401s are intentional.
-  /// Concurrent 401s share one refresh call via a Completer lock.
+  /// Error interceptor — routes every Dio failure to its appropriate handler.
+  ///
+  /// ## Paths
+  ///
+  /// 1. **Non-401** → [_rejectWithAppException]. Normalises the failure into
+  ///    an [AppException] and propagates. Most errors take this path.
+  /// 2. **401 on auth endpoints** (`/auth/login`, `/auth/signup`,
+  ///    `/auth/refresh`, `/auth/logout`) → fast-reject with
+  ///    [UnauthorizedException]. These 401s are *intentional* ("wrong
+  ///    password", "no valid refresh token"); attempting to silently refresh
+  ///    would recurse forever.
+  /// 3. **401 elsewhere, refresh already in flight** → suspend on
+  ///    [_refreshCompleter] until the in-flight refresh settles. See
+  ///    "Concurrent 401 lock" below.
+  /// 4. **401 elsewhere, no refresh in flight** → become the *leader*; start
+  ///    a refresh (`POST /auth/refresh`), then replay the original request on
+  ///    success or dispatch logout on failure.
+  ///
+  /// ## Silent refresh
+  ///
+  /// A 401 on a non-auth endpoint usually means the access-token cookie
+  /// expired. Rather than propagate the 401, this method calls
+  /// `/auth/refresh` (which uses the refresh-token cookie to set a new
+  /// access-token cookie), then replays the original request. From every
+  /// layer above — service, repository, cubit — a successful refresh is
+  /// **invisible**; the request just appears to work.
+  ///
+  /// ## Concurrent 401 lock
+  ///
+  /// When the screen fires several requests in parallel and all return 401,
+  /// only **one** of them should refresh — the rest must wait and then replay
+  /// or fail in unison. Without coordination, parallel `/auth/refresh` calls
+  /// would race the backend's refresh-token rotation: the second call would
+  /// use an already-invalidated token, fail, and the user would be logged out
+  /// even though refresh #1 succeeded.
+  ///
+  /// Two fields coordinate this:
+  /// - [_isRefreshing] — synchronous gate distinguishing leader from
+  ///   follower without an `await`.
+  /// - [_refreshCompleter] — rendezvous future; the leader completes it with
+  ///   the refresh outcome, every follower awakens at once.
+  ///
+  /// On refresh **success**: leader and followers each replay their own
+  /// original request and resolve with the fresh response. The screen sees N
+  /// successful responses; the 401s were invisible.
+  ///
+  /// On refresh **failure**: the leader dispatches `AuthLogoutRequested`
+  /// exactly once (global side effect — dispatching from each follower would
+  /// emit the auth state change N times). Every parked request — leader and
+  /// followers — rejects with [UnauthorizedException]. The cubit layer
+  /// catches the typed exception; the routing layer reacts to the auth state
+  /// change.
   Future<void> _onError(DioException e, ErrorInterceptorHandler handler) async {
     final statusCode = e.response?.statusCode;
 
@@ -148,7 +254,24 @@ class DioClient {
     }
   }
 
-  /// Normalizes non-401 Dio errors into [AppException] stored in [DioException.error].
+  /// Normalises non-401 Dio errors into an [AppException] for callers.
+  ///
+  /// Two cases:
+  /// - **Server responded with an error** (4xx / 5xx) → builds an
+  ///   [AppException] from the backend's `{ success: false, message,
+  ///   statusCode }` envelope. Falls back to a generic message if the body
+  ///   isn't a `Map` or has no `message` field, and to status 500 if the
+  ///   response somehow lacks a status code.
+  /// - **No server response** (DNS failure, timeout, offline) → builds an
+  ///   [AppException] with `statusCode: 0` (sentinel for "no HTTP involved")
+  ///   and a friendly fallback message — the raw Dio message is not user
+  ///   readable.
+  ///
+  /// In both cases the [AppException] is wrapped inside a fresh
+  /// [DioException] (Dio's `handler.reject` only accepts a `DioException`)
+  /// and stored in its [DioException.error] slot. The repository layer reads
+  /// `.error` and re-throws the typed exception, so layers above this client
+  /// never touch Dio types directly.
   void _rejectWithAppException(
     DioException e,
     ErrorInterceptorHandler handler,

@@ -16,6 +16,15 @@ part 'customer_reservation_state.dart';
 ///
 /// This keeps the list in sync without requiring the screen to trigger a
 /// separate fetch after a mutation.
+///
+/// ## When this pattern applies
+///
+/// **Dual-emit mutation feedback** — `ActionSuccess` for the snackbar, then
+/// `Loaded` for the rebuild. Use only when the screen stays mounted after
+/// the mutation, needs ephemeral confirmation, and needs the data to refresh.
+/// If the screen navigates after the mutation (e.g. login → home), skip the
+/// extra state — navigation is the feedback. See `~/.claude/my/FLUTTER.md`
+/// § State Management for the rule and alternatives.
 class CustomerReservationCubit extends Cubit<CustomerReservationState> {
   CustomerReservationCubit(this._repository)
     : super(const CustomerReservationInitial());

@@ -15,9 +15,14 @@ const _kLocaleKey = 'app_locale';
 
 /// Holds and persists the app's active [Locale].
 ///
-/// [LocaleCubit] is a lazy singleton in GetIt and provided above [MaterialApp]
-/// so locale state is available before the widget tree is built. It must live
-/// above [MaterialApp.router] — providing it inside the builder would be too late.
+/// Unlike other cubits, [LocaleCubit] is NOT registered in GetIt. It is
+/// constructed directly in `main.dart` and passed into [App] via constructor
+/// injection, so [loadSavedLocale] can complete before [runApp] — avoiding a
+/// locale flash on startup.
+///
+/// [App] provides it above [MaterialApp.router] via [BlocProvider.value]. It
+/// must live above [MaterialApp.router] — providing it inside the builder
+/// would be too late, since [MaterialApp] locks in its locale at construction.
 class LocaleCubit extends Cubit<Locale> {
   LocaleCubit() : super(const Locale('en'));
 

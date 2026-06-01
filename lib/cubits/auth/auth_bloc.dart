@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 
 import '../../models/models.dart';
 import '../../repositories/auth_repository.dart';
-
 part 'auth_event.dart';
 part 'auth_state.dart';
 
@@ -23,7 +22,13 @@ part 'auth_state.dart';
 /// without any individual Cubit needing to know about auth. The event model
 /// makes the external trigger explicit and visible in BLoC DevTools.
 ///
+/// A secondary advantage matters here specifically: BLoC's internal event
+/// queue serializes handlers, so a user-tapped logout and an interceptor-
+/// dispatched logout can't run [_onLogoutRequested] concurrently. With a
+/// Cubit, two concurrent `logout()` calls would interleave their awaits.
+///
 /// ## Event → State transitions
+
 ///
 /// ```
 /// AuthCheckRequested  → AuthLoading → AuthAuthenticated | AuthUnauthenticated

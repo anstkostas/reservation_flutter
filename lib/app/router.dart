@@ -96,6 +96,7 @@ String? _redirect(BuildContext context, GoRouterState state) {
     AuthUnauthenticated() => _unauthenticatedRedirect(location),
 
     // Valid session — bounce away from auth screens; enforce role-based access.
+    // shorthand for (user: final user)
     AuthAuthenticated(:final user) => _authenticatedRedirect(
       location,
       user.role,
