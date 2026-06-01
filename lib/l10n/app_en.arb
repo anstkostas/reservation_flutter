@@ -2,182 +2,512 @@
   "@@locale": "en",
 
   "appTitle": "Antigravity",
+  "@appTitle": {
+    "description": "App name shown in the browser tab and loading screen"
+  },
 
   "navRestaurants": "Restaurants",
+  "@navRestaurants": {
+    "description": "Navigation bar link to the restaurant listing page"
+  },
   "navLogIn": "Log in",
+  "@navLogIn": {
+    "description": "Navigation bar link to the login page — shown when the user is not authenticated"
+  },
   "navDashboard": "Dashboard",
+  "@navDashboard": {
+    "description": "Navigation bar link to the owner dashboard — shown to restaurant owners only"
+  },
   "navReservations": "Reservations",
+  "@navReservations": {
+    "description": "Navigation bar link to the reservation history page — shown to customers only"
+  },
   "navLogout": "Logout",
+  "@navLogout": {
+    "description": "Navigation bar logout button — shown when the user is authenticated"
+  },
 
   "splashHeadline": "Reservation App",
+  "@splashHeadline": {
+    "description": "Large headline on the splash/landing screen"
+  },
   "splashSubtitle": "Book, manage, and explore your favorite restaurants seamlessly.",
+  "@splashSubtitle": {
+    "description": "Subtitle on the splash/landing screen describing the app purpose"
+  },
   "splashCtaExplore": "Explore Restaurants",
+  "@splashCtaExplore": {
+    "description": "Call-to-action button on the splash screen — navigates to the restaurant list; shown to unauthenticated users and customers"
+  },
   "splashCtaDashboard": "Dashboard",
+  "@splashCtaDashboard": {
+    "description": "Call-to-action button on the splash screen — navigates to the owner dashboard; shown to restaurant owners only"
+  },
   "splashCtaMyReservations": "My Reservations",
+  "@splashCtaMyReservations": {
+    "description": "Call-to-action button on the splash screen — navigates to reservation history; shown to customers only"
+  },
 
   "loginTitle": "Welcome back",
+  "@loginTitle": {
+    "description": "Heading on the login page"
+  },
   "loginSubtitle": "Sign in to your account",
+  "@loginSubtitle": {
+    "description": "Subtitle on the login page"
+  },
   "loginEmailLabel": "Email",
+  "@loginEmailLabel": {
+    "description": "Label for the email input field on the login form"
+  },
   "loginEmailHint": "you@example.com",
+  "@loginEmailHint": {
+    "description": "Placeholder text inside the email input field on the login form"
+  },
   "loginPasswordLabel": "Password",
+  "@loginPasswordLabel": {
+    "description": "Label for the password input field on the login form"
+  },
   "loginSubmitButton": "Sign in",
+  "@loginSubmitButton": {
+    "description": "Submit button on the login form"
+  },
   "loginNoAccount": "Don't have an account?",
+  "@loginNoAccount": {
+    "description": "Text prompting users without an account to sign up — appears next to loginSignUpLink"
+  },
   "loginSignUpLink": "Sign up",
+  "@loginSignUpLink": {
+    "description": "Tappable link text that navigates to the sign-up page — appears next to loginNoAccount"
+  },
 
   "signupTitle": "Create account",
+  "@signupTitle": {
+    "description": "Heading on the sign-up page"
+  },
   "signupSubtitle": "Fill in the details below to get started",
+  "@signupSubtitle": {
+    "description": "Subtitle on the sign-up page"
+  },
   "signupFirstNameLabel": "First name",
+  "@signupFirstNameLabel": {
+    "description": "Label for the first name input field on the sign-up form"
+  },
   "signupLastNameLabel": "Last name",
+  "@signupLastNameLabel": {
+    "description": "Label for the last name input field on the sign-up form"
+  },
   "signupEmailLabel": "Email",
+  "@signupEmailLabel": {
+    "description": "Label for the email input field on the sign-up form"
+  },
   "signupEmailHint": "you@example.com",
+  "@signupEmailHint": {
+    "description": "Placeholder text inside the email input field on the sign-up form"
+  },
   "signupPasswordLabel": "Password",
+  "@signupPasswordLabel": {
+    "description": "Label for the password input field on the sign-up form"
+  },
   "signupRolePrompt": "I am signing up as a:",
+  "@signupRolePrompt": {
+    "description": "Prompt asking the user to select their account type on the sign-up form"
+  },
   "signupRoleCustomer": "Customer",
+  "@signupRoleCustomer": {
+    "description": "Role option on the sign-up form — selects the customer account type"
+  },
   "signupRoleOwner": "Restaurant owner",
+  "@signupRoleOwner": {
+    "description": "Role option on the sign-up form — selects the restaurant owner account type"
+  },
   "signupSubmitButton": "Create account",
+  "@signupSubmitButton": {
+    "description": "Submit button on the sign-up form"
+  },
   "signupHaveAccount": "Already have an account?",
+  "@signupHaveAccount": {
+    "description": "Text prompting users who already have an account to sign in — appears next to signupSignInLink"
+  },
   "signupSignInLink": "Sign in",
+  "@signupSignInLink": {
+    "description": "Tappable link text that navigates to the login page — appears next to signupHaveAccount"
+  },
   "signupRestaurantPickerLabel": "Select your restaurant",
+  "@signupRestaurantPickerLabel": {
+    "description": "Label for the restaurant selector dropdown shown to users signing up as restaurant owners"
+  },
   "signupRestaurantPickerRequired": "Select a restaurant to claim",
+  "@signupRestaurantPickerRequired": {
+    "description": "Validation error shown when an owner signs up without selecting a restaurant"
+  },
   "signupNoRestaurantsAvailable": "No restaurants available to claim. Sign up as a customer instead.",
+  "@signupNoRestaurantsAvailable": {
+    "description": "Message shown when there are no unclaimed restaurants available for owner sign-up"
+  },
   "signupRetry": "Retry",
+  "@signupRetry": {
+    "description": "Button to retry loading the restaurant list on the sign-up page after an error"
+  },
 
   "restaurantListTitle": "Available Restaurants",
+  "@restaurantListTitle": {
+    "description": "Page heading on the restaurant listing page"
+  },
   "restaurantListEmpty": "No restaurants available.",
+  "@restaurantListEmpty": {
+    "description": "Message shown when no restaurants are available on the listing page"
+  },
   "restaurantCardCapacity": "Capacity: {capacity} Tables",
   "@restaurantCardCapacity": {
+    "description": "Capacity chip on a restaurant card — capacity is the number of simultaneous table slots",
     "placeholders": {
       "capacity": { "type": "int" }
     }
   },
   "restaurantCardViewButton": "View Details & Book",
+  "@restaurantCardViewButton": {
+    "description": "Button on a restaurant card that navigates to the restaurant detail and booking page"
+  },
 
   "restaurantDetailAbout": "About",
+  "@restaurantDetailAbout": {
+    "description": "Section heading on the restaurant detail page introducing the restaurant description"
+  },
   "restaurantDetailCapacityChip": "Capacity: {capacity} Tables",
   "@restaurantDetailCapacityChip": {
+    "description": "Capacity chip on the restaurant detail page — capacity is the number of simultaneous table slots",
     "placeholders": {
       "capacity": { "type": "int" }
     }
   },
   "restaurantDetailMakeReservationTitle": "Make a Reservation",
+  "@restaurantDetailMakeReservationTitle": {
+    "description": "Section heading on the restaurant detail page for the booking form"
+  },
   "restaurantDetailMakeReservationSubtitle": "Secure your table for an unforgettable dining experience.",
+  "@restaurantDetailMakeReservationSubtitle": {
+    "description": "Subtitle below the booking section heading on the restaurant detail page"
+  },
   "restaurantDetailBookButton": "Book a Table",
+  "@restaurantDetailBookButton": {
+    "description": "Button on the restaurant detail page that opens the reservation creation sheet"
+  },
 
   "reservationHistoryTitle": "My Reservations",
+  "@reservationHistoryTitle": {
+    "description": "Page heading on the customer reservation history page"
+  },
   "reservationHistorySubtitle": "View and manage your dining bookings.",
+  "@reservationHistorySubtitle": {
+    "description": "Subtitle on the customer reservation history page"
+  },
   "reservationHistoryBookButton": "Book a Table",
+  "@reservationHistoryBookButton": {
+    "description": "Button on the reservation history page that navigates to the restaurant list to book a new table"
+  },
   "reservationHistoryTabUpcoming": "Upcoming ({count})",
   "@reservationHistoryTabUpcoming": {
+    "description": "Tab label for upcoming/active reservations — count is the number of active reservations",
     "placeholders": {
       "count": { "type": "int" }
     }
   },
   "reservationHistoryTabHistory": "History ({count})",
   "@reservationHistoryTabHistory": {
+    "description": "Tab label for past reservations — count is the number of past reservations",
     "placeholders": {
       "count": { "type": "int" }
     }
   },
   "reservationHistoryEmptyUpcomingTitle": "No upcoming reservations",
+  "@reservationHistoryEmptyUpcomingTitle": {
+    "description": "Heading shown when the customer has no upcoming reservations"
+  },
   "reservationHistoryEmptyUpcomingDetail": "You don't have any active bookings at the moment. Explore restaurants and book your next meal!",
+  "@reservationHistoryEmptyUpcomingDetail": {
+    "description": "Detail text shown when the customer has no upcoming reservations"
+  },
   "reservationHistoryEmptyPastTitle": "No past reservations",
+  "@reservationHistoryEmptyPastTitle": {
+    "description": "Heading shown when the customer has no past reservations"
+  },
   "reservationHistoryEmptyPastDetail": "No reservation history yet.",
+  "@reservationHistoryEmptyPastDetail": {
+    "description": "Detail text shown when the customer has no past reservations"
+  },
   "reservationUpdatedSnackbar": "Reservation updated.",
+  "@reservationUpdatedSnackbar": {
+    "description": "Snackbar message shown after a reservation is successfully updated"
+  },
 
   "ownerDashboardTitle": "Dashboard",
+  "@ownerDashboardTitle": {
+    "description": "Page heading on the owner dashboard page"
+  },
   "ownerDashboardSubtitle": "Manage your restaurant's reservations.",
+  "@ownerDashboardSubtitle": {
+    "description": "Subtitle on the owner dashboard page"
+  },
   "ownerDashboardTabActive": "Active ({count})",
   "@ownerDashboardTabActive": {
+    "description": "Tab label for active reservations on the owner dashboard — count is the number of active reservations",
     "placeholders": {
       "count": { "type": "int" }
     }
   },
   "ownerDashboardTabHistory": "History ({count})",
   "@ownerDashboardTabHistory": {
+    "description": "Tab label for past reservations on the owner dashboard — count is the number of past reservations",
     "placeholders": {
       "count": { "type": "int" }
     }
   },
   "ownerDashboardSearchHint": "Search by name or email...",
+  "@ownerDashboardSearchHint": {
+    "description": "Placeholder text in the search field on the owner dashboard"
+  },
   "ownerDashboardNoReservations": "No reservations found.",
+  "@ownerDashboardNoReservations": {
+    "description": "Message shown when no reservations match the current search or tab on the owner dashboard"
+  },
   "ownerResolvedSnackbar": "Reservation resolved.",
+  "@ownerResolvedSnackbar": {
+    "description": "Snackbar message shown after an owner marks a reservation as completed or no-show"
+  },
 
   "ownerTableColumnCustomer": "Customer",
+  "@ownerTableColumnCustomer": {
+    "description": "Column header for the customer column in the owner reservation table (desktop layout)"
+  },
   "ownerTableColumnDate": "Date",
+  "@ownerTableColumnDate": {
+    "description": "Column header for the date column in the owner reservation table (desktop layout)"
+  },
   "ownerTableColumnTime": "Time",
+  "@ownerTableColumnTime": {
+    "description": "Column header for the time column in the owner reservation table (desktop layout)"
+  },
   "ownerTableColumnPeople": "People",
+  "@ownerTableColumnPeople": {
+    "description": "Column header for the guest count column in the owner reservation table (desktop layout)"
+  },
   "ownerTableColumnStatus": "Status",
+  "@ownerTableColumnStatus": {
+    "description": "Column header for the status column in the owner reservation table (desktop layout)"
+  },
   "ownerTableColumnActions": "Actions",
+  "@ownerTableColumnActions": {
+    "description": "Column header for the actions column in the owner reservation table (desktop layout)"
+  },
   "ownerTableMarkCompleted": "Mark as completed",
+  "@ownerTableMarkCompleted": {
+    "description": "Tooltip and action label for the button that marks a reservation as completed (owner desktop table)"
+  },
   "ownerTableMarkNoShow": "Mark as no-show",
+  "@ownerTableMarkNoShow": {
+    "description": "Tooltip and action label for the button that marks a reservation as no-show (owner desktop table)"
+  },
   "ownerTableArrivingSoon": "Arriving soon",
+  "@ownerTableArrivingSoon": {
+    "description": "Badge label shown on reservations scheduled within the next few hours in the owner table"
+  },
 
   "ownerMobileComplete": "Complete",
+  "@ownerMobileComplete": {
+    "description": "Action button label to mark a reservation as completed in the mobile owner view"
+  },
   "ownerMobileNoShow": "No-show",
+  "@ownerMobileNoShow": {
+    "description": "Action button label to mark a reservation as no-show in the mobile owner view"
+  },
   "ownerMobilePeopleLabel": "{count} People",
   "@ownerMobilePeopleLabel": {
+    "description": "Guest count label on a reservation card in the mobile owner view — count is the number of guests",
     "placeholders": {
       "count": { "type": "int" }
     }
   },
 
   "reservationCreateTitle": "Make a Reservation",
+  "@reservationCreateTitle": {
+    "description": "Heading on the reservation creation bottom sheet"
+  },
   "reservationCreateDateLabel": "Date",
+  "@reservationCreateDateLabel": {
+    "description": "Label for the date picker field on the reservation creation form"
+  },
   "reservationCreateTimeLabel": "Time",
+  "@reservationCreateTimeLabel": {
+    "description": "Label for the time picker field on the reservation creation form"
+  },
   "reservationCreateGuestsLabel": "Number of guests",
+  "@reservationCreateGuestsLabel": {
+    "description": "Label for the guest count input field on the reservation creation form"
+  },
   "reservationCreateConfirmButton": "Confirm",
+  "@reservationCreateConfirmButton": {
+    "description": "Submit button on the reservation creation form"
+  },
   "reservationCreateSelectDate": "Select a date",
+  "@reservationCreateSelectDate": {
+    "description": "Placeholder shown in the date field before a date is selected on the reservation creation form"
+  },
   "reservationCreateSelectTime": "Select a time",
+  "@reservationCreateSelectTime": {
+    "description": "Placeholder shown in the time field before a time is selected on the reservation creation form"
+  },
   "reservationCreateSuccess": "Reservation confirmed!",
+  "@reservationCreateSuccess": {
+    "description": "Snackbar message shown after a reservation is successfully created"
+  },
 
   "reservationEditTitle": "Edit Reservation",
+  "@reservationEditTitle": {
+    "description": "Heading on the reservation edit bottom sheet"
+  },
   "reservationEditDateLabel": "Date",
+  "@reservationEditDateLabel": {
+    "description": "Label for the date picker field on the reservation edit form"
+  },
   "reservationEditTimeLabel": "Time",
+  "@reservationEditTimeLabel": {
+    "description": "Label for the time picker field on the reservation edit form"
+  },
   "reservationEditGuestsLabel": "Number of guests",
+  "@reservationEditGuestsLabel": {
+    "description": "Label for the guest count input field on the reservation edit form"
+  },
   "reservationEditDiscardButton": "Discard",
+  "@reservationEditDiscardButton": {
+    "description": "Button to discard changes and close the reservation edit form without saving"
+  },
   "reservationEditSaveButton": "Save changes",
+  "@reservationEditSaveButton": {
+    "description": "Button to save changes on the reservation edit form"
+  },
   "reservationEditSelectDate": "Select a date",
+  "@reservationEditSelectDate": {
+    "description": "Placeholder shown in the date field before a date is selected on the reservation edit form"
+  },
   "reservationEditSelectTime": "Select a time",
+  "@reservationEditSelectTime": {
+    "description": "Placeholder shown in the time field before a time is selected on the reservation edit form"
+  },
 
   "reservationCancelDialogTitle": "Cancel reservation?",
+  "@reservationCancelDialogTitle": {
+    "description": "Title of the confirmation dialog shown before canceling a reservation"
+  },
   "reservationCancelDialogContent": "This cannot be undone.",
+  "@reservationCancelDialogContent": {
+    "description": "Body text of the cancellation confirmation dialog warning the user the action is irreversible"
+  },
   "reservationCancelDialogKeep": "Keep it",
+  "@reservationCancelDialogKeep": {
+    "description": "Button in the cancellation dialog that dismisses the dialog and keeps the reservation unchanged"
+  },
   "reservationCancelDialogConfirm": "Cancel reservation",
+  "@reservationCancelDialogConfirm": {
+    "description": "Button in the cancellation dialog that confirms and cancels the reservation"
+  },
 
   "reservationDetailEditButton": "Edit",
+  "@reservationDetailEditButton": {
+    "description": "Button on the reservation detail sheet that opens the edit form"
+  },
   "reservationDetailCancelButton": "Cancel",
+  "@reservationDetailCancelButton": {
+    "description": "Button on the reservation detail sheet that opens the cancellation confirmation dialog"
+  },
   "reservationDetailGuestSingular": "1 guest",
+  "@reservationDetailGuestSingular": {
+    "description": "Guest count label used when there is exactly 1 guest on the reservation detail sheet"
+  },
   "reservationDetailGuestPlural": "{count} guests",
   "@reservationDetailGuestPlural": {
+    "description": "Guest count label used when there are 2 or more guests on the reservation detail sheet — count is the number of guests",
     "placeholders": {
       "count": { "type": "int" }
     }
   },
   "reservationDetailRestaurantFallback": "Restaurant",
+  "@reservationDetailRestaurantFallback": {
+    "description": "Fallback text shown as the restaurant name on the reservation detail sheet when the restaurant name is unavailable"
+  },
   "reservationCardRestaurantFallback": "Restaurant",
+  "@reservationCardRestaurantFallback": {
+    "description": "Fallback text shown as the restaurant name on a reservation card when the restaurant name is unavailable"
+  },
 
   "statusActive": "Active",
+  "@statusActive": {
+    "description": "Reservation status badge label — the reservation is upcoming and active"
+  },
   "statusCanceled": "Canceled",
+  "@statusCanceled": {
+    "description": "Reservation status badge label — the reservation was canceled by the customer"
+  },
   "statusCompleted": "Completed",
+  "@statusCompleted": {
+    "description": "Reservation status badge label — the reservation was marked as completed by the owner"
+  },
   "statusNoShow": "No-show",
+  "@statusNoShow": {
+    "description": "Reservation status badge label — the customer did not show up; marked by the owner"
+  },
 
   "errorRetry": "Retry",
+  "@errorRetry": {
+    "description": "Generic retry button shown on error states throughout the app"
+  },
 
   "validatorEmailRequired": "Email is required",
+  "@validatorEmailRequired": {
+    "description": "Form validation error shown when the email field is empty"
+  },
   "validatorEmailInvalid": "Enter a valid email address",
+  "@validatorEmailInvalid": {
+    "description": "Form validation error shown when the email address format is invalid"
+  },
   "validatorPasswordRequired": "Password is required",
+  "@validatorPasswordRequired": {
+    "description": "Form validation error shown when the password field is empty"
+  },
   "validatorPasswordTooShort": "Password must be at least 6 characters",
+  "@validatorPasswordTooShort": {
+    "description": "Form validation error shown when the password is fewer than 6 characters"
+  },
   "validatorFieldRequired": "{fieldName} is required",
   "@validatorFieldRequired": {
+    "description": "Generic required-field validation error — fieldName is the label of the field that is empty",
     "placeholders": {
       "fieldName": { "type": "String" }
     }
   },
   "validatorGuestsRequired": "Number of guests is required",
+  "@validatorGuestsRequired": {
+    "description": "Form validation error shown when the guest count field is empty"
+  },
   "validatorGuestsInvalidNumber": "Enter a valid number",
+  "@validatorGuestsInvalidNumber": {
+    "description": "Form validation error shown when the guest count input is not a valid number"
+  },
   "validatorGuestsTooFew": "Must be at least 1 guest",
+  "@validatorGuestsTooFew": {
+    "description": "Form validation error shown when the guest count is less than 1"
+  },
   "validatorGuestsTooMany": "Cannot exceed 20 guests",
+  "@validatorGuestsTooMany": {
+    "description": "Form validation error shown when the guest count exceeds 20"
+  },
 
   "languageSelectorEnglish": "English",
-  "languageSelectorGreek": "Greek"
+  "@languageSelectorEnglish": {
+    "description": "Language option label for English in the language selector"
+  },
+  "languageSelectorGreek": "Greek",
+  "@languageSelectorGreek": {
+    "description": "Language option label for Greek in the language selector"
+  }
 }

@@ -2,137 +2,512 @@
   "@@locale": "el",
 
   "appTitle": "Antigravity",
+  "@appTitle": {
+    "description": "App name shown in the browser tab and loading screen"
+  },
 
   "navRestaurants": "Εστιατόρια",
+  "@navRestaurants": {
+    "description": "Navigation bar link to the restaurant listing page"
+  },
   "navLogIn": "Σύνδεση",
+  "@navLogIn": {
+    "description": "Navigation bar link to the login page — shown when the user is not authenticated"
+  },
   "navDashboard": "Πίνακας ελέγχου",
+  "@navDashboard": {
+    "description": "Navigation bar link to the owner dashboard — shown to restaurant owners only"
+  },
   "navReservations": "Κρατήσεις",
+  "@navReservations": {
+    "description": "Navigation bar link to the reservation history page — shown to customers only"
+  },
   "navLogout": "Αποσύνδεση",
+  "@navLogout": {
+    "description": "Navigation bar logout button — shown when the user is authenticated"
+  },
 
   "splashHeadline": "Εφαρμογή Κρατήσεων",
+  "@splashHeadline": {
+    "description": "Large headline on the splash/landing screen"
+  },
   "splashSubtitle": "Κάντε κράτηση, διαχειριστείτε και εξερευνήστε τα αγαπημένα σας εστιατόρια.",
+  "@splashSubtitle": {
+    "description": "Subtitle on the splash/landing screen describing the app purpose"
+  },
   "splashCtaExplore": "Εξερεύνηση Εστιατορίων",
+  "@splashCtaExplore": {
+    "description": "Call-to-action button on the splash screen — navigates to the restaurant list; shown to unauthenticated users and customers"
+  },
   "splashCtaDashboard": "Πίνακας ελέγχου",
+  "@splashCtaDashboard": {
+    "description": "Call-to-action button on the splash screen — navigates to the owner dashboard; shown to restaurant owners only"
+  },
   "splashCtaMyReservations": "Οι Κρατήσεις μου",
+  "@splashCtaMyReservations": {
+    "description": "Call-to-action button on the splash screen — navigates to reservation history; shown to customers only"
+  },
 
   "loginTitle": "Καλωσορίσατε",
+  "@loginTitle": {
+    "description": "Heading on the login page"
+  },
   "loginSubtitle": "Συνδεθείτε στον λογαριασμό σας",
+  "@loginSubtitle": {
+    "description": "Subtitle on the login page"
+  },
   "loginEmailLabel": "Email",
+  "@loginEmailLabel": {
+    "description": "Label for the email input field on the login form"
+  },
   "loginEmailHint": "you@example.com",
+  "@loginEmailHint": {
+    "description": "Placeholder text inside the email input field on the login form"
+  },
   "loginPasswordLabel": "Κωδικός πρόσβασης",
+  "@loginPasswordLabel": {
+    "description": "Label for the password input field on the login form"
+  },
   "loginSubmitButton": "Σύνδεση",
+  "@loginSubmitButton": {
+    "description": "Submit button on the login form"
+  },
   "loginNoAccount": "Δεν έχετε λογαριασμό;",
+  "@loginNoAccount": {
+    "description": "Text prompting users without an account to sign up — appears next to loginSignUpLink"
+  },
   "loginSignUpLink": "Εγγραφή",
+  "@loginSignUpLink": {
+    "description": "Tappable link text that navigates to the sign-up page — appears next to loginNoAccount"
+  },
 
   "signupTitle": "Δημιουργία λογαριασμού",
+  "@signupTitle": {
+    "description": "Heading on the sign-up page"
+  },
   "signupSubtitle": "Συμπληρώστε τα στοιχεία παρακάτω για να ξεκινήσετε",
+  "@signupSubtitle": {
+    "description": "Subtitle on the sign-up page"
+  },
   "signupFirstNameLabel": "Όνομα",
+  "@signupFirstNameLabel": {
+    "description": "Label for the first name input field on the sign-up form"
+  },
   "signupLastNameLabel": "Επώνυμο",
+  "@signupLastNameLabel": {
+    "description": "Label for the last name input field on the sign-up form"
+  },
   "signupEmailLabel": "Email",
+  "@signupEmailLabel": {
+    "description": "Label for the email input field on the sign-up form"
+  },
   "signupEmailHint": "you@example.com",
+  "@signupEmailHint": {
+    "description": "Placeholder text inside the email input field on the sign-up form"
+  },
   "signupPasswordLabel": "Κωδικός πρόσβασης",
+  "@signupPasswordLabel": {
+    "description": "Label for the password input field on the sign-up form"
+  },
   "signupRolePrompt": "Εγγράφομαι ως:",
+  "@signupRolePrompt": {
+    "description": "Prompt asking the user to select their account type on the sign-up form"
+  },
   "signupRoleCustomer": "Πελάτης",
+  "@signupRoleCustomer": {
+    "description": "Role option on the sign-up form — selects the customer account type"
+  },
   "signupRoleOwner": "Ιδιοκτήτης εστιατορίου",
+  "@signupRoleOwner": {
+    "description": "Role option on the sign-up form — selects the restaurant owner account type"
+  },
   "signupSubmitButton": "Δημιουργία λογαριασμού",
+  "@signupSubmitButton": {
+    "description": "Submit button on the sign-up form"
+  },
   "signupHaveAccount": "Έχετε ήδη λογαριασμό;",
+  "@signupHaveAccount": {
+    "description": "Text prompting users who already have an account to sign in — appears next to signupSignInLink"
+  },
   "signupSignInLink": "Σύνδεση",
+  "@signupSignInLink": {
+    "description": "Tappable link text that navigates to the login page — appears next to signupHaveAccount"
+  },
   "signupRestaurantPickerLabel": "Επιλέξτε το εστιατόριό σας",
+  "@signupRestaurantPickerLabel": {
+    "description": "Label for the restaurant selector dropdown shown to users signing up as restaurant owners"
+  },
   "signupRestaurantPickerRequired": "Επιλέξτε ένα εστιατόριο για αξίωση",
+  "@signupRestaurantPickerRequired": {
+    "description": "Validation error shown when an owner signs up without selecting a restaurant"
+  },
   "signupNoRestaurantsAvailable": "Δεν υπάρχουν διαθέσιμα εστιατόρια. Εγγραφείτε ως πελάτης.",
+  "@signupNoRestaurantsAvailable": {
+    "description": "Message shown when there are no unclaimed restaurants available for owner sign-up"
+  },
   "signupRetry": "Επανάληψη",
+  "@signupRetry": {
+    "description": "Button to retry loading the restaurant list on the sign-up page after an error"
+  },
 
   "restaurantListTitle": "Διαθέσιμα Εστιατόρια",
+  "@restaurantListTitle": {
+    "description": "Page heading on the restaurant listing page"
+  },
   "restaurantListEmpty": "Δεν υπάρχουν διαθέσιμα εστιατόρια.",
+  "@restaurantListEmpty": {
+    "description": "Message shown when no restaurants are available on the listing page"
+  },
   "restaurantCardCapacity": "Χωρητικότητα: {capacity} Τραπέζια",
+  "@restaurantCardCapacity": {
+    "description": "Capacity chip on a restaurant card — capacity is the number of simultaneous table slots",
+    "placeholders": {
+      "capacity": { "type": "int" }
+    }
+  },
   "restaurantCardViewButton": "Λεπτομέρειες & Κράτηση",
+  "@restaurantCardViewButton": {
+    "description": "Button on a restaurant card that navigates to the restaurant detail and booking page"
+  },
 
   "restaurantDetailAbout": "Σχετικά",
+  "@restaurantDetailAbout": {
+    "description": "Section heading on the restaurant detail page introducing the restaurant description"
+  },
   "restaurantDetailCapacityChip": "Χωρητικότητα: {capacity} Τραπέζια",
+  "@restaurantDetailCapacityChip": {
+    "description": "Capacity chip on the restaurant detail page — capacity is the number of simultaneous table slots",
+    "placeholders": {
+      "capacity": { "type": "int" }
+    }
+  },
   "restaurantDetailMakeReservationTitle": "Κάντε Κράτηση",
+  "@restaurantDetailMakeReservationTitle": {
+    "description": "Section heading on the restaurant detail page for the booking form"
+  },
   "restaurantDetailMakeReservationSubtitle": "Εξασφαλίστε το τραπέζι σας για μια αξέχαστη γαστρονομική εμπειρία.",
+  "@restaurantDetailMakeReservationSubtitle": {
+    "description": "Subtitle below the booking section heading on the restaurant detail page"
+  },
   "restaurantDetailBookButton": "Κράτηση Τραπεζιού",
+  "@restaurantDetailBookButton": {
+    "description": "Button on the restaurant detail page that opens the reservation creation sheet"
+  },
 
   "reservationHistoryTitle": "Οι Κρατήσεις μου",
+  "@reservationHistoryTitle": {
+    "description": "Page heading on the customer reservation history page"
+  },
   "reservationHistorySubtitle": "Δείτε και διαχειριστείτε τις κρατήσεις σας.",
+  "@reservationHistorySubtitle": {
+    "description": "Subtitle on the customer reservation history page"
+  },
   "reservationHistoryBookButton": "Κράτηση Τραπεζιού",
+  "@reservationHistoryBookButton": {
+    "description": "Button on the reservation history page that navigates to the restaurant list to book a new table"
+  },
   "reservationHistoryTabUpcoming": "Επερχόμενες ({count})",
+  "@reservationHistoryTabUpcoming": {
+    "description": "Tab label for upcoming/active reservations — count is the number of active reservations",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
   "reservationHistoryTabHistory": "Ιστορικό ({count})",
+  "@reservationHistoryTabHistory": {
+    "description": "Tab label for past reservations — count is the number of past reservations",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
   "reservationHistoryEmptyUpcomingTitle": "Δεν υπάρχουν επερχόμενες κρατήσεις",
+  "@reservationHistoryEmptyUpcomingTitle": {
+    "description": "Heading shown when the customer has no upcoming reservations"
+  },
   "reservationHistoryEmptyUpcomingDetail": "Δεν έχετε ενεργές κρατήσεις αυτή τη στιγμή. Εξερευνήστε εστιατόρια και κλείστε το επόμενο τραπέζι σας!",
+  "@reservationHistoryEmptyUpcomingDetail": {
+    "description": "Detail text shown when the customer has no upcoming reservations"
+  },
   "reservationHistoryEmptyPastTitle": "Δεν υπάρχουν παλαιότερες κρατήσεις",
+  "@reservationHistoryEmptyPastTitle": {
+    "description": "Heading shown when the customer has no past reservations"
+  },
   "reservationHistoryEmptyPastDetail": "Δεν υπάρχει ακόμα ιστορικό κρατήσεων.",
+  "@reservationHistoryEmptyPastDetail": {
+    "description": "Detail text shown when the customer has no past reservations"
+  },
   "reservationUpdatedSnackbar": "Η κράτηση ενημερώθηκε.",
+  "@reservationUpdatedSnackbar": {
+    "description": "Snackbar message shown after a reservation is successfully updated"
+  },
 
   "ownerDashboardTitle": "Πίνακας ελέγχου",
+  "@ownerDashboardTitle": {
+    "description": "Page heading on the owner dashboard page"
+  },
   "ownerDashboardSubtitle": "Διαχειριστείτε τις κρατήσεις του εστιατορίου σας.",
+  "@ownerDashboardSubtitle": {
+    "description": "Subtitle on the owner dashboard page"
+  },
   "ownerDashboardTabActive": "Ενεργές ({count})",
+  "@ownerDashboardTabActive": {
+    "description": "Tab label for active reservations on the owner dashboard — count is the number of active reservations",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
   "ownerDashboardTabHistory": "Ιστορικό ({count})",
+  "@ownerDashboardTabHistory": {
+    "description": "Tab label for past reservations on the owner dashboard — count is the number of past reservations",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
   "ownerDashboardSearchHint": "Αναζήτηση με όνομα ή email...",
+  "@ownerDashboardSearchHint": {
+    "description": "Placeholder text in the search field on the owner dashboard"
+  },
   "ownerDashboardNoReservations": "Δεν βρέθηκαν κρατήσεις.",
+  "@ownerDashboardNoReservations": {
+    "description": "Message shown when no reservations match the current search or tab on the owner dashboard"
+  },
   "ownerResolvedSnackbar": "Η κράτηση ολοκληρώθηκε.",
+  "@ownerResolvedSnackbar": {
+    "description": "Snackbar message shown after an owner marks a reservation as completed or no-show"
+  },
 
   "ownerTableColumnCustomer": "Πελάτης",
+  "@ownerTableColumnCustomer": {
+    "description": "Column header for the customer column in the owner reservation table (desktop layout)"
+  },
   "ownerTableColumnDate": "Ημερομηνία",
+  "@ownerTableColumnDate": {
+    "description": "Column header for the date column in the owner reservation table (desktop layout)"
+  },
   "ownerTableColumnTime": "Ώρα",
+  "@ownerTableColumnTime": {
+    "description": "Column header for the time column in the owner reservation table (desktop layout)"
+  },
   "ownerTableColumnPeople": "Άτομα",
+  "@ownerTableColumnPeople": {
+    "description": "Column header for the guest count column in the owner reservation table (desktop layout)"
+  },
   "ownerTableColumnStatus": "Κατάσταση",
+  "@ownerTableColumnStatus": {
+    "description": "Column header for the status column in the owner reservation table (desktop layout)"
+  },
   "ownerTableColumnActions": "Ενέργειες",
+  "@ownerTableColumnActions": {
+    "description": "Column header for the actions column in the owner reservation table (desktop layout)"
+  },
   "ownerTableMarkCompleted": "Σημείωση ως ολοκληρωμένη",
+  "@ownerTableMarkCompleted": {
+    "description": "Tooltip and action label for the button that marks a reservation as completed (owner desktop table)"
+  },
   "ownerTableMarkNoShow": "Σημείωση ως no-show",
+  "@ownerTableMarkNoShow": {
+    "description": "Tooltip and action label for the button that marks a reservation as no-show (owner desktop table)"
+  },
   "ownerTableArrivingSoon": "Φτάνει σύντομα",
+  "@ownerTableArrivingSoon": {
+    "description": "Badge label shown on reservations scheduled within the next few hours in the owner table"
+  },
 
   "ownerMobileComplete": "Ολοκλήρωση",
+  "@ownerMobileComplete": {
+    "description": "Action button label to mark a reservation as completed in the mobile owner view"
+  },
   "ownerMobileNoShow": "No-show",
+  "@ownerMobileNoShow": {
+    "description": "Action button label to mark a reservation as no-show in the mobile owner view"
+  },
   "ownerMobilePeopleLabel": "{count} Άτομα",
+  "@ownerMobilePeopleLabel": {
+    "description": "Guest count label on a reservation card in the mobile owner view — count is the number of guests",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
 
   "reservationCreateTitle": "Κάντε Κράτηση",
+  "@reservationCreateTitle": {
+    "description": "Heading on the reservation creation bottom sheet"
+  },
   "reservationCreateDateLabel": "Ημερομηνία",
+  "@reservationCreateDateLabel": {
+    "description": "Label for the date picker field on the reservation creation form"
+  },
   "reservationCreateTimeLabel": "Ώρα",
+  "@reservationCreateTimeLabel": {
+    "description": "Label for the time picker field on the reservation creation form"
+  },
   "reservationCreateGuestsLabel": "Αριθμός καλεσμένων",
+  "@reservationCreateGuestsLabel": {
+    "description": "Label for the guest count input field on the reservation creation form"
+  },
   "reservationCreateConfirmButton": "Επιβεβαίωση",
+  "@reservationCreateConfirmButton": {
+    "description": "Submit button on the reservation creation form"
+  },
   "reservationCreateSelectDate": "Επιλέξτε ημερομηνία",
+  "@reservationCreateSelectDate": {
+    "description": "Placeholder shown in the date field before a date is selected on the reservation creation form"
+  },
   "reservationCreateSelectTime": "Επιλέξτε ώρα",
+  "@reservationCreateSelectTime": {
+    "description": "Placeholder shown in the time field before a time is selected on the reservation creation form"
+  },
   "reservationCreateSuccess": "Η κράτηση επιβεβαιώθηκε!",
+  "@reservationCreateSuccess": {
+    "description": "Snackbar message shown after a reservation is successfully created"
+  },
 
   "reservationEditTitle": "Επεξεργασία Κράτησης",
+  "@reservationEditTitle": {
+    "description": "Heading on the reservation edit bottom sheet"
+  },
   "reservationEditDateLabel": "Ημερομηνία",
+  "@reservationEditDateLabel": {
+    "description": "Label for the date picker field on the reservation edit form"
+  },
   "reservationEditTimeLabel": "Ώρα",
+  "@reservationEditTimeLabel": {
+    "description": "Label for the time picker field on the reservation edit form"
+  },
   "reservationEditGuestsLabel": "Αριθμός καλεσμένων",
+  "@reservationEditGuestsLabel": {
+    "description": "Label for the guest count input field on the reservation edit form"
+  },
   "reservationEditDiscardButton": "Απόρριψη",
+  "@reservationEditDiscardButton": {
+    "description": "Button to discard changes and close the reservation edit form without saving"
+  },
   "reservationEditSaveButton": "Αποθήκευση αλλαγών",
+  "@reservationEditSaveButton": {
+    "description": "Button to save changes on the reservation edit form"
+  },
   "reservationEditSelectDate": "Επιλέξτε ημερομηνία",
+  "@reservationEditSelectDate": {
+    "description": "Placeholder shown in the date field before a date is selected on the reservation edit form"
+  },
   "reservationEditSelectTime": "Επιλέξτε ώρα",
+  "@reservationEditSelectTime": {
+    "description": "Placeholder shown in the time field before a time is selected on the reservation edit form"
+  },
 
   "reservationCancelDialogTitle": "Ακύρωση κράτησης;",
+  "@reservationCancelDialogTitle": {
+    "description": "Title of the confirmation dialog shown before canceling a reservation"
+  },
   "reservationCancelDialogContent": "Η ενέργεια αυτή δεν μπορεί να αναιρεθεί.",
+  "@reservationCancelDialogContent": {
+    "description": "Body text of the cancellation confirmation dialog warning the user the action is irreversible"
+  },
   "reservationCancelDialogKeep": "Διατήρηση",
+  "@reservationCancelDialogKeep": {
+    "description": "Button in the cancellation dialog that dismisses the dialog and keeps the reservation unchanged"
+  },
   "reservationCancelDialogConfirm": "Ακύρωση κράτησης",
+  "@reservationCancelDialogConfirm": {
+    "description": "Button in the cancellation dialog that confirms and cancels the reservation"
+  },
 
   "reservationDetailEditButton": "Επεξεργασία",
+  "@reservationDetailEditButton": {
+    "description": "Button on the reservation detail sheet that opens the edit form"
+  },
   "reservationDetailCancelButton": "Ακύρωση",
+  "@reservationDetailCancelButton": {
+    "description": "Button on the reservation detail sheet that opens the cancellation confirmation dialog"
+  },
   "reservationDetailGuestSingular": "1 άτομο",
+  "@reservationDetailGuestSingular": {
+    "description": "Guest count label used when there is exactly 1 guest on the reservation detail sheet"
+  },
   "reservationDetailGuestPlural": "{count} άτομα",
+  "@reservationDetailGuestPlural": {
+    "description": "Guest count label used when there are 2 or more guests on the reservation detail sheet — count is the number of guests",
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
   "reservationDetailRestaurantFallback": "Εστιατόριο",
+  "@reservationDetailRestaurantFallback": {
+    "description": "Fallback text shown as the restaurant name on the reservation detail sheet when the restaurant name is unavailable"
+  },
   "reservationCardRestaurantFallback": "Εστιατόριο",
+  "@reservationCardRestaurantFallback": {
+    "description": "Fallback text shown as the restaurant name on a reservation card when the restaurant name is unavailable"
+  },
 
   "statusActive": "Ενεργή",
+  "@statusActive": {
+    "description": "Reservation status badge label — the reservation is upcoming and active"
+  },
   "statusCanceled": "Ακυρωμένη",
+  "@statusCanceled": {
+    "description": "Reservation status badge label — the reservation was canceled by the customer"
+  },
   "statusCompleted": "Ολοκληρωμένη",
+  "@statusCompleted": {
+    "description": "Reservation status badge label — the reservation was marked as completed by the owner"
+  },
   "statusNoShow": "No-show",
+  "@statusNoShow": {
+    "description": "Reservation status badge label — the customer did not show up; marked by the owner"
+  },
 
   "errorRetry": "Επανάληψη",
+  "@errorRetry": {
+    "description": "Generic retry button shown on error states throughout the app"
+  },
 
   "validatorEmailRequired": "Απαιτείται email",
+  "@validatorEmailRequired": {
+    "description": "Form validation error shown when the email field is empty"
+  },
   "validatorEmailInvalid": "Εισάγετε έγκυρη διεύθυνση email",
+  "@validatorEmailInvalid": {
+    "description": "Form validation error shown when the email address format is invalid"
+  },
   "validatorPasswordRequired": "Απαιτείται κωδικός",
+  "@validatorPasswordRequired": {
+    "description": "Form validation error shown when the password field is empty"
+  },
   "validatorPasswordTooShort": "Ο κωδικός πρέπει να έχει τουλάχιστον 6 χαρακτήρες",
+  "@validatorPasswordTooShort": {
+    "description": "Form validation error shown when the password is fewer than 6 characters"
+  },
   "validatorFieldRequired": "Το πεδίο {fieldName} είναι υποχρεωτικό",
+  "@validatorFieldRequired": {
+    "description": "Generic required-field validation error — fieldName is the label of the field that is empty",
+    "placeholders": {
+      "fieldName": { "type": "String" }
+    }
+  },
   "validatorGuestsRequired": "Απαιτείται αριθμός καλεσμένων",
+  "@validatorGuestsRequired": {
+    "description": "Form validation error shown when the guest count field is empty"
+  },
   "validatorGuestsInvalidNumber": "Εισάγετε έγκυρο αριθμό",
+  "@validatorGuestsInvalidNumber": {
+    "description": "Form validation error shown when the guest count input is not a valid number"
+  },
   "validatorGuestsTooFew": "Πρέπει να είναι τουλάχιστον 1 άτομο",
+  "@validatorGuestsTooFew": {
+    "description": "Form validation error shown when the guest count is less than 1"
+  },
   "validatorGuestsTooMany": "Δεν μπορεί να υπερβαίνει τα 20 άτομα",
+  "@validatorGuestsTooMany": {
+    "description": "Form validation error shown when the guest count exceeds 20"
+  },
 
   "languageSelectorEnglish": "Αγγλικά",
-  "languageSelectorGreek": "Ελληνικά"
+  "@languageSelectorEnglish": {
+    "description": "Language option label for English in the language selector"
+  },
+  "languageSelectorGreek": "Ελληνικά",
+  "@languageSelectorGreek": {
+    "description": "Language option label for Greek in the language selector"
+  }
 }
