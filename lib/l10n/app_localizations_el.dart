@@ -334,6 +334,9 @@ class AppLocalizationsEl extends AppLocalizations {
   String get reservationDetailRestaurantFallback => 'Εστιατόριο';
 
   @override
+  String get reservationCardRestaurantFallback => 'Εστιατόριο';
+
+  @override
   String get statusActive => 'Ενεργή';
 
   @override

@@ -328,6 +328,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get reservationDetailRestaurantFallback => 'Restaurant';
 
   @override
+  String get reservationCardRestaurantFallback => 'Restaurant';
+
+  @override
   String get statusActive => 'Active';
 
   @override

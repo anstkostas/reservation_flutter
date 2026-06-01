@@ -154,6 +154,7 @@
     }
   },
   "reservationDetailRestaurantFallback": "Restaurant",
+  "reservationCardRestaurantFallback": "Restaurant",
 
   "statusActive": "Active",
   "statusCanceled": "Canceled",

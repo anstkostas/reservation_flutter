@@ -114,6 +114,7 @@
   "reservationDetailGuestSingular": "1 άτομο",
   "reservationDetailGuestPlural": "{count} άτομα",
   "reservationDetailRestaurantFallback": "Εστιατόριο",
+  "reservationCardRestaurantFallback": "Εστιατόριο",
 
   "statusActive": "Ενεργή",
   "statusCanceled": "Ακυρωμένη",

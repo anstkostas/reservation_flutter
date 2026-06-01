@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../../models/models.dart';
 import 'reservation_status_badge.dart';
 
@@ -20,6 +21,7 @@ class ReservationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final date = DateFormat.yMMMd().format(reservation.scheduledAt.toLocal());
     final time = DateFormat.Hm().format(reservation.scheduledAt.toLocal());
 
@@ -31,10 +33,7 @@ class ReservationCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             // Left accent stripe — mirrors React's border-l-4 border-l-primary.
-            Container(
-              width: 4,
-              color: Theme.of(context).colorScheme.primary,
-            ),
+            Container(width: 4, color: Theme.of(context).colorScheme.primary),
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -45,7 +44,8 @@ class ReservationCard extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Text(
-                            reservation.restaurantName ?? 'Restaurant',
+                            reservation.restaurantName ??
+                                l10n.reservationCardRestaurantFallback,
                             style: Theme.of(context).textTheme.titleMedium,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,

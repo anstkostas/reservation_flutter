@@ -692,6 +692,12 @@ abstract class AppLocalizations {
   /// **'Restaurant'**
   String get reservationDetailRestaurantFallback;
 
+  /// No description provided for @reservationCardRestaurantFallback.
+  ///
+  /// In en, this message translates to:
+  /// **'Restaurant'**
+  String get reservationCardRestaurantFallback;
+
   /// No description provided for @statusActive.
   ///
   /// In en, this message translates to:
