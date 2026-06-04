@@ -26,7 +26,7 @@ class RestaurantListCubit extends Cubit<RestaurantListState> {
       emit(RestaurantListLoaded(restaurants));
     } on AppException catch (e) {
       if (isClosed) return;
-      emit(RestaurantListFailure(e.message));
+      emit(RestaurantListFailure(e.message, code: e.code));
     }
   }
 }

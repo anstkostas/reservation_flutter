@@ -98,701 +98,857 @@ abstract class AppLocalizations {
     Locale('en'),
   ];
 
-  /// No description provided for @appTitle.
+  /// App name shown in the browser tab and loading screen
   ///
   /// In en, this message translates to:
   /// **'Antigravity'**
   String get appTitle;
 
-  /// No description provided for @navRestaurants.
+  /// Navigation bar link to the restaurant listing page
   ///
   /// In en, this message translates to:
   /// **'Restaurants'**
   String get navRestaurants;
 
-  /// No description provided for @navLogIn.
+  /// Navigation bar link to the login page — shown when the user is not authenticated
   ///
   /// In en, this message translates to:
   /// **'Log in'**
   String get navLogIn;
 
-  /// No description provided for @navDashboard.
+  /// Navigation bar link to the owner dashboard — shown to restaurant owners only
   ///
   /// In en, this message translates to:
   /// **'Dashboard'**
   String get navDashboard;
 
-  /// No description provided for @navReservations.
+  /// Navigation bar link to the reservation history page — shown to customers only
   ///
   /// In en, this message translates to:
   /// **'Reservations'**
   String get navReservations;
 
-  /// No description provided for @navLogout.
+  /// Navigation bar logout button — shown when the user is authenticated
   ///
   /// In en, this message translates to:
   /// **'Logout'**
   String get navLogout;
 
-  /// No description provided for @splashHeadline.
+  /// Large headline on the splash/landing screen
   ///
   /// In en, this message translates to:
   /// **'Reservation App'**
   String get splashHeadline;
 
-  /// No description provided for @splashSubtitle.
+  /// Subtitle on the splash/landing screen describing the app purpose
   ///
   /// In en, this message translates to:
   /// **'Book, manage, and explore your favorite restaurants seamlessly.'**
   String get splashSubtitle;
 
-  /// No description provided for @splashCtaExplore.
+  /// Call-to-action button on the splash screen — navigates to the restaurant list; shown to unauthenticated users and customers
   ///
   /// In en, this message translates to:
   /// **'Explore Restaurants'**
   String get splashCtaExplore;
 
-  /// No description provided for @splashCtaDashboard.
+  /// Call-to-action button on the splash screen — navigates to the owner dashboard; shown to restaurant owners only
   ///
   /// In en, this message translates to:
   /// **'Dashboard'**
   String get splashCtaDashboard;
 
-  /// No description provided for @splashCtaMyReservations.
+  /// Call-to-action button on the splash screen — navigates to reservation history; shown to customers only
   ///
   /// In en, this message translates to:
   /// **'My Reservations'**
   String get splashCtaMyReservations;
 
-  /// No description provided for @loginTitle.
+  /// Heading on the login page
   ///
   /// In en, this message translates to:
   /// **'Welcome back'**
   String get loginTitle;
 
-  /// No description provided for @loginSubtitle.
+  /// Subtitle on the login page
   ///
   /// In en, this message translates to:
   /// **'Sign in to your account'**
   String get loginSubtitle;
 
-  /// No description provided for @loginEmailLabel.
+  /// Label for the email input field on the login form
   ///
   /// In en, this message translates to:
   /// **'Email'**
   String get loginEmailLabel;
 
-  /// No description provided for @loginEmailHint.
+  /// Placeholder text inside the email input field on the login form
   ///
   /// In en, this message translates to:
   /// **'you@example.com'**
   String get loginEmailHint;
 
-  /// No description provided for @loginPasswordLabel.
+  /// Label for the password input field on the login form
   ///
   /// In en, this message translates to:
   /// **'Password'**
   String get loginPasswordLabel;
 
-  /// No description provided for @loginSubmitButton.
+  /// Submit button on the login form
   ///
   /// In en, this message translates to:
   /// **'Sign in'**
   String get loginSubmitButton;
 
-  /// No description provided for @loginNoAccount.
+  /// Text prompting users without an account to sign up — appears next to loginSignUpLink
   ///
   /// In en, this message translates to:
   /// **'Don\'t have an account?'**
   String get loginNoAccount;
 
-  /// No description provided for @loginSignUpLink.
+  /// Tappable link text that navigates to the sign-up page — appears next to loginNoAccount
   ///
   /// In en, this message translates to:
   /// **'Sign up'**
   String get loginSignUpLink;
 
-  /// No description provided for @signupTitle.
+  /// Heading on the sign-up page
   ///
   /// In en, this message translates to:
   /// **'Create account'**
   String get signupTitle;
 
-  /// No description provided for @signupSubtitle.
+  /// Subtitle on the sign-up page
   ///
   /// In en, this message translates to:
   /// **'Fill in the details below to get started'**
   String get signupSubtitle;
 
-  /// No description provided for @signupFirstNameLabel.
+  /// Label for the first name input field on the sign-up form
   ///
   /// In en, this message translates to:
   /// **'First name'**
   String get signupFirstNameLabel;
 
-  /// No description provided for @signupLastNameLabel.
+  /// Label for the last name input field on the sign-up form
   ///
   /// In en, this message translates to:
   /// **'Last name'**
   String get signupLastNameLabel;
 
-  /// No description provided for @signupEmailLabel.
+  /// Label for the email input field on the sign-up form
   ///
   /// In en, this message translates to:
   /// **'Email'**
   String get signupEmailLabel;
 
-  /// No description provided for @signupEmailHint.
+  /// Placeholder text inside the email input field on the sign-up form
   ///
   /// In en, this message translates to:
   /// **'you@example.com'**
   String get signupEmailHint;
 
-  /// No description provided for @signupPasswordLabel.
+  /// Label for the password input field on the sign-up form
   ///
   /// In en, this message translates to:
   /// **'Password'**
   String get signupPasswordLabel;
 
-  /// No description provided for @signupRolePrompt.
+  /// Prompt asking the user to select their account type on the sign-up form
   ///
   /// In en, this message translates to:
   /// **'I am signing up as a:'**
   String get signupRolePrompt;
 
-  /// No description provided for @signupRoleCustomer.
+  /// Role option on the sign-up form — selects the customer account type
   ///
   /// In en, this message translates to:
   /// **'Customer'**
   String get signupRoleCustomer;
 
-  /// No description provided for @signupRoleOwner.
+  /// Role option on the sign-up form — selects the restaurant owner account type
   ///
   /// In en, this message translates to:
   /// **'Restaurant owner'**
   String get signupRoleOwner;
 
-  /// No description provided for @signupSubmitButton.
+  /// Submit button on the sign-up form
   ///
   /// In en, this message translates to:
   /// **'Create account'**
   String get signupSubmitButton;
 
-  /// No description provided for @signupHaveAccount.
+  /// Text prompting users who already have an account to sign in — appears next to signupSignInLink
   ///
   /// In en, this message translates to:
   /// **'Already have an account?'**
   String get signupHaveAccount;
 
-  /// No description provided for @signupSignInLink.
+  /// Tappable link text that navigates to the login page — appears next to signupHaveAccount
   ///
   /// In en, this message translates to:
   /// **'Sign in'**
   String get signupSignInLink;
 
-  /// No description provided for @signupRestaurantPickerLabel.
+  /// Label for the restaurant selector dropdown shown to users signing up as restaurant owners
   ///
   /// In en, this message translates to:
   /// **'Select your restaurant'**
   String get signupRestaurantPickerLabel;
 
-  /// No description provided for @signupRestaurantPickerRequired.
+  /// Validation error shown when an owner signs up without selecting a restaurant
   ///
   /// In en, this message translates to:
   /// **'Select a restaurant to claim'**
   String get signupRestaurantPickerRequired;
 
-  /// No description provided for @signupNoRestaurantsAvailable.
+  /// Message shown when there are no unclaimed restaurants available for owner sign-up
   ///
   /// In en, this message translates to:
   /// **'No restaurants available to claim. Sign up as a customer instead.'**
   String get signupNoRestaurantsAvailable;
 
-  /// No description provided for @signupRetry.
+  /// Button to retry loading the restaurant list on the sign-up page after an error
   ///
   /// In en, this message translates to:
   /// **'Retry'**
   String get signupRetry;
 
-  /// No description provided for @restaurantListTitle.
+  /// Page heading on the restaurant listing page
   ///
   /// In en, this message translates to:
   /// **'Available Restaurants'**
   String get restaurantListTitle;
 
-  /// No description provided for @restaurantListEmpty.
+  /// Message shown when no restaurants are available on the listing page
   ///
   /// In en, this message translates to:
   /// **'No restaurants available.'**
   String get restaurantListEmpty;
 
-  /// No description provided for @restaurantCardCapacity.
+  /// Capacity chip on a restaurant card — capacity is the number of simultaneous table slots
   ///
   /// In en, this message translates to:
   /// **'Capacity: {capacity} Tables'**
   String restaurantCardCapacity(int capacity);
 
-  /// No description provided for @restaurantCardViewButton.
+  /// Button on a restaurant card that navigates to the restaurant detail and booking page
   ///
   /// In en, this message translates to:
   /// **'View Details & Book'**
   String get restaurantCardViewButton;
 
-  /// No description provided for @restaurantDetailAbout.
+  /// Section heading on the restaurant detail page introducing the restaurant description
   ///
   /// In en, this message translates to:
   /// **'About'**
   String get restaurantDetailAbout;
 
-  /// No description provided for @restaurantDetailCapacityChip.
+  /// Capacity chip on the restaurant detail page — capacity is the number of simultaneous table slots
   ///
   /// In en, this message translates to:
   /// **'Capacity: {capacity} Tables'**
   String restaurantDetailCapacityChip(int capacity);
 
-  /// No description provided for @restaurantDetailMakeReservationTitle.
+  /// Section heading on the restaurant detail page for the booking form
   ///
   /// In en, this message translates to:
   /// **'Make a Reservation'**
   String get restaurantDetailMakeReservationTitle;
 
-  /// No description provided for @restaurantDetailMakeReservationSubtitle.
+  /// Subtitle below the booking section heading on the restaurant detail page
   ///
   /// In en, this message translates to:
   /// **'Secure your table for an unforgettable dining experience.'**
   String get restaurantDetailMakeReservationSubtitle;
 
-  /// No description provided for @restaurantDetailBookButton.
+  /// Button on the restaurant detail page that opens the reservation creation sheet
   ///
   /// In en, this message translates to:
   /// **'Book a Table'**
   String get restaurantDetailBookButton;
 
-  /// No description provided for @reservationHistoryTitle.
+  /// Page heading on the customer reservation history page
   ///
   /// In en, this message translates to:
   /// **'My Reservations'**
   String get reservationHistoryTitle;
 
-  /// No description provided for @reservationHistorySubtitle.
+  /// Subtitle on the customer reservation history page
   ///
   /// In en, this message translates to:
   /// **'View and manage your dining bookings.'**
   String get reservationHistorySubtitle;
 
-  /// No description provided for @reservationHistoryBookButton.
+  /// Button on the reservation history page that navigates to the restaurant list to book a new table
   ///
   /// In en, this message translates to:
   /// **'Book a Table'**
   String get reservationHistoryBookButton;
 
-  /// No description provided for @reservationHistoryTabUpcoming.
+  /// Tab label for upcoming/active reservations — count is the number of active reservations
   ///
   /// In en, this message translates to:
   /// **'Upcoming ({count})'**
   String reservationHistoryTabUpcoming(int count);
 
-  /// No description provided for @reservationHistoryTabHistory.
+  /// Tab label for past reservations — count is the number of past reservations
   ///
   /// In en, this message translates to:
   /// **'History ({count})'**
   String reservationHistoryTabHistory(int count);
 
-  /// No description provided for @reservationHistoryEmptyUpcomingTitle.
+  /// Heading shown when the customer has no upcoming reservations
   ///
   /// In en, this message translates to:
   /// **'No upcoming reservations'**
   String get reservationHistoryEmptyUpcomingTitle;
 
-  /// No description provided for @reservationHistoryEmptyUpcomingDetail.
+  /// Detail text shown when the customer has no upcoming reservations
   ///
   /// In en, this message translates to:
   /// **'You don\'t have any active bookings at the moment. Explore restaurants and book your next meal!'**
   String get reservationHistoryEmptyUpcomingDetail;
 
-  /// No description provided for @reservationHistoryEmptyPastTitle.
+  /// Heading shown when the customer has no past reservations
   ///
   /// In en, this message translates to:
   /// **'No past reservations'**
   String get reservationHistoryEmptyPastTitle;
 
-  /// No description provided for @reservationHistoryEmptyPastDetail.
+  /// Detail text shown when the customer has no past reservations
   ///
   /// In en, this message translates to:
   /// **'No reservation history yet.'**
   String get reservationHistoryEmptyPastDetail;
 
-  /// No description provided for @reservationUpdatedSnackbar.
+  /// Snackbar message shown after a reservation is successfully updated
   ///
   /// In en, this message translates to:
   /// **'Reservation updated.'**
   String get reservationUpdatedSnackbar;
 
-  /// No description provided for @ownerDashboardTitle.
+  /// Page heading on the owner dashboard page
   ///
   /// In en, this message translates to:
   /// **'Dashboard'**
   String get ownerDashboardTitle;
 
-  /// No description provided for @ownerDashboardSubtitle.
+  /// Subtitle on the owner dashboard page
   ///
   /// In en, this message translates to:
   /// **'Manage your restaurant\'s reservations.'**
   String get ownerDashboardSubtitle;
 
-  /// No description provided for @ownerDashboardTabActive.
+  /// Tab label for active reservations on the owner dashboard — count is the number of active reservations
   ///
   /// In en, this message translates to:
   /// **'Active ({count})'**
   String ownerDashboardTabActive(int count);
 
-  /// No description provided for @ownerDashboardTabHistory.
+  /// Tab label for past reservations on the owner dashboard — count is the number of past reservations
   ///
   /// In en, this message translates to:
   /// **'History ({count})'**
   String ownerDashboardTabHistory(int count);
 
-  /// No description provided for @ownerDashboardSearchHint.
+  /// Placeholder text in the search field on the owner dashboard
   ///
   /// In en, this message translates to:
   /// **'Search by name or email...'**
   String get ownerDashboardSearchHint;
 
-  /// No description provided for @ownerDashboardNoReservations.
+  /// Message shown when no reservations match the current search or tab on the owner dashboard
   ///
   /// In en, this message translates to:
   /// **'No reservations found.'**
   String get ownerDashboardNoReservations;
 
-  /// No description provided for @ownerResolvedSnackbar.
+  /// Snackbar message shown after an owner marks a reservation as completed or no-show
   ///
   /// In en, this message translates to:
   /// **'Reservation resolved.'**
   String get ownerResolvedSnackbar;
 
-  /// No description provided for @ownerTableColumnCustomer.
+  /// Column header for the customer column in the owner reservation table (desktop layout)
   ///
   /// In en, this message translates to:
   /// **'Customer'**
   String get ownerTableColumnCustomer;
 
-  /// No description provided for @ownerTableColumnDate.
+  /// Column header for the date column in the owner reservation table (desktop layout)
   ///
   /// In en, this message translates to:
   /// **'Date'**
   String get ownerTableColumnDate;
 
-  /// No description provided for @ownerTableColumnTime.
+  /// Column header for the time column in the owner reservation table (desktop layout)
   ///
   /// In en, this message translates to:
   /// **'Time'**
   String get ownerTableColumnTime;
 
-  /// No description provided for @ownerTableColumnPeople.
+  /// Column header for the guest count column in the owner reservation table (desktop layout)
   ///
   /// In en, this message translates to:
   /// **'People'**
   String get ownerTableColumnPeople;
 
-  /// No description provided for @ownerTableColumnStatus.
+  /// Column header for the status column in the owner reservation table (desktop layout)
   ///
   /// In en, this message translates to:
   /// **'Status'**
   String get ownerTableColumnStatus;
 
-  /// No description provided for @ownerTableColumnActions.
+  /// Column header for the actions column in the owner reservation table (desktop layout)
   ///
   /// In en, this message translates to:
   /// **'Actions'**
   String get ownerTableColumnActions;
 
-  /// No description provided for @ownerTableMarkCompleted.
+  /// Tooltip and action label for the button that marks a reservation as completed (owner desktop table)
   ///
   /// In en, this message translates to:
   /// **'Mark as completed'**
   String get ownerTableMarkCompleted;
 
-  /// No description provided for @ownerTableMarkNoShow.
+  /// Tooltip and action label for the button that marks a reservation as no-show (owner desktop table)
   ///
   /// In en, this message translates to:
   /// **'Mark as no-show'**
   String get ownerTableMarkNoShow;
 
-  /// No description provided for @ownerTableArrivingSoon.
+  /// Badge label shown on reservations scheduled within the next few hours in the owner table
   ///
   /// In en, this message translates to:
   /// **'Arriving soon'**
   String get ownerTableArrivingSoon;
 
-  /// No description provided for @ownerMobileComplete.
+  /// Action button label to mark a reservation as completed in the mobile owner view
   ///
   /// In en, this message translates to:
   /// **'Complete'**
   String get ownerMobileComplete;
 
-  /// No description provided for @ownerMobileNoShow.
+  /// Action button label to mark a reservation as no-show in the mobile owner view
   ///
   /// In en, this message translates to:
   /// **'No-show'**
   String get ownerMobileNoShow;
 
-  /// No description provided for @ownerMobilePeopleLabel.
+  /// Guest count label on a reservation card in the mobile owner view — count is the number of guests
   ///
   /// In en, this message translates to:
   /// **'{count} People'**
   String ownerMobilePeopleLabel(int count);
 
-  /// No description provided for @reservationCreateTitle.
+  /// Heading on the reservation creation bottom sheet
   ///
   /// In en, this message translates to:
   /// **'Make a Reservation'**
   String get reservationCreateTitle;
 
-  /// No description provided for @reservationCreateDateLabel.
+  /// Label for the date picker field on the reservation creation form
   ///
   /// In en, this message translates to:
   /// **'Date'**
   String get reservationCreateDateLabel;
 
-  /// No description provided for @reservationCreateTimeLabel.
+  /// Label for the time picker field on the reservation creation form
   ///
   /// In en, this message translates to:
   /// **'Time'**
   String get reservationCreateTimeLabel;
 
-  /// No description provided for @reservationCreateGuestsLabel.
+  /// Label for the guest count input field on the reservation creation form
   ///
   /// In en, this message translates to:
   /// **'Number of guests'**
   String get reservationCreateGuestsLabel;
 
-  /// No description provided for @reservationCreateConfirmButton.
+  /// Submit button on the reservation creation form
   ///
   /// In en, this message translates to:
   /// **'Confirm'**
   String get reservationCreateConfirmButton;
 
-  /// No description provided for @reservationCreateSelectDate.
+  /// Placeholder shown in the date field before a date is selected on the reservation creation form
   ///
   /// In en, this message translates to:
   /// **'Select a date'**
   String get reservationCreateSelectDate;
 
-  /// No description provided for @reservationCreateSelectTime.
+  /// Placeholder shown in the time field before a time is selected on the reservation creation form
   ///
   /// In en, this message translates to:
   /// **'Select a time'**
   String get reservationCreateSelectTime;
 
-  /// No description provided for @reservationCreateSuccess.
+  /// Snackbar message shown after a reservation is successfully created
   ///
   /// In en, this message translates to:
   /// **'Reservation confirmed!'**
   String get reservationCreateSuccess;
 
-  /// No description provided for @reservationEditTitle.
+  /// Heading on the reservation edit bottom sheet
   ///
   /// In en, this message translates to:
   /// **'Edit Reservation'**
   String get reservationEditTitle;
 
-  /// No description provided for @reservationEditDateLabel.
+  /// Label for the date picker field on the reservation edit form
   ///
   /// In en, this message translates to:
   /// **'Date'**
   String get reservationEditDateLabel;
 
-  /// No description provided for @reservationEditTimeLabel.
+  /// Label for the time picker field on the reservation edit form
   ///
   /// In en, this message translates to:
   /// **'Time'**
   String get reservationEditTimeLabel;
 
-  /// No description provided for @reservationEditGuestsLabel.
+  /// Label for the guest count input field on the reservation edit form
   ///
   /// In en, this message translates to:
   /// **'Number of guests'**
   String get reservationEditGuestsLabel;
 
-  /// No description provided for @reservationEditDiscardButton.
+  /// Button to discard changes and close the reservation edit form without saving
   ///
   /// In en, this message translates to:
   /// **'Discard'**
   String get reservationEditDiscardButton;
 
-  /// No description provided for @reservationEditSaveButton.
+  /// Button to save changes on the reservation edit form
   ///
   /// In en, this message translates to:
   /// **'Save changes'**
   String get reservationEditSaveButton;
 
-  /// No description provided for @reservationEditSelectDate.
+  /// Placeholder shown in the date field before a date is selected on the reservation edit form
   ///
   /// In en, this message translates to:
   /// **'Select a date'**
   String get reservationEditSelectDate;
 
-  /// No description provided for @reservationEditSelectTime.
+  /// Placeholder shown in the time field before a time is selected on the reservation edit form
   ///
   /// In en, this message translates to:
   /// **'Select a time'**
   String get reservationEditSelectTime;
 
-  /// No description provided for @reservationCancelDialogTitle.
+  /// Title of the confirmation dialog shown before canceling a reservation
   ///
   /// In en, this message translates to:
   /// **'Cancel reservation?'**
   String get reservationCancelDialogTitle;
 
-  /// No description provided for @reservationCancelDialogContent.
+  /// Body text of the cancellation confirmation dialog warning the user the action is irreversible
   ///
   /// In en, this message translates to:
   /// **'This cannot be undone.'**
   String get reservationCancelDialogContent;
 
-  /// No description provided for @reservationCancelDialogKeep.
+  /// Button in the cancellation dialog that dismisses the dialog and keeps the reservation unchanged
   ///
   /// In en, this message translates to:
   /// **'Keep it'**
   String get reservationCancelDialogKeep;
 
-  /// No description provided for @reservationCancelDialogConfirm.
+  /// Button in the cancellation dialog that confirms and cancels the reservation
   ///
   /// In en, this message translates to:
   /// **'Cancel reservation'**
   String get reservationCancelDialogConfirm;
 
-  /// No description provided for @reservationDetailEditButton.
+  /// Button on the reservation detail sheet that opens the edit form
   ///
   /// In en, this message translates to:
   /// **'Edit'**
   String get reservationDetailEditButton;
 
-  /// No description provided for @reservationDetailCancelButton.
+  /// Button on the reservation detail sheet that opens the cancellation confirmation dialog
   ///
   /// In en, this message translates to:
   /// **'Cancel'**
   String get reservationDetailCancelButton;
 
-  /// No description provided for @reservationDetailGuestSingular.
+  /// Guest count label used when there is exactly 1 guest on the reservation detail sheet
   ///
   /// In en, this message translates to:
   /// **'1 guest'**
   String get reservationDetailGuestSingular;
 
-  /// No description provided for @reservationDetailGuestPlural.
+  /// Guest count label used when there are 2 or more guests on the reservation detail sheet — count is the number of guests
   ///
   /// In en, this message translates to:
   /// **'{count} guests'**
   String reservationDetailGuestPlural(int count);
 
-  /// No description provided for @reservationDetailRestaurantFallback.
+  /// Fallback text shown as the restaurant name on the reservation detail sheet when the restaurant name is unavailable
   ///
   /// In en, this message translates to:
   /// **'Restaurant'**
   String get reservationDetailRestaurantFallback;
 
-  /// No description provided for @reservationCardRestaurantFallback.
+  /// Fallback text shown as the restaurant name on a reservation card when the restaurant name is unavailable
   ///
   /// In en, this message translates to:
   /// **'Restaurant'**
   String get reservationCardRestaurantFallback;
 
-  /// No description provided for @statusActive.
+  /// Reservation status badge label — the reservation is upcoming and active
   ///
   /// In en, this message translates to:
   /// **'Active'**
   String get statusActive;
 
-  /// No description provided for @statusCanceled.
+  /// Reservation status badge label — the reservation was canceled by the customer
   ///
   /// In en, this message translates to:
   /// **'Canceled'**
   String get statusCanceled;
 
-  /// No description provided for @statusCompleted.
+  /// Reservation status badge label — the reservation was marked as completed by the owner
   ///
   /// In en, this message translates to:
   /// **'Completed'**
   String get statusCompleted;
 
-  /// No description provided for @statusNoShow.
+  /// Reservation status badge label — the customer did not show up; marked by the owner
   ///
   /// In en, this message translates to:
   /// **'No-show'**
   String get statusNoShow;
 
-  /// No description provided for @errorRetry.
+  /// Generic retry button shown on error states throughout the app
   ///
   /// In en, this message translates to:
   /// **'Retry'**
   String get errorRetry;
 
-  /// No description provided for @validatorEmailRequired.
+  /// Form validation error shown when the email field is empty
   ///
   /// In en, this message translates to:
   /// **'Email is required'**
   String get validatorEmailRequired;
 
-  /// No description provided for @validatorEmailInvalid.
+  /// Form validation error shown when the email address format is invalid
   ///
   /// In en, this message translates to:
   /// **'Enter a valid email address'**
   String get validatorEmailInvalid;
 
-  /// No description provided for @validatorPasswordRequired.
+  /// Form validation error shown when the password field is empty
   ///
   /// In en, this message translates to:
   /// **'Password is required'**
   String get validatorPasswordRequired;
 
-  /// No description provided for @validatorPasswordTooShort.
+  /// Form validation error shown when the password is fewer than 6 characters
   ///
   /// In en, this message translates to:
   /// **'Password must be at least 6 characters'**
   String get validatorPasswordTooShort;
 
-  /// No description provided for @validatorFieldRequired.
+  /// Generic required-field validation error — fieldName is the label of the field that is empty
   ///
   /// In en, this message translates to:
   /// **'{fieldName} is required'**
   String validatorFieldRequired(String fieldName);
 
-  /// No description provided for @validatorGuestsRequired.
+  /// Form validation error shown when the guest count field is empty
   ///
   /// In en, this message translates to:
   /// **'Number of guests is required'**
   String get validatorGuestsRequired;
 
-  /// No description provided for @validatorGuestsInvalidNumber.
+  /// Form validation error shown when the guest count input is not a valid number
   ///
   /// In en, this message translates to:
   /// **'Enter a valid number'**
   String get validatorGuestsInvalidNumber;
 
-  /// No description provided for @validatorGuestsTooFew.
+  /// Form validation error shown when the guest count is less than 1
   ///
   /// In en, this message translates to:
   /// **'Must be at least 1 guest'**
   String get validatorGuestsTooFew;
 
-  /// No description provided for @validatorGuestsTooMany.
+  /// Form validation error shown when the guest count exceeds 20
   ///
   /// In en, this message translates to:
   /// **'Cannot exceed 20 guests'**
   String get validatorGuestsTooMany;
 
-  /// No description provided for @languageSelectorEnglish.
+  /// Language option label for English in the language selector
   ///
   /// In en, this message translates to:
   /// **'English'**
   String get languageSelectorEnglish;
 
-  /// No description provided for @languageSelectorGreek.
+  /// Language option label for Greek in the language selector
   ///
   /// In en, this message translates to:
   /// **'Greek'**
   String get languageSelectorGreek;
+
+  /// Error shown when login fails due to wrong email or password
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid email or password'**
+  String get errorAuthInvalidCredentials;
+
+  /// Error shown when the refresh token is invalid
+  ///
+  /// In en, this message translates to:
+  /// **'Your session is invalid. Please sign in again.'**
+  String get errorAuthRefreshInvalid;
+
+  /// Error shown when refresh token reuse is detected — all sessions are invalidated
+  ///
+  /// In en, this message translates to:
+  /// **'Security alert: your session was used from another device. All sessions have been ended.'**
+  String get errorAuthRefreshReuse;
+
+  /// Error shown when the refresh token has expired
+  ///
+  /// In en, this message translates to:
+  /// **'Your session has expired. Please sign in again.'**
+  String get errorAuthRefreshExpired;
+
+  /// Error shown when the user record is not found during auth
+  ///
+  /// In en, this message translates to:
+  /// **'User not found. Please sign in again.'**
+  String get errorAuthUserNotFound;
+
+  /// Error shown when an authenticated request is made without a session
+  ///
+  /// In en, this message translates to:
+  /// **'Please sign in to continue.'**
+  String get errorAuthNotAuthenticated;
+
+  /// Error shown when no authentication token is present
+  ///
+  /// In en, this message translates to:
+  /// **'Authentication required.'**
+  String get errorAuthNoToken;
+
+  /// Error shown when the access token has expired
+  ///
+  /// In en, this message translates to:
+  /// **'Your session has expired. Please sign in again.'**
+  String get errorAuthTokenExpired;
+
+  /// Error shown when the access token is malformed or invalid
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid session. Please sign in again.'**
+  String get errorAuthTokenInvalid;
+
+  /// Error shown when no refresh token cookie is present
+  ///
+  /// In en, this message translates to:
+  /// **'No active session found. Please sign in again.'**
+  String get errorAuthNoRefreshToken;
+
+  /// Error shown when the user lacks the required role or permission
+  ///
+  /// In en, this message translates to:
+  /// **'You do not have permission to access this.'**
+  String get errorForbidden;
+
+  /// Error shown when an owner tries to create or manage a customer reservation
+  ///
+  /// In en, this message translates to:
+  /// **'Only customers can make or manage reservations.'**
+  String get errorReservationCustomerOnly;
+
+  /// Error shown when a customer tries to modify another customer's reservation
+  ///
+  /// In en, this message translates to:
+  /// **'You can only modify your own reservations.'**
+  String get errorReservationNotOwner;
+
+  /// Error shown when a customer tries to perform an owner-only action
+  ///
+  /// In en, this message translates to:
+  /// **'Only restaurant owners can perform this action.'**
+  String get errorReservationOwnerOnly;
+
+  /// Error shown when an owner tries to resolve a reservation for another restaurant
+  ///
+  /// In en, this message translates to:
+  /// **'This reservation belongs to a different restaurant.'**
+  String get errorReservationWrongRestaurant;
+
+  /// Error shown when the requested reservation does not exist
+  ///
+  /// In en, this message translates to:
+  /// **'Reservation not found.'**
+  String get errorReservationNotFound;
+
+  /// Error shown when the restaurant has reached capacity for the requested time slot
+  ///
+  /// In en, this message translates to:
+  /// **'This time slot is fully booked. Please choose another time.'**
+  String get errorReservationSlotFull;
+
+  /// Error shown when trying to modify or cancel a non-active reservation
+  ///
+  /// In en, this message translates to:
+  /// **'Only active reservations can be modified or canceled.'**
+  String get errorReservationNotActive;
+
+  /// Error shown when the requested reservation time violates the booking window or buffer rules
+  ///
+  /// In en, this message translates to:
+  /// **'Please choose a valid time within the booking window.'**
+  String get errorReservationTimeInvalid;
+
+  /// Error shown when an owner with no restaurant tries to view reservations
+  ///
+  /// In en, this message translates to:
+  /// **'Your account has no restaurant assigned.'**
+  String get errorReservationOwnerNoRestaurant;
+
+  /// Error shown when the requested restaurant does not exist
+  ///
+  /// In en, this message translates to:
+  /// **'Restaurant not found.'**
+  String get errorRestaurantNotFound;
+
+  /// Error shown during signup when the email is already registered
+  ///
+  /// In en, this message translates to:
+  /// **'An account with this email already exists.'**
+  String get errorUserEmailExists;
+
+  /// Error shown when an owner signs up without selecting a restaurant
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a restaurant to manage.'**
+  String get errorUserOwnerRestaurantRequired;
+
+  /// Error shown when trying to claim a restaurant that is already owned
+  ///
+  /// In en, this message translates to:
+  /// **'This restaurant already has an owner.'**
+  String get errorRestaurantAlreadyOwned;
+
+  /// Error shown when a unique constraint is violated (e.g. duplicate email)
+  ///
+  /// In en, this message translates to:
+  /// **'This resource already exists.'**
+  String get errorResourceConflict;
+
+  /// Top-level error shown when the server returns a validation error envelope
+  ///
+  /// In en, this message translates to:
+  /// **'Please check the form for errors.'**
+  String get errorValidationError;
 }
 
 class _AppLocalizationsDelegate

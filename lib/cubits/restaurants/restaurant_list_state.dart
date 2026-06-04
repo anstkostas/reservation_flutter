@@ -34,11 +34,13 @@ final class RestaurantListLoaded extends RestaurantListState {
 /// The fetch failed.
 ///
 /// [message] is from the backend error response and is safe to display to the user.
+/// [code] is the machine-readable error code — use it to look up a localized string.
 final class RestaurantListFailure extends RestaurantListState {
-  const RestaurantListFailure(this.message);
+  const RestaurantListFailure(this.message, {this.code});
 
   final String message;
+  final String? code;
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [message, code];
 }

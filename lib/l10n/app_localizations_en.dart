@@ -380,4 +380,98 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get languageSelectorGreek => 'Greek';
+
+  @override
+  String get errorAuthInvalidCredentials => 'Invalid email or password';
+
+  @override
+  String get errorAuthRefreshInvalid =>
+      'Your session is invalid. Please sign in again.';
+
+  @override
+  String get errorAuthRefreshReuse =>
+      'Security alert: your session was used from another device. All sessions have been ended.';
+
+  @override
+  String get errorAuthRefreshExpired =>
+      'Your session has expired. Please sign in again.';
+
+  @override
+  String get errorAuthUserNotFound => 'User not found. Please sign in again.';
+
+  @override
+  String get errorAuthNotAuthenticated => 'Please sign in to continue.';
+
+  @override
+  String get errorAuthNoToken => 'Authentication required.';
+
+  @override
+  String get errorAuthTokenExpired =>
+      'Your session has expired. Please sign in again.';
+
+  @override
+  String get errorAuthTokenInvalid => 'Invalid session. Please sign in again.';
+
+  @override
+  String get errorAuthNoRefreshToken =>
+      'No active session found. Please sign in again.';
+
+  @override
+  String get errorForbidden => 'You do not have permission to access this.';
+
+  @override
+  String get errorReservationCustomerOnly =>
+      'Only customers can make or manage reservations.';
+
+  @override
+  String get errorReservationNotOwner =>
+      'You can only modify your own reservations.';
+
+  @override
+  String get errorReservationOwnerOnly =>
+      'Only restaurant owners can perform this action.';
+
+  @override
+  String get errorReservationWrongRestaurant =>
+      'This reservation belongs to a different restaurant.';
+
+  @override
+  String get errorReservationNotFound => 'Reservation not found.';
+
+  @override
+  String get errorReservationSlotFull =>
+      'This time slot is fully booked. Please choose another time.';
+
+  @override
+  String get errorReservationNotActive =>
+      'Only active reservations can be modified or canceled.';
+
+  @override
+  String get errorReservationTimeInvalid =>
+      'Please choose a valid time within the booking window.';
+
+  @override
+  String get errorReservationOwnerNoRestaurant =>
+      'Your account has no restaurant assigned.';
+
+  @override
+  String get errorRestaurantNotFound => 'Restaurant not found.';
+
+  @override
+  String get errorUserEmailExists =>
+      'An account with this email already exists.';
+
+  @override
+  String get errorUserOwnerRestaurantRequired =>
+      'Please select a restaurant to manage.';
+
+  @override
+  String get errorRestaurantAlreadyOwned =>
+      'This restaurant already has an owner.';
+
+  @override
+  String get errorResourceConflict => 'This resource already exists.';
+
+  @override
+  String get errorValidationError => 'Please check the form for errors.';
 }

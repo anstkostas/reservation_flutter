@@ -52,11 +52,13 @@ final class AuthUnauthenticated extends AuthState {
 ///
 /// [message] is from the backend error response and is safe to display to the
 /// user. Not used for session expiry — that always emits [AuthUnauthenticated].
+/// [code] is the machine-readable error code — use it to look up a localized string.
 final class AuthFailure extends AuthState {
-  const AuthFailure(this.message);
+  const AuthFailure(this.message, {this.code});
 
   final String message;
+  final String? code;
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [message, code];
 }

@@ -29,7 +29,7 @@ class RestaurantDetailCubit extends Cubit<RestaurantDetailState> {
       emit(RestaurantDetailLoaded(restaurant));
     } on AppException catch (e) {
       if (isClosed) return;
-      emit(RestaurantDetailFailure(e.message));
+      emit(RestaurantDetailFailure(e.message, code: e.code));
     }
   }
 }

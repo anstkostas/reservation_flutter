@@ -5,6 +5,7 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import '../../constants/breakpoints.dart';
 import '../../cubits/reservations/customer/customer_reservation_cubit.dart';
 import '../../l10n/app_localizations.dart';
+import '../../utils/error_resolver.dart';
 import '../../utils/validators.dart';
 import '../app_text_field.dart';
 
@@ -91,9 +92,17 @@ class _ReservationCreateSheetState extends State<ReservationCreateSheet> {
           Navigator.of(context).pop();
         }
         if (state is CustomerReservationFailure) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(state.message)));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                resolveErrorMessage(
+                  context,
+                  message: state.message,
+                  code: state.code,
+                ),
+              ),
+            ),
+          );
         }
       },
       builder: (context, state) {

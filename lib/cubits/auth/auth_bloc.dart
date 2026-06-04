@@ -81,7 +81,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       final user = await _repository.login(event.email, event.password);
       emit(AuthAuthenticated(user));
     } on AppException catch (e) {
-      emit(AuthFailure(e.message));
+      emit(AuthFailure(e.message, code: e.code));
     }
   }
 
@@ -100,7 +100,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
       emit(AuthAuthenticated(user));
     } on AppException catch (e) {
-      emit(AuthFailure(e.message));
+      emit(AuthFailure(e.message, code: e.code));
     }
   }
 

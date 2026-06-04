@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../cubits/auth/auth_bloc.dart';
 import '../../l10n/app_localizations.dart';
+import '../../utils/error_resolver.dart';
 import '../../utils/validators.dart';
 import '../../widgets/app_text_field.dart';
 import '../../widgets/loading_indicator.dart';
@@ -41,9 +42,17 @@ class _LoginScreenState extends State<LoginScreen> {
       body: BlocConsumer<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthFailure) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(state.message)));
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  resolveErrorMessage(
+                    context,
+                    message: state.message,
+                    code: state.code,
+                  ),
+                ),
+              ),
+            );
           }
           // AuthAuthenticated triggers GoRouterRefreshStream — the router
           // redirect fires automatically, no manual navigation needed.

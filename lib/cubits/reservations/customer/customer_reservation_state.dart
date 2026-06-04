@@ -46,11 +46,13 @@ final class CustomerReservationActionSuccess extends CustomerReservationState {
 /// A fetch or mutation failed.
 ///
 /// [message] is from the backend error response and is safe to display to the user.
+/// [code] is the machine-readable error code — use it to look up a localized string.
 final class CustomerReservationFailure extends CustomerReservationState {
-  const CustomerReservationFailure(this.message);
+  const CustomerReservationFailure(this.message, {this.code});
 
   final String message;
+  final String? code;
 
   @override
-  List<Object?> get props => [message];
+  List<Object?> get props => [message, code];
 }

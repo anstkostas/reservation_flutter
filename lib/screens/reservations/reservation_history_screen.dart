@@ -7,6 +7,7 @@ import '../../constants/reservation_status.dart';
 import '../../l10n/app_localizations.dart';
 import '../../cubits/reservations/customer/customer_reservation_cubit.dart';
 import '../../models/models.dart';
+import '../../utils/error_resolver.dart';
 import '../../widgets/error_display.dart';
 import '../../widgets/loading_indicator.dart';
 import '../../widgets/reservations/reservation_card.dart';
@@ -116,11 +117,16 @@ class _ReservationHistoryScreenState extends State<ReservationHistoryScreen> {
             return switch (state) {
               CustomerReservationInitial() ||
               CustomerReservationLoading() => const LoadingIndicator(),
-              CustomerReservationFailure(:final message) => ErrorDisplay(
-                message: message,
-                onRetry: () =>
-                    context.read<CustomerReservationCubit>().fetchMine(),
-              ),
+              CustomerReservationFailure(:final message, :final code) =>
+                ErrorDisplay(
+                  message: resolveErrorMessage(
+                    context,
+                    message: message,
+                    code: code,
+                  ),
+                  onRetry: () =>
+                      context.read<CustomerReservationCubit>().fetchMine(),
+                ),
               CustomerReservationLoaded(:final reservations) => _buildContent(
                 reservations,
               ),

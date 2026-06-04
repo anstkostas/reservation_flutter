@@ -7,6 +7,7 @@ import '../../l10n/app_localizations.dart';
 import '../../cubits/reservations/owner/owner_reservation_cubit.dart';
 import '../../layouts/app_navbar.dart';
 import '../../models/models.dart';
+import '../../utils/error_resolver.dart';
 import '../../widgets/error_display.dart';
 import '../../widgets/loading_indicator.dart';
 import '../../widgets/owner/reservation_table.dart';
@@ -132,11 +133,16 @@ class _OwnerDashboardScreenState extends State<OwnerDashboardScreen> {
             return switch (state) {
               OwnerReservationInitial() ||
               OwnerReservationLoading() => const LoadingIndicator(),
-              OwnerReservationFailure(:final message) => ErrorDisplay(
-                message: message,
-                onRetry: () =>
-                    context.read<OwnerReservationCubit>().fetchOwner(),
-              ),
+              OwnerReservationFailure(:final message, :final code) =>
+                ErrorDisplay(
+                  message: resolveErrorMessage(
+                    context,
+                    message: message,
+                    code: code,
+                  ),
+                  onRetry: () =>
+                      context.read<OwnerReservationCubit>().fetchOwner(),
+                ),
               OwnerReservationLoaded(:final reservations) => _buildContent(
                 reservations,
               ),

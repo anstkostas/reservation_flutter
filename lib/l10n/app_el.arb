@@ -509,5 +509,110 @@
   "languageSelectorGreek": "Ελληνικά",
   "@languageSelectorGreek": {
     "description": "Language option label for Greek in the language selector"
+  },
+
+  "errorAuthInvalidCredentials": "Λάθος email ή κωδικός πρόσβασης",
+  "@errorAuthInvalidCredentials": {
+    "description": "Error shown when login fails due to wrong email or password"
+  },
+  "errorAuthRefreshInvalid": "Η συνεδρία σας είναι άκυρη. Παρακαλώ συνδεθείτε ξανά.",
+  "@errorAuthRefreshInvalid": {
+    "description": "Error shown when the refresh token is invalid"
+  },
+  "errorAuthRefreshReuse": "Ειδοποίηση ασφαλείας: η συνεδρία χρησιμοποιήθηκε από άλλη συσκευή. Όλες οι συνεδρίες τερματίστηκαν.",
+  "@errorAuthRefreshReuse": {
+    "description": "Error shown when refresh token reuse is detected — all sessions are invalidated"
+  },
+  "errorAuthRefreshExpired": "Η συνεδρία σας έχει λήξει. Παρακαλώ συνδεθείτε ξανά.",
+  "@errorAuthRefreshExpired": {
+    "description": "Error shown when the refresh token has expired"
+  },
+  "errorAuthUserNotFound": "Ο χρήστης δεν βρέθηκε. Παρακαλώ συνδεθείτε ξανά.",
+  "@errorAuthUserNotFound": {
+    "description": "Error shown when the user record is not found during auth"
+  },
+  "errorAuthNotAuthenticated": "Παρακαλώ συνδεθείτε για να συνεχίσετε.",
+  "@errorAuthNotAuthenticated": {
+    "description": "Error shown when an authenticated request is made without a session"
+  },
+  "errorAuthNoToken": "Απαιτείται ταυτοποίηση.",
+  "@errorAuthNoToken": {
+    "description": "Error shown when no authentication token is present"
+  },
+  "errorAuthTokenExpired": "Η συνεδρία σας έχει λήξει. Παρακαλώ συνδεθείτε ξανά.",
+  "@errorAuthTokenExpired": {
+    "description": "Error shown when the access token has expired"
+  },
+  "errorAuthTokenInvalid": "Μη έγκυρη συνεδρία. Παρακαλώ συνδεθείτε ξανά.",
+  "@errorAuthTokenInvalid": {
+    "description": "Error shown when the access token is malformed or invalid"
+  },
+  "errorAuthNoRefreshToken": "Δεν βρέθηκε ενεργή συνεδρία. Παρακαλώ συνδεθείτε ξανά.",
+  "@errorAuthNoRefreshToken": {
+    "description": "Error shown when no refresh token cookie is present"
+  },
+  "errorForbidden": "Δεν έχετε δικαίωμα πρόσβασης.",
+  "@errorForbidden": {
+    "description": "Error shown when the user lacks the required role or permission"
+  },
+  "errorReservationCustomerOnly": "Μόνο οι πελάτες μπορούν να κάνουν ή να διαχειριστούν κρατήσεις.",
+  "@errorReservationCustomerOnly": {
+    "description": "Error shown when an owner tries to create or manage a customer reservation"
+  },
+  "errorReservationNotOwner": "Μπορείτε να τροποποιήσετε μόνο τις δικές σας κρατήσεις.",
+  "@errorReservationNotOwner": {
+    "description": "Error shown when a customer tries to modify another customer's reservation"
+  },
+  "errorReservationOwnerOnly": "Μόνο οι ιδιοκτήτες εστιατορίων μπορούν να εκτελέσουν αυτή την ενέργεια.",
+  "@errorReservationOwnerOnly": {
+    "description": "Error shown when a customer tries to perform an owner-only action"
+  },
+  "errorReservationWrongRestaurant": "Αυτή η κράτηση ανήκει σε άλλο εστιατόριο.",
+  "@errorReservationWrongRestaurant": {
+    "description": "Error shown when an owner tries to resolve a reservation for another restaurant"
+  },
+  "errorReservationNotFound": "Η κράτηση δεν βρέθηκε.",
+  "@errorReservationNotFound": {
+    "description": "Error shown when the requested reservation does not exist"
+  },
+  "errorReservationSlotFull": "Αυτή η χρονική θέση είναι πλήρως κλεισμένη. Παρακαλώ επιλέξτε άλλη ώρα.",
+  "@errorReservationSlotFull": {
+    "description": "Error shown when the restaurant has reached capacity for the requested time slot"
+  },
+  "errorReservationNotActive": "Μόνο ενεργές κρατήσεις μπορούν να τροποποιηθούν ή να ακυρωθούν.",
+  "@errorReservationNotActive": {
+    "description": "Error shown when trying to modify or cancel a non-active reservation"
+  },
+  "errorReservationTimeInvalid": "Παρακαλώ επιλέξτε έγκυρη ώρα εντός του παραθύρου κρατήσεων.",
+  "@errorReservationTimeInvalid": {
+    "description": "Error shown when the requested reservation time violates the booking window or buffer rules"
+  },
+  "errorReservationOwnerNoRestaurant": "Ο λογαριασμός σας δεν έχει ανατεθεί εστιατόριο.",
+  "@errorReservationOwnerNoRestaurant": {
+    "description": "Error shown when an owner with no restaurant tries to view reservations"
+  },
+  "errorRestaurantNotFound": "Το εστιατόριο δεν βρέθηκε.",
+  "@errorRestaurantNotFound": {
+    "description": "Error shown when the requested restaurant does not exist"
+  },
+  "errorUserEmailExists": "Υπάρχει ήδη λογαριασμός με αυτό το email.",
+  "@errorUserEmailExists": {
+    "description": "Error shown during signup when the email is already registered"
+  },
+  "errorUserOwnerRestaurantRequired": "Παρακαλώ επιλέξτε εστιατόριο για διαχείριση.",
+  "@errorUserOwnerRestaurantRequired": {
+    "description": "Error shown when an owner signs up without selecting a restaurant"
+  },
+  "errorRestaurantAlreadyOwned": "Αυτό το εστιατόριο έχει ήδη ιδιοκτήτη.",
+  "@errorRestaurantAlreadyOwned": {
+    "description": "Error shown when trying to claim a restaurant that is already owned"
+  },
+  "errorResourceConflict": "Αυτός ο πόρος υπάρχει ήδη.",
+  "@errorResourceConflict": {
+    "description": "Error shown when a unique constraint is violated (e.g. duplicate email)"
+  },
+  "errorValidationError": "Παρακαλώ ελέγξτε τη φόρμα για σφάλματα.",
+  "@errorValidationError": {
+    "description": "Top-level error shown when the server returns a validation error envelope"
   }
 }

@@ -284,9 +284,9 @@ class DioClient {
   ) {
     if (e.response != null) {
       final data = e.response!.data;
-      final message = data is Map<String, dynamic>
-          ? (data['message'] as String?) ?? 'An error occurred.'
-          : 'An error occurred.';
+      final body = data is Map<String, dynamic> ? data : null;
+      final message = (body?['message'] as String?) ?? 'An error occurred.';
+      final code = body?['code'] as String?;
       handler.reject(
         DioException(
           requestOptions: e.requestOptions,
@@ -295,6 +295,7 @@ class DioClient {
           error: AppException(
             message: message,
             statusCode: e.response!.statusCode ?? 500,
+            code: code,
           ),
         ),
       );

@@ -386,4 +386,101 @@ class AppLocalizationsEl extends AppLocalizations {
 
   @override
   String get languageSelectorGreek => 'Ελληνικά';
+
+  @override
+  String get errorAuthInvalidCredentials => 'Λάθος email ή κωδικός πρόσβασης';
+
+  @override
+  String get errorAuthRefreshInvalid =>
+      'Η συνεδρία σας είναι άκυρη. Παρακαλώ συνδεθείτε ξανά.';
+
+  @override
+  String get errorAuthRefreshReuse =>
+      'Ειδοποίηση ασφαλείας: η συνεδρία χρησιμοποιήθηκε από άλλη συσκευή. Όλες οι συνεδρίες τερματίστηκαν.';
+
+  @override
+  String get errorAuthRefreshExpired =>
+      'Η συνεδρία σας έχει λήξει. Παρακαλώ συνδεθείτε ξανά.';
+
+  @override
+  String get errorAuthUserNotFound =>
+      'Ο χρήστης δεν βρέθηκε. Παρακαλώ συνδεθείτε ξανά.';
+
+  @override
+  String get errorAuthNotAuthenticated =>
+      'Παρακαλώ συνδεθείτε για να συνεχίσετε.';
+
+  @override
+  String get errorAuthNoToken => 'Απαιτείται ταυτοποίηση.';
+
+  @override
+  String get errorAuthTokenExpired =>
+      'Η συνεδρία σας έχει λήξει. Παρακαλώ συνδεθείτε ξανά.';
+
+  @override
+  String get errorAuthTokenInvalid =>
+      'Μη έγκυρη συνεδρία. Παρακαλώ συνδεθείτε ξανά.';
+
+  @override
+  String get errorAuthNoRefreshToken =>
+      'Δεν βρέθηκε ενεργή συνεδρία. Παρακαλώ συνδεθείτε ξανά.';
+
+  @override
+  String get errorForbidden => 'Δεν έχετε δικαίωμα πρόσβασης.';
+
+  @override
+  String get errorReservationCustomerOnly =>
+      'Μόνο οι πελάτες μπορούν να κάνουν ή να διαχειριστούν κρατήσεις.';
+
+  @override
+  String get errorReservationNotOwner =>
+      'Μπορείτε να τροποποιήσετε μόνο τις δικές σας κρατήσεις.';
+
+  @override
+  String get errorReservationOwnerOnly =>
+      'Μόνο οι ιδιοκτήτες εστιατορίων μπορούν να εκτελέσουν αυτή την ενέργεια.';
+
+  @override
+  String get errorReservationWrongRestaurant =>
+      'Αυτή η κράτηση ανήκει σε άλλο εστιατόριο.';
+
+  @override
+  String get errorReservationNotFound => 'Η κράτηση δεν βρέθηκε.';
+
+  @override
+  String get errorReservationSlotFull =>
+      'Αυτή η χρονική θέση είναι πλήρως κλεισμένη. Παρακαλώ επιλέξτε άλλη ώρα.';
+
+  @override
+  String get errorReservationNotActive =>
+      'Μόνο ενεργές κρατήσεις μπορούν να τροποποιηθούν ή να ακυρωθούν.';
+
+  @override
+  String get errorReservationTimeInvalid =>
+      'Παρακαλώ επιλέξτε έγκυρη ώρα εντός του παραθύρου κρατήσεων.';
+
+  @override
+  String get errorReservationOwnerNoRestaurant =>
+      'Ο λογαριασμός σας δεν έχει ανατεθεί εστιατόριο.';
+
+  @override
+  String get errorRestaurantNotFound => 'Το εστιατόριο δεν βρέθηκε.';
+
+  @override
+  String get errorUserEmailExists =>
+      'Υπάρχει ήδη λογαριασμός με αυτό το email.';
+
+  @override
+  String get errorUserOwnerRestaurantRequired =>
+      'Παρακαλώ επιλέξτε εστιατόριο για διαχείριση.';
+
+  @override
+  String get errorRestaurantAlreadyOwned =>
+      'Αυτό το εστιατόριο έχει ήδη ιδιοκτήτη.';
+
+  @override
+  String get errorResourceConflict => 'Αυτός ο πόρος υπάρχει ήδη.';
+
+  @override
+  String get errorValidationError => 'Παρακαλώ ελέγξτε τη φόρμα για σφάλματα.';
 }

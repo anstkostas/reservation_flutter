@@ -8,6 +8,7 @@ import '../../constants/reservation_status.dart';
 import '../../cubits/reservations/customer/customer_reservation_cubit.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/models.dart';
+import '../../utils/error_resolver.dart';
 import '../../utils/validators.dart';
 import '../app_text_field.dart';
 import 'reservation_status_badge.dart';
@@ -114,9 +115,17 @@ class _ReservationDetailSheetState extends State<ReservationDetailSheet> {
           Navigator.of(context).pop();
         }
         if (state is CustomerReservationFailure) {
-          ScaffoldMessenger.of(
-            context,
-          ).showSnackBar(SnackBar(content: Text(state.message)));
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                resolveErrorMessage(
+                  context,
+                  message: state.message,
+                  code: state.code,
+                ),
+              ),
+            ),
+          );
         }
       },
       builder: (context, state) {

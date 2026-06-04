@@ -1,15 +1,24 @@
 /// Base exception for all API and application errors.
 ///
 /// Thrown by repositories and services when a request fails.
-/// Caught by cubits/blocs which emit a failure state with [message].
+/// Caught by cubits/blocs which emit a failure state with [message] and [code].
 class AppException implements Exception {
-  const AppException({required this.message, required this.statusCode});
+  const AppException({
+    required this.message,
+    required this.statusCode,
+    this.code,
+  });
 
   final String message;
   final int statusCode;
 
+  /// Machine-readable error code from the backend (e.g. 'AUTH_INVALID_CREDENTIALS').
+  /// Null when the server did not include a code (network errors, plain 500s).
+  final String? code;
+
   @override
-  String toString() => 'AppException($statusCode): $message';
+  String toString() =>
+      'AppException($statusCode${code != null ? ', $code' : ''}): $message';
 }
 
 /// Thrown when the server returns a 401 Unauthorized response.

@@ -6,6 +6,7 @@ import '../../constants/breakpoints.dart';
 import '../../cubits/restaurants/restaurant_list_cubit.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/models.dart';
+import '../../utils/error_resolver.dart';
 import '../../widgets/error_display.dart';
 import '../../widgets/loading_indicator.dart';
 import '../../layouts/app_navbar.dart';
@@ -37,8 +38,12 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
           return switch (state) {
             RestaurantListInitial() ||
             RestaurantListLoading() => const LoadingIndicator(),
-            RestaurantListFailure(:final message) => ErrorDisplay(
-              message: message,
+            RestaurantListFailure(:final message, :final code) => ErrorDisplay(
+              message: resolveErrorMessage(
+                context,
+                message: message,
+                code: code,
+              ),
               onRetry: () => context.read<RestaurantListCubit>().fetchAll(),
             ),
             RestaurantListLoaded(:final restaurants) when restaurants.isEmpty =>

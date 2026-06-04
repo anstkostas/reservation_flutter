@@ -509,5 +509,110 @@
   "languageSelectorGreek": "Greek",
   "@languageSelectorGreek": {
     "description": "Language option label for Greek in the language selector"
+  },
+
+  "errorAuthInvalidCredentials": "Invalid email or password",
+  "@errorAuthInvalidCredentials": {
+    "description": "Error shown when login fails due to wrong email or password"
+  },
+  "errorAuthRefreshInvalid": "Your session is invalid. Please sign in again.",
+  "@errorAuthRefreshInvalid": {
+    "description": "Error shown when the refresh token is invalid"
+  },
+  "errorAuthRefreshReuse": "Security alert: your session was used from another device. All sessions have been ended.",
+  "@errorAuthRefreshReuse": {
+    "description": "Error shown when refresh token reuse is detected — all sessions are invalidated"
+  },
+  "errorAuthRefreshExpired": "Your session has expired. Please sign in again.",
+  "@errorAuthRefreshExpired": {
+    "description": "Error shown when the refresh token has expired"
+  },
+  "errorAuthUserNotFound": "User not found. Please sign in again.",
+  "@errorAuthUserNotFound": {
+    "description": "Error shown when the user record is not found during auth"
+  },
+  "errorAuthNotAuthenticated": "Please sign in to continue.",
+  "@errorAuthNotAuthenticated": {
+    "description": "Error shown when an authenticated request is made without a session"
+  },
+  "errorAuthNoToken": "Authentication required.",
+  "@errorAuthNoToken": {
+    "description": "Error shown when no authentication token is present"
+  },
+  "errorAuthTokenExpired": "Your session has expired. Please sign in again.",
+  "@errorAuthTokenExpired": {
+    "description": "Error shown when the access token has expired"
+  },
+  "errorAuthTokenInvalid": "Invalid session. Please sign in again.",
+  "@errorAuthTokenInvalid": {
+    "description": "Error shown when the access token is malformed or invalid"
+  },
+  "errorAuthNoRefreshToken": "No active session found. Please sign in again.",
+  "@errorAuthNoRefreshToken": {
+    "description": "Error shown when no refresh token cookie is present"
+  },
+  "errorForbidden": "You do not have permission to access this.",
+  "@errorForbidden": {
+    "description": "Error shown when the user lacks the required role or permission"
+  },
+  "errorReservationCustomerOnly": "Only customers can make or manage reservations.",
+  "@errorReservationCustomerOnly": {
+    "description": "Error shown when an owner tries to create or manage a customer reservation"
+  },
+  "errorReservationNotOwner": "You can only modify your own reservations.",
+  "@errorReservationNotOwner": {
+    "description": "Error shown when a customer tries to modify another customer's reservation"
+  },
+  "errorReservationOwnerOnly": "Only restaurant owners can perform this action.",
+  "@errorReservationOwnerOnly": {
+    "description": "Error shown when a customer tries to perform an owner-only action"
+  },
+  "errorReservationWrongRestaurant": "This reservation belongs to a different restaurant.",
+  "@errorReservationWrongRestaurant": {
+    "description": "Error shown when an owner tries to resolve a reservation for another restaurant"
+  },
+  "errorReservationNotFound": "Reservation not found.",
+  "@errorReservationNotFound": {
+    "description": "Error shown when the requested reservation does not exist"
+  },
+  "errorReservationSlotFull": "This time slot is fully booked. Please choose another time.",
+  "@errorReservationSlotFull": {
+    "description": "Error shown when the restaurant has reached capacity for the requested time slot"
+  },
+  "errorReservationNotActive": "Only active reservations can be modified or canceled.",
+  "@errorReservationNotActive": {
+    "description": "Error shown when trying to modify or cancel a non-active reservation"
+  },
+  "errorReservationTimeInvalid": "Please choose a valid time within the booking window.",
+  "@errorReservationTimeInvalid": {
+    "description": "Error shown when the requested reservation time violates the booking window or buffer rules"
+  },
+  "errorReservationOwnerNoRestaurant": "Your account has no restaurant assigned.",
+  "@errorReservationOwnerNoRestaurant": {
+    "description": "Error shown when an owner with no restaurant tries to view reservations"
+  },
+  "errorRestaurantNotFound": "Restaurant not found.",
+  "@errorRestaurantNotFound": {
+    "description": "Error shown when the requested restaurant does not exist"
+  },
+  "errorUserEmailExists": "An account with this email already exists.",
+  "@errorUserEmailExists": {
+    "description": "Error shown during signup when the email is already registered"
+  },
+  "errorUserOwnerRestaurantRequired": "Please select a restaurant to manage.",
+  "@errorUserOwnerRestaurantRequired": {
+    "description": "Error shown when an owner signs up without selecting a restaurant"
+  },
+  "errorRestaurantAlreadyOwned": "This restaurant already has an owner.",
+  "@errorRestaurantAlreadyOwned": {
+    "description": "Error shown when trying to claim a restaurant that is already owned"
+  },
+  "errorResourceConflict": "This resource already exists.",
+  "@errorResourceConflict": {
+    "description": "Error shown when a unique constraint is violated (e.g. duplicate email)"
+  },
+  "errorValidationError": "Please check the form for errors.",
+  "@errorValidationError": {
+    "description": "Top-level error shown when the server returns a validation error envelope"
   }
 }

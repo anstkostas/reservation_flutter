@@ -43,7 +43,7 @@ class CustomerReservationCubit extends Cubit<CustomerReservationState> {
       emit(CustomerReservationLoaded(reservations));
     } on AppException catch (e) {
       if (isClosed) return;
-      emit(CustomerReservationFailure(e.message));
+      emit(CustomerReservationFailure(e.message, code: e.code));
     }
   }
 
@@ -70,7 +70,7 @@ class CustomerReservationCubit extends Cubit<CustomerReservationState> {
       emit(CustomerReservationLoaded(reservations));
     } on AppException catch (e) {
       if (isClosed) return;
-      emit(CustomerReservationFailure(e.message));
+      emit(CustomerReservationFailure(e.message, code: e.code));
     }
   }
 
@@ -98,7 +98,7 @@ class CustomerReservationCubit extends Cubit<CustomerReservationState> {
       emit(CustomerReservationLoaded(reservations));
     } on AppException catch (e) {
       if (isClosed) return;
-      emit(CustomerReservationFailure(e.message));
+      emit(CustomerReservationFailure(e.message, code: e.code));
     }
   }
 
@@ -117,7 +117,7 @@ class CustomerReservationCubit extends Cubit<CustomerReservationState> {
       emit(CustomerReservationLoaded(reservations));
     } on AppException catch (e) {
       if (isClosed) return;
-      emit(CustomerReservationFailure(e.message));
+      emit(CustomerReservationFailure(e.message, code: e.code));
     }
   }
 }

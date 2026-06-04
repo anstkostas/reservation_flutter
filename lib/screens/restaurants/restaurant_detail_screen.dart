@@ -12,6 +12,7 @@ import '../../cubits/restaurants/restaurant_detail_cubit.dart';
 import '../../layouts/app_navbar.dart';
 import '../../layouts/container_body.dart';
 import '../../models/models.dart';
+import '../../utils/error_resolver.dart';
 import '../../widgets/error_display.dart';
 import '../../widgets/loading_indicator.dart';
 import '../../widgets/reservations/reservation_create_sheet.dart';
@@ -52,12 +53,17 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
           return switch (state) {
             RestaurantDetailInitial() ||
             RestaurantDetailLoading() => const LoadingIndicator(),
-            RestaurantDetailFailure(:final message) => ErrorDisplay(
-              message: message,
-              onRetry: () => context.read<RestaurantDetailCubit>().fetchById(
-                widget.restaurantId,
+            RestaurantDetailFailure(:final message, :final code) =>
+              ErrorDisplay(
+                message: resolveErrorMessage(
+                  context,
+                  message: message,
+                  code: code,
+                ),
+                onRetry: () => context.read<RestaurantDetailCubit>().fetchById(
+                  widget.restaurantId,
+                ),
               ),
-            ),
             RestaurantDetailLoaded(:final restaurant) => _buildDetail(
               restaurant,
             ),

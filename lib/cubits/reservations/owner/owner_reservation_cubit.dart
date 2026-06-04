@@ -32,7 +32,7 @@ class OwnerReservationCubit extends Cubit<OwnerReservationState> {
       emit(OwnerReservationLoaded(reservations));
     } on AppException catch (e) {
       if (isClosed) return;
-      emit(OwnerReservationFailure(e.message));
+      emit(OwnerReservationFailure(e.message, code: e.code));
     }
   }
 
@@ -54,7 +54,7 @@ class OwnerReservationCubit extends Cubit<OwnerReservationState> {
       emit(OwnerReservationLoaded(reservations));
     } on AppException catch (e) {
       if (isClosed) return;
-      emit(OwnerReservationFailure(e.message));
+      emit(OwnerReservationFailure(e.message, code: e.code));
     }
   }
 }
