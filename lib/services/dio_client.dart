@@ -119,6 +119,14 @@ class DioClient {
     _dio.interceptors.add(InterceptorsWrapper(onError: _onError));
   }
 
+  /// Sets the Accept-Language header on all subsequent requests.
+  ///
+  /// Called by [LocaleCubit] before emitting a new locale so the header is
+  /// current before any downstream BlocListener fires a refetch.
+  void setLanguage(String code) {
+    _dio.options.headers['Accept-Language'] = code;
+  }
+
   /// Clears the persistent cookie jar (mobile only; no-op on web).
   ///
   /// Delegates to the platform-conditional [cookie_setup.clearCookies].

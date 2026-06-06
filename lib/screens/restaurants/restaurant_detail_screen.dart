@@ -8,6 +8,7 @@ import '../../constants/breakpoints.dart';
 import '../../constants/user_role.dart';
 import '../../l10n/app_localizations.dart';
 import '../../cubits/auth/auth_bloc.dart';
+import '../../cubits/locale/locale_cubit.dart';
 import '../../cubits/restaurants/restaurant_detail_cubit.dart';
 import '../../layouts/app_navbar.dart';
 import '../../layouts/container_body.dart';
@@ -48,27 +49,32 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const AppNavbar(),
-      body: BlocBuilder<RestaurantDetailCubit, RestaurantDetailState>(
-        builder: (context, state) {
-          return switch (state) {
-            RestaurantDetailInitial() ||
-            RestaurantDetailLoading() => const LoadingIndicator(),
-            RestaurantDetailFailure(:final message, :final code) =>
-              ErrorDisplay(
-                message: resolveErrorMessage(
-                  context,
-                  message: message,
-                  code: code,
-                ),
-                onRetry: () => context.read<RestaurantDetailCubit>().fetchById(
-                  widget.restaurantId,
-                ),
-              ),
-            RestaurantDetailLoaded(:final restaurant) => _buildDetail(
-              restaurant,
-            ),
-          };
+      body: BlocListener<LocaleCubit, Locale>(
+        listener: (context, locale) {
+          context.read<RestaurantDetailCubit>().fetchById(widget.restaurantId);
         },
+        child: BlocBuilder<RestaurantDetailCubit, RestaurantDetailState>(
+          builder: (context, state) {
+            return switch (state) {
+              RestaurantDetailInitial() ||
+              RestaurantDetailLoading() => const LoadingIndicator(),
+              RestaurantDetailFailure(:final message, :final code) =>
+                ErrorDisplay(
+                  message: resolveErrorMessage(
+                    context,
+                    message: message,
+                    code: code,
+                  ),
+                  onRetry: () => context
+                      .read<RestaurantDetailCubit>()
+                      .fetchById(widget.restaurantId),
+                ),
+              RestaurantDetailLoaded(:final restaurant) => _buildDetail(
+                restaurant,
+              ),
+            };
+          },
+        ),
       ),
     );
   }

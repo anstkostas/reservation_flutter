@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../constants/breakpoints.dart';
+import '../../cubits/locale/locale_cubit.dart';
 import '../../cubits/restaurants/restaurant_list_cubit.dart';
 import '../../l10n/app_localizations.dart';
 import '../../models/models.dart';
@@ -33,28 +34,37 @@ class _RestaurantListScreenState extends State<RestaurantListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const AppNavbar(),
-      body: BlocBuilder<RestaurantListCubit, RestaurantListState>(
-        builder: (context, state) {
-          return switch (state) {
-            RestaurantListInitial() ||
-            RestaurantListLoading() => const LoadingIndicator(),
-            RestaurantListFailure(:final message, :final code) => ErrorDisplay(
-              message: resolveErrorMessage(
-                context,
-                message: message,
-                code: code,
-              ),
-              onRetry: () => context.read<RestaurantListCubit>().fetchAll(),
-            ),
-            RestaurantListLoaded(:final restaurants) when restaurants.isEmpty =>
-              Center(
-                child: Text(AppLocalizations.of(context)!.restaurantListEmpty),
-              ),
-            RestaurantListLoaded(:final restaurants) => _buildContent(
-              restaurants,
-            ),
-          };
+      body: BlocListener<LocaleCubit, Locale>(
+        listener: (context, locale) {
+          context.read<RestaurantListCubit>().fetchAll();
         },
+        child: BlocBuilder<RestaurantListCubit, RestaurantListState>(
+          builder: (context, state) {
+            return switch (state) {
+              RestaurantListInitial() ||
+              RestaurantListLoading() => const LoadingIndicator(),
+              RestaurantListFailure(:final message, :final code) =>
+                ErrorDisplay(
+                  message: resolveErrorMessage(
+                    context,
+                    message: message,
+                    code: code,
+                  ),
+                  onRetry: () => context.read<RestaurantListCubit>().fetchAll(),
+                ),
+              RestaurantListLoaded(:final restaurants)
+                  when restaurants.isEmpty =>
+                Center(
+                  child: Text(
+                    AppLocalizations.of(context)!.restaurantListEmpty,
+                  ),
+                ),
+              RestaurantListLoaded(:final restaurants) => _buildContent(
+                restaurants,
+              ),
+            };
+          },
+        ),
       ),
     );
   }
