@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../constants/error_codes.dart';
-import '../l10n/app_localizations.dart';
+import 'package:antigravity_client/constants/error_codes.dart';
+import 'package:antigravity_client/l10n/app_localizations.dart';
 
 /// Returns the localized string for [code], or falls back to [message]
 /// (the backend's English string) when no translation key exists.

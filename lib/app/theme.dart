@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../constants/breakpoints.dart';
+import 'package:antigravity_client/constants/breakpoints.dart';
 import 'design_tokens.dart';
 
 /// App-wide theme configuration.

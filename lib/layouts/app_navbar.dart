@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 
-import '../constants/breakpoints.dart';
-import '../constants/supported_locale.dart';
-import '../constants/user_role.dart';
-import '../cubits/auth/auth_bloc.dart';
-import '../cubits/locale/locale_cubit.dart';
-import '../l10n/app_localizations.dart';
-import '../layouts/container_body.dart';
-import '../models/models.dart';
+import 'package:antigravity_client/constants/breakpoints.dart';
+import 'package:antigravity_client/constants/supported_locale.dart';
+import 'package:antigravity_client/constants/user_role.dart';
+import 'package:antigravity_client/cubits/auth/auth_bloc.dart';
+import 'package:antigravity_client/cubits/locale/locale_cubit.dart';
+import 'package:antigravity_client/l10n/app_localizations.dart';
+import 'package:antigravity_client/layouts/container_body.dart';
+import 'package:antigravity_client/models/models.dart';
 
 /// Global navigation bar — mirrors the React web client layout.
 ///

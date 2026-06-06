@@ -1,10 +1,10 @@
 import 'package:get_it/get_it.dart';
 
-import '../cubits/auth/auth_bloc.dart';
-import '../cubits/restaurants/unowned_restaurant_cubit.dart';
-import '../cubits/restaurants/restaurant_detail_cubit.dart';
-import '../repositories/repositories.dart';
-import '../services/services.dart';
+import 'package:antigravity_client/cubits/auth/auth_bloc.dart';
+import 'package:antigravity_client/cubits/restaurants/unowned_restaurant_cubit.dart';
+import 'package:antigravity_client/cubits/restaurants/restaurant_detail_cubit.dart';
+import 'package:antigravity_client/repositories/repositories.dart';
+import 'package:antigravity_client/services/services.dart';
 
 /// Global service locator instance.
 ///

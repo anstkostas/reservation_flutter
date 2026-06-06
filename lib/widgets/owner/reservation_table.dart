@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
-import '../../constants/reservation_status.dart';
-import '../../cubits/reservations/owner/owner_reservation_cubit.dart';
-import '../../l10n/app_localizations.dart';
-import '../../models/models.dart';
-import '../reservations/reservation_status_badge.dart';
+import 'package:antigravity_client/constants/reservation_status.dart';
+import 'package:antigravity_client/cubits/reservations/owner/owner_reservation_cubit.dart';
+import 'package:antigravity_client/l10n/app_localizations.dart';
+import 'package:antigravity_client/models/models.dart';
+import 'package:antigravity_client/widgets/reservations/reservation_status_badge.dart';
 
 /// Desktop/tablet table view of the owner's reservations.
 ///

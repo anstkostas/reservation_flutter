@@ -4,9 +4,9 @@ import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get_it/get_it.dart';
 
-import '../constants/api_constants.dart';
-import '../cubits/auth/auth_bloc.dart';
-import '../models/models.dart';
+import 'package:antigravity_client/constants/api_constants.dart';
+import 'package:antigravity_client/cubits/auth/auth_bloc.dart';
+import 'package:antigravity_client/models/models.dart';
 import 'cookie_setup/cookie_setup.dart' as cookie_setup;
 
 /// Single HTTP client for the app — all API calls go through this.

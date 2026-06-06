@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../constants/reservation_status.dart';
-import '../../l10n/app_localizations.dart';
+import 'package:antigravity_client/constants/reservation_status.dart';
+import 'package:antigravity_client/l10n/app_localizations.dart';
 
 /// A compact [Chip] showing a reservation's status with a colour indicator.
 class ReservationStatusBadge extends StatelessWidget {

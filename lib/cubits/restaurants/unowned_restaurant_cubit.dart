@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../models/models.dart';
-import '../../repositories/restaurant_repository.dart';
+import 'package:antigravity_client/models/models.dart';
+import 'package:antigravity_client/repositories/restaurant_repository.dart';
 
 part 'unowned_restaurant_state.dart';
 

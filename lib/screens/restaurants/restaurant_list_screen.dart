@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../constants/breakpoints.dart';
-import '../../cubits/locale/locale_cubit.dart';
-import '../../cubits/restaurants/restaurant_list_cubit.dart';
-import '../../l10n/app_localizations.dart';
-import '../../models/models.dart';
-import '../../utils/error_resolver.dart';
-import '../../widgets/error_display.dart';
-import '../../widgets/loading_indicator.dart';
-import '../../layouts/app_navbar.dart';
-import '../../widgets/restaurants/restaurant_card.dart';
+import 'package:antigravity_client/constants/breakpoints.dart';
+import 'package:antigravity_client/cubits/locale/locale_cubit.dart';
+import 'package:antigravity_client/cubits/restaurants/restaurant_list_cubit.dart';
+import 'package:antigravity_client/l10n/app_localizations.dart';
+import 'package:antigravity_client/models/models.dart';
+import 'package:antigravity_client/utils/error_resolver.dart';
+import 'package:antigravity_client/widgets/error_display.dart';
+import 'package:antigravity_client/widgets/loading_indicator.dart';
+import 'package:antigravity_client/layouts/app_navbar.dart';
+import 'package:antigravity_client/widgets/restaurants/restaurant_card.dart';
 
 /// Displays all restaurants in a responsive grid.
 ///

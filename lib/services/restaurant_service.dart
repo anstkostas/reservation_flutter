@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 
-import '../constants/api_constants.dart';
-import '../models/app_exception.dart';
+import 'package:antigravity_client/constants/api_constants.dart';
+import 'package:antigravity_client/models/app_exception.dart';
 import 'dio_client.dart';
 
 /// Handles raw HTTP calls for all restaurant endpoints.

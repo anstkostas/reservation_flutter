@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../constants/constants.dart';
+import 'package:antigravity_client/constants/constants.dart';
 import 'user_summary.dart';
 
 part 'reservation_model.freezed.dart';

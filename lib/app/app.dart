@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 
-import '../constants/supported_locale.dart';
-import '../cubits/auth/auth_bloc.dart';
-import '../cubits/locale/locale_cubit.dart';
-import '../cubits/reservations/customer/customer_reservation_cubit.dart';
-import '../cubits/reservations/owner/owner_reservation_cubit.dart';
-import '../cubits/restaurants/restaurant_list_cubit.dart';
-import '../l10n/app_localizations.dart';
-import '../repositories/repositories.dart';
+import 'package:antigravity_client/constants/supported_locale.dart';
+import 'package:antigravity_client/cubits/auth/auth_bloc.dart';
+import 'package:antigravity_client/cubits/locale/locale_cubit.dart';
+import 'package:antigravity_client/cubits/reservations/customer/customer_reservation_cubit.dart';
+import 'package:antigravity_client/cubits/reservations/owner/owner_reservation_cubit.dart';
+import 'package:antigravity_client/cubits/restaurants/restaurant_list_cubit.dart';
+import 'package:antigravity_client/l10n/app_localizations.dart';
+import 'package:antigravity_client/repositories/repositories.dart';
 import 'router.dart';
 import 'theme.dart';
 

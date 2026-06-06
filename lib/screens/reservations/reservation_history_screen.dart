@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../constants/breakpoints.dart';
-import '../../constants/reservation_status.dart';
-import '../../l10n/app_localizations.dart';
-import '../../cubits/reservations/customer/customer_reservation_cubit.dart';
-import '../../models/models.dart';
-import '../../utils/error_resolver.dart';
-import '../../widgets/error_display.dart';
-import '../../widgets/loading_indicator.dart';
-import '../../widgets/reservations/reservation_card.dart';
-import '../../layouts/app_navbar.dart';
-import '../../layouts/container_body.dart';
-import '../../widgets/reservations/reservation_detail_sheet.dart';
+import 'package:antigravity_client/constants/breakpoints.dart';
+import 'package:antigravity_client/constants/reservation_status.dart';
+import 'package:antigravity_client/l10n/app_localizations.dart';
+import 'package:antigravity_client/cubits/reservations/customer/customer_reservation_cubit.dart';
+import 'package:antigravity_client/models/models.dart';
+import 'package:antigravity_client/utils/error_resolver.dart';
+import 'package:antigravity_client/widgets/error_display.dart';
+import 'package:antigravity_client/widgets/loading_indicator.dart';
+import 'package:antigravity_client/widgets/reservations/reservation_card.dart';
+import 'package:antigravity_client/layouts/app_navbar.dart';
+import 'package:antigravity_client/layouts/container_body.dart';
+import 'package:antigravity_client/widgets/reservations/reservation_detail_sheet.dart';
 
 /// Displays the authenticated customer's reservations in two tabs: Upcoming and History.
 ///

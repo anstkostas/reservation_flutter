@@ -4,19 +4,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../constants/breakpoints.dart';
-import '../../constants/user_role.dart';
-import '../../l10n/app_localizations.dart';
-import '../../cubits/auth/auth_bloc.dart';
-import '../../cubits/locale/locale_cubit.dart';
-import '../../cubits/restaurants/restaurant_detail_cubit.dart';
-import '../../layouts/app_navbar.dart';
-import '../../layouts/container_body.dart';
-import '../../models/models.dart';
-import '../../utils/error_resolver.dart';
-import '../../widgets/error_display.dart';
-import '../../widgets/loading_indicator.dart';
-import '../../widgets/reservations/reservation_create_sheet.dart';
+import 'package:antigravity_client/constants/breakpoints.dart';
+import 'package:antigravity_client/constants/user_role.dart';
+import 'package:antigravity_client/l10n/app_localizations.dart';
+import 'package:antigravity_client/cubits/auth/auth_bloc.dart';
+import 'package:antigravity_client/cubits/locale/locale_cubit.dart';
+import 'package:antigravity_client/cubits/restaurants/restaurant_detail_cubit.dart';
+import 'package:antigravity_client/layouts/app_navbar.dart';
+import 'package:antigravity_client/layouts/container_body.dart';
+import 'package:antigravity_client/models/models.dart';
+import 'package:antigravity_client/utils/error_resolver.dart';
+import 'package:antigravity_client/widgets/error_display.dart';
+import 'package:antigravity_client/widgets/loading_indicator.dart';
+import 'package:antigravity_client/widgets/reservations/reservation_create_sheet.dart';
 
 /// Shows full details for a single restaurant.
 ///

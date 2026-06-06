@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../app/design_tokens.dart';
-import '../constants/user_role.dart';
-import '../cubits/auth/auth_bloc.dart';
-import '../l10n/app_localizations.dart';
-import '../layouts/app_navbar.dart';
+import 'package:antigravity_client/app/design_tokens.dart';
+import 'package:antigravity_client/constants/user_role.dart';
+import 'package:antigravity_client/cubits/auth/auth_bloc.dart';
+import 'package:antigravity_client/l10n/app_localizations.dart';
+import 'package:antigravity_client/layouts/app_navbar.dart';
 
 /// Full-screen hero landing page — mirrors React's SplashPage.
 ///

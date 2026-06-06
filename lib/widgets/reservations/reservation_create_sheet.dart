@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
-import '../../constants/breakpoints.dart';
-import '../../cubits/reservations/customer/customer_reservation_cubit.dart';
-import '../../l10n/app_localizations.dart';
-import '../../utils/error_resolver.dart';
-import '../../utils/validators.dart';
-import '../app_text_field.dart';
+import 'package:antigravity_client/constants/breakpoints.dart';
+import 'package:antigravity_client/cubits/reservations/customer/customer_reservation_cubit.dart';
+import 'package:antigravity_client/l10n/app_localizations.dart';
+import 'package:antigravity_client/utils/error_resolver.dart';
+import 'package:antigravity_client/utils/validators.dart';
+import 'package:antigravity_client/widgets/app_text_field.dart';
 
 /// Sheet for creating a new reservation.
 ///

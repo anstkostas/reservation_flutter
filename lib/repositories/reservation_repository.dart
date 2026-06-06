@@ -1,6 +1,6 @@
-import '../constants/reservation_status.dart';
-import '../models/models.dart';
-import '../services/reservation_service.dart';
+import 'package:antigravity_client/constants/reservation_status.dart';
+import 'package:antigravity_client/models/models.dart';
+import 'package:antigravity_client/services/reservation_service.dart';
 
 /// Maps raw reservation API responses to typed models.
 ///

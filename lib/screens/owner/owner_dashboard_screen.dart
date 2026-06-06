@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../constants/breakpoints.dart';
-import '../../constants/reservation_status.dart';
-import '../../l10n/app_localizations.dart';
-import '../../cubits/reservations/owner/owner_reservation_cubit.dart';
-import '../../layouts/app_navbar.dart';
-import '../../models/models.dart';
-import '../../utils/error_resolver.dart';
-import '../../widgets/error_display.dart';
-import '../../widgets/loading_indicator.dart';
-import '../../widgets/owner/reservation_table.dart';
-import '../../widgets/owner/reservation_table_mobile.dart';
+import 'package:antigravity_client/constants/breakpoints.dart';
+import 'package:antigravity_client/constants/reservation_status.dart';
+import 'package:antigravity_client/l10n/app_localizations.dart';
+import 'package:antigravity_client/cubits/reservations/owner/owner_reservation_cubit.dart';
+import 'package:antigravity_client/layouts/app_navbar.dart';
+import 'package:antigravity_client/models/models.dart';
+import 'package:antigravity_client/utils/error_resolver.dart';
+import 'package:antigravity_client/widgets/error_display.dart';
+import 'package:antigravity_client/widgets/loading_indicator.dart';
+import 'package:antigravity_client/widgets/owner/reservation_table.dart';
+import 'package:antigravity_client/widgets/owner/reservation_table_mobile.dart';
 
 /// The owner's main dashboard — shows all reservations for their restaurant.
 ///

@@ -1,4 +1,4 @@
-import '../../constants/reservation_status.dart';
+import 'package:antigravity_client/constants/reservation_status.dart';
 
 /// Request payload for POST /reservations/:id/resolve.
 ///

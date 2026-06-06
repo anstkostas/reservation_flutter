@@ -1,5 +1,5 @@
-import '../models/models.dart';
-import '../services/auth_service.dart';
+import 'package:antigravity_client/models/models.dart';
+import 'package:antigravity_client/services/auth_service.dart';
 
 /// Maps raw auth API responses to typed models.
 ///

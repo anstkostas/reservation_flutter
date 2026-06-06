@@ -1,5 +1,5 @@
-import '../models/models.dart';
-import '../services/restaurant_service.dart';
+import 'package:antigravity_client/models/models.dart';
+import 'package:antigravity_client/services/restaurant_service.dart';
 
 /// Maps raw restaurant API responses to typed models.
 ///

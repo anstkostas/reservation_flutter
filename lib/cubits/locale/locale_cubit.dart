@@ -12,7 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../services/dio_client.dart';
+import 'package:antigravity_client/services/dio_client.dart';
 
 const _kLocaleKey = 'app_locale';
 

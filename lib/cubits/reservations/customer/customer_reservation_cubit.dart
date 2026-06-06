@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../models/models.dart';
-import '../../../repositories/reservation_repository.dart';
+import 'package:antigravity_client/models/models.dart';
+import 'package:antigravity_client/repositories/reservation_repository.dart';
 
 part 'customer_reservation_state.dart';
 

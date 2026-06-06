@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../l10n/app_localizations.dart';
-import '../../models/models.dart';
+import 'package:antigravity_client/l10n/app_localizations.dart';
+import 'package:antigravity_client/models/models.dart';
 
 /// A card displaying a restaurant's logo, name, description, and capacity.
 ///

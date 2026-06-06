@@ -3,12 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../cubits/auth/auth_bloc.dart';
-import '../../l10n/app_localizations.dart';
-import '../../utils/error_resolver.dart';
-import '../../utils/validators.dart';
-import '../../widgets/app_text_field.dart';
-import '../../widgets/loading_indicator.dart';
+import 'package:antigravity_client/cubits/auth/auth_bloc.dart';
+import 'package:antigravity_client/l10n/app_localizations.dart';
+import 'package:antigravity_client/utils/error_resolver.dart';
+import 'package:antigravity_client/utils/validators.dart';
+import 'package:antigravity_client/widgets/app_text_field.dart';
+import 'package:antigravity_client/widgets/loading_indicator.dart';
 
 /// Login screen — email + password form backed by [AuthBloc].
 ///

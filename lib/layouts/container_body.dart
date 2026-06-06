@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-import '../constants/breakpoints.dart';
+import 'package:antigravity_client/constants/breakpoints.dart';
 
 /// Constrains [child] to a layout-aware maximum width and centers it —
 /// mirrors Tailwind's `container mx-auto` pattern used in the React client.

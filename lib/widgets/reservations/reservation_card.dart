@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../l10n/app_localizations.dart';
-import '../../models/models.dart';
+import 'package:antigravity_client/l10n/app_localizations.dart';
+import 'package:antigravity_client/models/models.dart';
 import 'reservation_status_badge.dart';
 
 /// A card showing a summary of a single reservation.

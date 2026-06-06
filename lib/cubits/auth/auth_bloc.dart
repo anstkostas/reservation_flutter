@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../models/models.dart';
-import '../../repositories/auth_repository.dart';
+import 'package:antigravity_client/models/models.dart';
+import 'package:antigravity_client/repositories/auth_repository.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 

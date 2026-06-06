@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../../constants/reservation_status.dart';
-import '../../../models/models.dart';
-import '../../../repositories/reservation_repository.dart';
+import 'package:antigravity_client/constants/reservation_status.dart';
+import 'package:antigravity_client/models/models.dart';
+import 'package:antigravity_client/repositories/reservation_repository.dart';
 
 part 'owner_reservation_state.dart';
 

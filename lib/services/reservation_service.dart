@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 
-import '../constants/api_constants.dart';
-import '../models/app_exception.dart';
-import '../models/requests/requests.dart';
+import 'package:antigravity_client/constants/api_constants.dart';
+import 'package:antigravity_client/models/app_exception.dart';
+import 'package:antigravity_client/models/requests/requests.dart';
 import 'dio_client.dart';
 
 /// Handles raw HTTP calls for all reservation endpoints.
