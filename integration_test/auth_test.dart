@@ -1,12 +1,22 @@
+/// Integration tests for the auth flow.
+/// Type: integration (repository layer mocked via pumpApp harness).
+/// Covers: login → RestaurantListScreen visible (AuthAuthenticated + redirect);
+///   logout → LoginScreen visible (AuthUnauthenticated + redirect);
+///   failed login → AUTH_INVALID_CREDENTIALS maps to snackbar message (AuthFailure path);
+///   owner login → OwnerDashboardScreen visible (role-based redirect guard).
+library;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 import 'package:antigravity_client/models/models.dart';
+import 'package:antigravity_client/constants/error_codes.dart';
 import 'package:antigravity_client/constants/user_role.dart';
 import 'package:antigravity_client/app/router.dart';
 import 'package:antigravity_client/screens/auth/login_screen.dart';
+import 'package:antigravity_client/screens/owner/owner_dashboard_screen.dart';
 import 'package:antigravity_client/screens/restaurants/restaurant_list_screen.dart';
 
 import 'helpers/app_harness.dart';
@@ -27,6 +37,15 @@ void main() {
       lastname: 'User',
       email: 'customer@test.com',
       role: UserRole.customer,
+    );
+
+    // A minimal owner used for the role-based redirect test.
+    final fakeOwner = UserModel(
+      id: 'owner-user-id',
+      firstname: 'Owner',
+      lastname: 'User',
+      email: 'owner@test.com',
+      role: UserRole.owner,
     );
 
     setUp(() {
@@ -75,6 +94,68 @@ void main() {
       // RestaurantListScreen visible confirms: login → AuthAuthenticated → redirect chain.
       expect(find.byType(RestaurantListScreen), findsOneWidget);
     });
+
+    testWidgets(
+      'failed login → snackbar with invalid credentials message visible',
+      (tester) async {
+        // Why: verifies that AuthFailure is surfaced as a SnackBar on LoginScreen.
+        // AUTH_INVALID_CREDENTIALS maps via resolveErrorMessage to
+        // l10n.errorAuthInvalidCredentials = "Invalid email or password" (en locale).
+        when(() => mockAuth.login(any(), any())).thenThrow(
+          const AppException(
+            message: 'Invalid email or password',
+            statusCode: 401,
+            code: ErrorCodes.authInvalidCredentials,
+          ),
+        );
+
+        await pumpApp(
+          tester,
+          authRepo: mockAuth,
+          reservationRepo: mockReservations,
+          restaurantRepo: mockRestaurants,
+        );
+
+        // Navigate to /login via the splash screen navbar button.
+        await tester.tap(find.text('Log in'));
+        await tester.pumpAndSettle();
+
+        await tester.enterText(find.byType(TextField).at(0), 'bad@example.com');
+        await tester.enterText(find.byType(TextField).at(1), 'wrongpass');
+        await tester.tap(find.text('Sign in'));
+        // AuthLoading renders CircularProgressIndicator — pumpUntilFound avoids
+        // hanging on the continuous animation while waiting for AuthFailure.
+        await pumpUntilFound(tester, find.byType(SnackBar));
+
+        expect(find.text('Invalid email or password'), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'owner login → owner dashboard screen is visible',
+      (tester) async {
+        // Why: owner-role users must land on /owner (OwnerDashboardScreen), not
+        // /restaurants. Confirms the router's role-based redirect guard fires
+        // correctly for the owner role.
+        when(() => mockAuth.getMe()).thenAnswer((_) async => fakeOwner);
+        // Required: OwnerDashboardScreen.initState calls fetchOwner() which
+        // calls getOwnerReservations().
+        when(
+          () => mockReservations.getOwnerReservations(),
+        ).thenAnswer((_) async => []);
+
+        await pumpApp(
+          tester,
+          authRepo: mockAuth,
+          reservationRepo: mockReservations,
+          restaurantRepo: mockRestaurants,
+        );
+
+        await pumpUntilFound(tester, find.byType(OwnerDashboardScreen));
+
+        expect(find.byType(OwnerDashboardScreen), findsOneWidget);
+      },
+    );
 
     testWidgets('logout → login screen is visible', (tester) async {
       // Why: after logout, AuthBloc emits AuthUnauthenticated and the router

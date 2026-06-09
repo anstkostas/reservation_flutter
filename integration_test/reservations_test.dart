@@ -1,3 +1,11 @@
+/// Integration tests for reservation flows (customer role, desktop viewport 1200×800).
+/// Type: integration (repository layer mocked via pumpApp harness).
+/// Covers: cancel reservation (card → detail sheet → confirm dialog → ActionSuccess snackbar);
+///   create reservation (restaurant detail → booking dialog → form submit → sheet closes);
+///   update reservation (card → detail sheet → edit mode → save → ActionSuccess snackbar);
+///   owner resolve reservation (DataTable action button → completed → ActionSuccess snackbar).
+library;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -8,6 +16,7 @@ import 'package:antigravity_client/app/router.dart';
 import 'package:antigravity_client/constants/reservation_status.dart';
 import 'package:antigravity_client/constants/user_role.dart';
 import 'package:antigravity_client/models/models.dart';
+import 'package:antigravity_client/screens/owner/owner_dashboard_screen.dart';
 import 'package:antigravity_client/widgets/reservations/reservation_card.dart';
 
 import 'helpers/app_harness.dart';
@@ -209,6 +218,160 @@ void main() {
             restaurantId: 'rest-id-1',
             scheduledAt: any(named: 'scheduledAt'),
             people: any(named: 'people'),
+          ),
+        ).called(1);
+      },
+    );
+
+    testWidgets(
+      'update reservation: edit from detail sheet → success snackbar visible',
+      (tester) async {
+        // Why: verifies the full update flow — detail sheet edit mode, form
+        // save dispatch, and ActionSuccess → sheet close + history screen
+        // snackbar are all wired together correctly.
+        //
+        // Viewport matches the cancel test: 1200×800 (desktop).
+        // Edit button only renders when reservation.status == active && !isPast
+        // — fakeActiveReservation is 2 days in the future so both conditions hold.
+        tester.view.physicalSize = const Size(1200, 800);
+        tester.view.devicePixelRatio = 1.0;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+
+        final updatedReservation = fakeActiveReservation.copyWith(people: 3);
+
+        when(
+          () => mockReservations.getMyReservations(),
+        ).thenAnswer((_) async => [fakeActiveReservation]);
+        when(
+          () => mockReservations.update(
+            id: any(named: 'id'),
+            scheduledAt: any(named: 'scheduledAt'),
+            people: any(named: 'people'),
+          ),
+        ).thenAnswer((_) async => updatedReservation);
+
+        await pumpApp(
+          tester,
+          authRepo: mockAuth,
+          reservationRepo: mockReservations,
+          restaurantRepo: mockRestaurants,
+        );
+
+        // Navigate to reservation history and wait for the card to appear.
+        appRouter.go('/reservations');
+        await pumpUntilFound(tester, find.byType(ReservationCard));
+
+        // Open the detail sheet by tapping the reservation card.
+        await tester.tap(find.byType(ReservationCard).first);
+        await tester.pumpAndSettle();
+
+        // Switch to edit mode.
+        await tester.tap(find.text('Edit'));
+        await tester.pumpAndSettle();
+
+        // Set form values directly via FormBuilderState — mirrors create test approach.
+        // 26 hours ahead is within the booking window and past any lead time.
+        final scheduledAt = DateTime.now().add(const Duration(hours: 26));
+        final formState = tester.state<FormBuilderState>(
+          find.byType(FormBuilder),
+        );
+        formState.fields['date']!.didChange(scheduledAt);
+        formState.fields['time']!.didChange(scheduledAt);
+        formState.fields['people']!.didChange('3');
+        await tester.pump();
+
+        // Submit — reservationEditSaveButton = "Save changes".
+        await tester.tap(find.text('Save changes'));
+        await tester.pumpAndSettle();
+
+        // SnackBar from ReservationHistoryScreen BlocConsumer confirms ActionSuccess.
+        expect(find.byType(SnackBar), findsOneWidget);
+        verify(
+          () => mockReservations.update(
+            id: fakeActiveReservation.id,
+            scheduledAt: any(named: 'scheduledAt'),
+            people: 3,
+          ),
+        ).called(1);
+      },
+    );
+
+    testWidgets(
+      'owner resolve: mark active reservation as completed → snackbar visible',
+      (tester) async {
+        // Why: verifies the owner's resolve flow — the DataTable action button
+        // dispatches resolve() on OwnerReservationCubit, ActionSuccess triggers
+        // the OwnerDashboardScreen BlocConsumer listener which shows the snackbar.
+        //
+        // Viewport: 1200×800 (desktop) — renders ReservationTable (DataTable).
+        // Action buttons only appear when _canUpdate() is true, which requires
+        // scheduledAt to be in the past — fixture is 2 hours ago.
+        tester.view.physicalSize = const Size(1200, 800);
+        tester.view.devicePixelRatio = 1.0;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+
+        final fakeOwner = UserModel(
+          id: 'owner-id',
+          firstname: 'Owner',
+          lastname: 'User',
+          email: 'owner@test.com',
+          role: UserRole.owner,
+        );
+
+        // Past + active: shows in the Active tab AND enables action buttons.
+        final fakeOwnerReservation = ReservationModel(
+          id: 'owner-res-id',
+          scheduledAt: DateTime.now().subtract(const Duration(hours: 2)),
+          people: 2,
+          status: ReservationStatus.active,
+          restaurantId: 'rest-id-1',
+          customerId: 'cust-id',
+          restaurantName: 'Test Restaurant',
+        );
+
+        final resolvedReservation = fakeOwnerReservation.copyWith(
+          status: ReservationStatus.completed,
+        );
+
+        when(() => mockAuth.getMe()).thenAnswer((_) async => fakeOwner);
+        when(
+          () => mockReservations.getOwnerReservations(),
+        ).thenAnswer((_) async => [fakeOwnerReservation]);
+        when(
+          () => mockReservations.resolve(
+            id: fakeOwnerReservation.id,
+            status: ReservationStatus.completed,
+          ),
+        ).thenAnswer((_) async => resolvedReservation);
+
+        await pumpApp(
+          tester,
+          authRepo: mockAuth,
+          reservationRepo: mockReservations,
+          restaurantRepo: mockRestaurants,
+        );
+
+        // Owner lands on /owner — wait for screen and then the action buttons.
+        await pumpUntilFound(tester, find.byType(OwnerDashboardScreen));
+        await pumpUntilFound(
+          tester,
+          find.byIcon(Icons.check_circle_outline),
+        );
+
+        // Tap "Mark as completed" icon button.
+        await tester.tap(find.byIcon(Icons.check_circle_outline));
+
+        // Wait for OwnerReservationActionSuccess listener to fire the snackbar.
+        await pumpUntilFound(tester, find.byType(SnackBar));
+
+        // ownerResolvedSnackbar = "Reservation resolved."
+        expect(find.text('Reservation resolved.'), findsOneWidget);
+        verify(
+          () => mockReservations.resolve(
+            id: fakeOwnerReservation.id,
+            status: ReservationStatus.completed,
           ),
         ).called(1);
       },
