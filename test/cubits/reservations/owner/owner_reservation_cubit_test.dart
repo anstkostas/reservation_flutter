@@ -93,18 +93,21 @@ void main() {
 
     blocTest<OwnerReservationCubit, OwnerReservationState>(
       'emits [Loading, Failure] and skips the re-fetch when the resolve throws',
-      setUp: () => when(
-        () => repo.resolve(id: any(named: 'id'), status: any(named: 'status')),
-      ).thenThrow(
-        const AppException(
-          message: 'Not allowed',
-          statusCode: 403,
-          code: 'FORBIDDEN',
-        ),
-      ),
+      setUp: () =>
+          when(
+            () => repo.resolve(
+              id: any(named: 'id'),
+              status: any(named: 'status'),
+            ),
+          ).thenThrow(
+            const AppException(
+              message: 'Not allowed',
+              statusCode: 403,
+              code: 'FORBIDDEN',
+            ),
+          ),
       build: () => OwnerReservationCubit(repo),
-      act: (cubit) =>
-          cubit.resolve(id: 'r1', status: ReservationStatus.noShow),
+      act: (cubit) => cubit.resolve(id: 'r1', status: ReservationStatus.noShow),
       expect: () => const [
         OwnerReservationLoading(),
         OwnerReservationFailure('Not allowed', code: 'FORBIDDEN'),
@@ -147,9 +150,7 @@ void main() {
       },
       build: () => OwnerReservationCubit(repo),
       act: (cubit) async {
-        unawaited(
-          cubit.resolve(id: 'r1', status: ReservationStatus.completed),
-        );
+        unawaited(cubit.resolve(id: 'r1', status: ReservationStatus.completed));
         await cubit.close();
         resolveCompleter.complete(_buildReservation());
       },
@@ -173,9 +174,7 @@ void main() {
       },
       build: () => OwnerReservationCubit(repo),
       act: (cubit) async {
-        unawaited(
-          cubit.resolve(id: 'r1', status: ReservationStatus.completed),
-        );
+        unawaited(cubit.resolve(id: 'r1', status: ReservationStatus.completed));
         // yield to the event loop so resolve() completes and ActionSuccess is emitted
         // before getOwnerReservations() suspends on fetchCompleter
         await Future<void>.delayed(Duration.zero);
@@ -205,17 +204,17 @@ void main() {
 
     blocTest<OwnerReservationCubit, OwnerReservationState>(
       'resolve: emits [Loading, Failure] carrying null code when AppException omits code',
-      setUp: () => when(
-        () => repo.resolve(
-          id: any(named: 'id'),
-          status: any(named: 'status'),
-        ),
-      ).thenThrow(
-        const AppException(message: 'Service unavailable', statusCode: 503),
-      ),
+      setUp: () =>
+          when(
+            () => repo.resolve(
+              id: any(named: 'id'),
+              status: any(named: 'status'),
+            ),
+          ).thenThrow(
+            const AppException(message: 'Service unavailable', statusCode: 503),
+          ),
       build: () => OwnerReservationCubit(repo),
-      act: (cubit) =>
-          cubit.resolve(id: 'r1', status: ReservationStatus.noShow),
+      act: (cubit) => cubit.resolve(id: 'r1', status: ReservationStatus.noShow),
       expect: () => const [
         OwnerReservationLoading(),
         OwnerReservationFailure('Service unavailable'),

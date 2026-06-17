@@ -355,10 +355,7 @@ void main() {
 
         // Owner lands on /owner — wait for screen and then the action buttons.
         await pumpUntilFound(tester, find.byType(OwnerDashboardScreen));
-        await pumpUntilFound(
-          tester,
-          find.byIcon(Icons.check_circle_outline),
-        );
+        await pumpUntilFound(tester, find.byIcon(Icons.check_circle_outline));
 
         // Tap "Mark as completed" icon button.
         await tester.tap(find.byIcon(Icons.check_circle_outline));

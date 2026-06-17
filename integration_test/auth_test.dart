@@ -131,31 +131,30 @@ void main() {
       },
     );
 
-    testWidgets(
-      'owner login → owner dashboard screen is visible',
-      (tester) async {
-        // Why: owner-role users must land on /owner (OwnerDashboardScreen), not
-        // /restaurants. Confirms the router's role-based redirect guard fires
-        // correctly for the owner role.
-        when(() => mockAuth.getMe()).thenAnswer((_) async => fakeOwner);
-        // Required: OwnerDashboardScreen.initState calls fetchOwner() which
-        // calls getOwnerReservations().
-        when(
-          () => mockReservations.getOwnerReservations(),
-        ).thenAnswer((_) async => []);
+    testWidgets('owner login → owner dashboard screen is visible', (
+      tester,
+    ) async {
+      // Why: owner-role users must land on /owner (OwnerDashboardScreen), not
+      // /restaurants. Confirms the router's role-based redirect guard fires
+      // correctly for the owner role.
+      when(() => mockAuth.getMe()).thenAnswer((_) async => fakeOwner);
+      // Required: OwnerDashboardScreen.initState calls fetchOwner() which
+      // calls getOwnerReservations().
+      when(
+        () => mockReservations.getOwnerReservations(),
+      ).thenAnswer((_) async => []);
 
-        await pumpApp(
-          tester,
-          authRepo: mockAuth,
-          reservationRepo: mockReservations,
-          restaurantRepo: mockRestaurants,
-        );
+      await pumpApp(
+        tester,
+        authRepo: mockAuth,
+        reservationRepo: mockReservations,
+        restaurantRepo: mockRestaurants,
+      );
 
-        await pumpUntilFound(tester, find.byType(OwnerDashboardScreen));
+      await pumpUntilFound(tester, find.byType(OwnerDashboardScreen));
 
-        expect(find.byType(OwnerDashboardScreen), findsOneWidget);
-      },
-    );
+      expect(find.byType(OwnerDashboardScreen), findsOneWidget);
+    });
 
     testWidgets('logout → login screen is visible', (tester) async {
       // Why: after logout, AuthBloc emits AuthUnauthenticated and the router

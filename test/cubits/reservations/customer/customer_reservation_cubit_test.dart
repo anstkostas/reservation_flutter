@@ -105,19 +105,20 @@ void main() {
 
     blocTest<CustomerReservationCubit, CustomerReservationState>(
       'emits [Loading, Failure] and skips the re-fetch when create throws',
-      setUp: () => when(
-        () => repo.create(
-          restaurantId: 'rest1',
-          scheduledAt: scheduledAt,
-          people: 2,
-        ),
-      ).thenThrow(
-        const AppException(
-          message: 'Conflict',
-          statusCode: 409,
-          code: 'CONFLICT',
-        ),
-      ),
+      setUp: () =>
+          when(
+            () => repo.create(
+              restaurantId: 'rest1',
+              scheduledAt: scheduledAt,
+              people: 2,
+            ),
+          ).thenThrow(
+            const AppException(
+              message: 'Conflict',
+              statusCode: 409,
+              code: 'CONFLICT',
+            ),
+          ),
       build: () => CustomerReservationCubit(repo),
       act: (cubit) => cubit.create(
         restaurantId: 'rest1',
@@ -163,15 +164,16 @@ void main() {
 
     blocTest<CustomerReservationCubit, CustomerReservationState>(
       'emits [Loading, Failure] and skips the re-fetch when update throws',
-      setUp: () => when(
-        () => repo.update(id: 'r1', scheduledAt: scheduledAt, people: 3),
-      ).thenThrow(
-        const AppException(
-          message: 'Not found',
-          statusCode: 404,
-          code: 'NOT_FOUND',
-        ),
-      ),
+      setUp: () =>
+          when(
+            () => repo.update(id: 'r1', scheduledAt: scheduledAt, people: 3),
+          ).thenThrow(
+            const AppException(
+              message: 'Not found',
+              statusCode: 404,
+              code: 'NOT_FOUND',
+            ),
+          ),
       build: () => CustomerReservationCubit(repo),
       act: (cubit) =>
           cubit.update(id: 'r1', scheduledAt: scheduledAt, people: 3),
@@ -326,15 +328,16 @@ void main() {
 
     blocTest<CustomerReservationCubit, CustomerReservationState>(
       'create: emits [Loading, Failure] carrying null code when AppException omits code',
-      setUp: () => when(
-        () => repo.create(
-          restaurantId: 'rest1',
-          scheduledAt: DateTime(2026, 8, 15, 19, 30),
-          people: 2,
-        ),
-      ).thenThrow(
-        const AppException(message: 'Service unavailable', statusCode: 503),
-      ),
+      setUp: () =>
+          when(
+            () => repo.create(
+              restaurantId: 'rest1',
+              scheduledAt: DateTime(2026, 8, 15, 19, 30),
+              people: 2,
+            ),
+          ).thenThrow(
+            const AppException(message: 'Service unavailable', statusCode: 503),
+          ),
       build: () => CustomerReservationCubit(repo),
       act: (cubit) => cubit.create(
         restaurantId: 'rest1',
