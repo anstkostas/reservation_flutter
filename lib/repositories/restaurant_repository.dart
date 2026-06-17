@@ -31,6 +31,24 @@ class RestaurantRepository {
     return RestaurantModel.fromJson(data);
   }
 
+  /// Returns the authenticated owner's restaurant as a [RestaurantPrivateModel].
+  ///
+  /// Throws [AppException] on network error or if the owner has no restaurant.
+  Future<RestaurantPrivateModel> getOwn() async {
+    final data = await _service.getOwn();
+    return RestaurantPrivateModel.fromJson(data);
+  }
+
+  /// Updates the authenticated owner's restaurant and returns the updated [RestaurantPrivateModel].
+  ///
+  /// Throws [AppException] on network error or validation failure.
+  Future<RestaurantPrivateModel> updateOwn(
+    UpdateRestaurantRequest request,
+  ) async {
+    final data = await _service.updateOwn(request);
+    return RestaurantPrivateModel.fromJson(data);
+  }
+
   /// Returns all restaurants without an owner as a list of [RestaurantModel].
   ///
   /// Used in the owner signup flow to let a new owner claim a restaurant.

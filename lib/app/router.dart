@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 
 import 'package:antigravity_client/constants/user_role.dart';
 import 'package:antigravity_client/cubits/auth/auth_bloc.dart';
+import 'package:antigravity_client/cubits/restaurants/owner_restaurant_cubit.dart';
 import 'package:antigravity_client/cubits/restaurants/unowned_restaurant_cubit.dart';
 import 'package:antigravity_client/cubits/restaurants/restaurant_detail_cubit.dart';
 import 'package:antigravity_client/screens/auth/login_screen.dart';
@@ -12,6 +13,7 @@ import 'package:antigravity_client/screens/splash_screen.dart';
 import 'package:antigravity_client/screens/auth/signup_screen.dart';
 import 'package:antigravity_client/screens/loading_screen.dart';
 import 'package:antigravity_client/screens/owner/owner_dashboard_screen.dart';
+import 'package:antigravity_client/screens/owner/restaurant_edit_screen.dart';
 import 'package:antigravity_client/screens/reservations/reservation_history_screen.dart';
 import 'package:antigravity_client/screens/restaurants/restaurant_detail_screen.dart';
 import 'package:antigravity_client/screens/restaurants/restaurant_list_screen.dart';
@@ -74,6 +76,15 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/owner',
       builder: (context, state) => const OwnerDashboardScreen(),
+    ),
+    GoRoute(
+      path: '/owner/restaurant',
+      builder: (context, state) => BlocProvider(
+        // OwnerRestaurantCubit is scoped here — fresh instance per visit so
+        // stale form data never bleeds back from a previous edit session.
+        create: (_) => _getIt<OwnerRestaurantCubit>(),
+        child: const RestaurantEditScreen(),
+      ),
     ),
   ],
 );

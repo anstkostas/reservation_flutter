@@ -7,6 +7,7 @@ import 'package:antigravity_client/app/app.dart';
 import 'package:antigravity_client/app/router.dart';
 import 'package:antigravity_client/cubits/auth/auth_bloc.dart';
 import 'package:antigravity_client/cubits/locale/locale_cubit.dart';
+import 'package:antigravity_client/cubits/restaurants/owner_restaurant_cubit.dart';
 import 'package:antigravity_client/cubits/restaurants/restaurant_detail_cubit.dart';
 import 'package:antigravity_client/cubits/restaurants/unowned_restaurant_cubit.dart';
 import 'package:antigravity_client/repositories/auth_repository.dart';
@@ -20,6 +21,13 @@ import 'mock_repositories.dart';
 ///
 /// Use instead of [pumpAndSettle] whenever a continuous animation
 /// (e.g. CircularProgressIndicator) would prevent pumpAndSettle from settling.
+///
+/// Conversely, [pumpAndSettle] is safe even when a path passes *through* a
+/// spinner, as long as the terminal state has no continuous animation and the
+/// awaited work resolves immediately — the transient spinner is left before
+/// settle. That is why the submit success/error flows can settle directly
+/// after tapping, while the initial load (which ends on a spinner until data
+/// arrives) must use [pumpUntilFound].
 Future<void> pumpUntilFound(
   WidgetTester tester,
   Finder finder, {
@@ -70,6 +78,9 @@ Future<void> pumpApp(
   );
   GetIt.instance.registerFactory<UnownedRestaurantCubit>(
     () => UnownedRestaurantCubit(GetIt.instance<RestaurantRepository>()),
+  );
+  GetIt.instance.registerFactory<OwnerRestaurantCubit>(
+    () => OwnerRestaurantCubit(GetIt.instance<RestaurantRepository>()),
   );
 
   final localeCubit = LocaleCubit();

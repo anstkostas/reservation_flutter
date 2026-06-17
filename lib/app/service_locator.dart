@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 
 import 'package:antigravity_client/cubits/auth/auth_bloc.dart';
+import 'package:antigravity_client/cubits/restaurants/owner_restaurant_cubit.dart';
 import 'package:antigravity_client/cubits/restaurants/unowned_restaurant_cubit.dart';
 import 'package:antigravity_client/cubits/restaurants/restaurant_detail_cubit.dart';
 import 'package:antigravity_client/repositories/repositories.dart';
@@ -68,5 +69,8 @@ Future<void> setupServiceLocator() async {
   );
   getIt.registerFactory<UnownedRestaurantCubit>(
     () => UnownedRestaurantCubit(getIt<RestaurantRepository>()),
+  );
+  getIt.registerFactory<OwnerRestaurantCubit>(
+    () => OwnerRestaurantCubit(getIt<RestaurantRepository>()),
   );
 }

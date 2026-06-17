@@ -3,6 +3,7 @@ import 'package:logger/logger.dart';
 
 import 'package:antigravity_client/constants/api_constants.dart';
 import 'package:antigravity_client/models/app_exception.dart';
+import 'package:antigravity_client/models/requests/update_restaurant_request.dart';
 import 'dio_client.dart';
 
 /// Handles raw HTTP calls for all restaurant endpoints.
@@ -39,6 +40,43 @@ class RestaurantService {
       return response.data['data'] as Map<String, dynamic>;
     } on DioException catch (e) {
       _logger.e('getById restaurant failed', error: e.error);
+      final error = e.error;
+      throw error is AppException
+          ? error
+          : const AppException(message: 'Unexpected error', statusCode: 0);
+    }
+  }
+
+  /// GET [ApiConstants.ownRestaurant] and return the raw private restaurant object.
+  ///
+  /// Throws [AppException] on any API or network error.
+  Future<Map<String, dynamic>> getOwn() async {
+    try {
+      final response = await _client.dio.get(ApiConstants.ownRestaurant);
+      return response.data['data'] as Map<String, dynamic>;
+    } on DioException catch (e) {
+      _logger.e('getOwn restaurant failed', error: e.error);
+      final error = e.error;
+      throw error is AppException
+          ? error
+          : const AppException(message: 'Unexpected error', statusCode: 0);
+    }
+  }
+
+  /// PUT [ApiConstants.ownRestaurant] with [request] and return the updated raw restaurant object.
+  ///
+  /// Throws [AppException] on any API or network error.
+  Future<Map<String, dynamic>> updateOwn(
+    UpdateRestaurantRequest request,
+  ) async {
+    try {
+      final response = await _client.dio.put(
+        ApiConstants.ownRestaurant,
+        data: request.toMap(),
+      );
+      return response.data['data'] as Map<String, dynamic>;
+    } on DioException catch (e) {
+      _logger.e('updateOwn restaurant failed', error: e.error);
       final error = e.error;
       throw error is AppException
           ? error

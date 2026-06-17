@@ -591,9 +591,63 @@
   "@errorReservationOwnerNoRestaurant": {
     "description": "Error shown when an owner with no restaurant tries to view reservations"
   },
+  "ownerEditRestaurantButton": "Edit Restaurant",
+  "@ownerEditRestaurantButton": {
+    "description": "Button on the owner dashboard that navigates to the restaurant edit page"
+  },
+
+  "restaurantEditTitle": "Edit Restaurant",
+  "@restaurantEditTitle": {
+    "description": "Page heading on the restaurant edit page"
+  },
+  "restaurantEditSubtitle": "Update your restaurant details.",
+  "@restaurantEditSubtitle": {
+    "description": "Subtitle on the restaurant edit page"
+  },
+  "restaurantEditNameLabel": "Name",
+  "@restaurantEditNameLabel": {
+    "description": "Label for the name input field on the restaurant edit form"
+  },
+  "restaurantEditDescriptionEnLabel": "Description (English)",
+  "@restaurantEditDescriptionEnLabel": {
+    "description": "Label for the English description textarea on the restaurant edit form"
+  },
+  "restaurantEditDescriptionElLabel": "Description (Greek)",
+  "@restaurantEditDescriptionElLabel": {
+    "description": "Label for the Greek description textarea on the restaurant edit form"
+  },
+  "restaurantEditAddressLabel": "Address",
+  "@restaurantEditAddressLabel": {
+    "description": "Label for the address input field on the restaurant edit form"
+  },
+  "restaurantEditPhoneLabel": "Phone",
+  "@restaurantEditPhoneLabel": {
+    "description": "Label for the phone input field on the restaurant edit form"
+  },
+  "restaurantEditCapacityLabel": "Capacity (tables)",
+  "@restaurantEditCapacityLabel": {
+    "description": "Label for the capacity input field on the restaurant edit form"
+  },
+  "restaurantEditSaveButton": "Save changes",
+  "@restaurantEditSaveButton": {
+    "description": "Submit button on the restaurant edit form"
+  },
+  "restaurantEditSuccessSnackbar": "Restaurant updated.",
+  "@restaurantEditSuccessSnackbar": {
+    "description": "Snackbar message shown after the restaurant is successfully updated"
+  },
+
   "errorRestaurantNotFound": "Restaurant not found.",
   "@errorRestaurantNotFound": {
     "description": "Error shown when the requested restaurant does not exist"
+  },
+  "errorRestaurantOwnerOnly": "Only restaurant owners can perform this action.",
+  "@errorRestaurantOwnerOnly": {
+    "description": "Error shown when a non-owner tries to access an owner-only restaurant endpoint"
+  },
+  "errorRestaurantNoneForOwner": "Your account has no restaurant assigned.",
+  "@errorRestaurantNoneForOwner": {
+    "description": "Error shown when an owner with no restaurant tries to access GET or PUT /restaurants/me"
   },
   "errorUserEmailExists": "An account with this email already exists.",
   "@errorUserEmailExists": {

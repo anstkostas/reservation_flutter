@@ -455,7 +455,48 @@ class AppLocalizationsEn extends AppLocalizations {
       'Your account has no restaurant assigned.';
 
   @override
+  String get ownerEditRestaurantButton => 'Edit Restaurant';
+
+  @override
+  String get restaurantEditTitle => 'Edit Restaurant';
+
+  @override
+  String get restaurantEditSubtitle => 'Update your restaurant details.';
+
+  @override
+  String get restaurantEditNameLabel => 'Name';
+
+  @override
+  String get restaurantEditDescriptionEnLabel => 'Description (English)';
+
+  @override
+  String get restaurantEditDescriptionElLabel => 'Description (Greek)';
+
+  @override
+  String get restaurantEditAddressLabel => 'Address';
+
+  @override
+  String get restaurantEditPhoneLabel => 'Phone';
+
+  @override
+  String get restaurantEditCapacityLabel => 'Capacity (tables)';
+
+  @override
+  String get restaurantEditSaveButton => 'Save changes';
+
+  @override
+  String get restaurantEditSuccessSnackbar => 'Restaurant updated.';
+
+  @override
   String get errorRestaurantNotFound => 'Restaurant not found.';
+
+  @override
+  String get errorRestaurantOwnerOnly =>
+      'Only restaurant owners can perform this action.';
+
+  @override
+  String get errorRestaurantNoneForOwner =>
+      'Your account has no restaurant assigned.';
 
   @override
   String get errorUserEmailExists =>

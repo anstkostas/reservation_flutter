@@ -10,6 +10,7 @@ abstract final class ApiConstants {
 
   // Restaurants
   static const String restaurants = '/restaurants';
+  static const String ownRestaurant = '/restaurants/me';
   static String restaurantById(String id) => '/restaurants/$id';
 
   // Reservations

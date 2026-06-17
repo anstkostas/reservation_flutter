@@ -914,11 +914,89 @@ abstract class AppLocalizations {
   /// **'Your account has no restaurant assigned.'**
   String get errorReservationOwnerNoRestaurant;
 
+  /// Button on the owner dashboard that navigates to the restaurant edit page
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Restaurant'**
+  String get ownerEditRestaurantButton;
+
+  /// Page heading on the restaurant edit page
+  ///
+  /// In en, this message translates to:
+  /// **'Edit Restaurant'**
+  String get restaurantEditTitle;
+
+  /// Subtitle on the restaurant edit page
+  ///
+  /// In en, this message translates to:
+  /// **'Update your restaurant details.'**
+  String get restaurantEditSubtitle;
+
+  /// Label for the name input field on the restaurant edit form
+  ///
+  /// In en, this message translates to:
+  /// **'Name'**
+  String get restaurantEditNameLabel;
+
+  /// Label for the English description textarea on the restaurant edit form
+  ///
+  /// In en, this message translates to:
+  /// **'Description (English)'**
+  String get restaurantEditDescriptionEnLabel;
+
+  /// Label for the Greek description textarea on the restaurant edit form
+  ///
+  /// In en, this message translates to:
+  /// **'Description (Greek)'**
+  String get restaurantEditDescriptionElLabel;
+
+  /// Label for the address input field on the restaurant edit form
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get restaurantEditAddressLabel;
+
+  /// Label for the phone input field on the restaurant edit form
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get restaurantEditPhoneLabel;
+
+  /// Label for the capacity input field on the restaurant edit form
+  ///
+  /// In en, this message translates to:
+  /// **'Capacity (tables)'**
+  String get restaurantEditCapacityLabel;
+
+  /// Submit button on the restaurant edit form
+  ///
+  /// In en, this message translates to:
+  /// **'Save changes'**
+  String get restaurantEditSaveButton;
+
+  /// Snackbar message shown after the restaurant is successfully updated
+  ///
+  /// In en, this message translates to:
+  /// **'Restaurant updated.'**
+  String get restaurantEditSuccessSnackbar;
+
   /// Error shown when the requested restaurant does not exist
   ///
   /// In en, this message translates to:
   /// **'Restaurant not found.'**
   String get errorRestaurantNotFound;
+
+  /// Error shown when a non-owner tries to access an owner-only restaurant endpoint
+  ///
+  /// In en, this message translates to:
+  /// **'Only restaurant owners can perform this action.'**
+  String get errorRestaurantOwnerOnly;
+
+  /// Error shown when an owner with no restaurant tries to access GET or PUT /restaurants/me
+  ///
+  /// In en, this message translates to:
+  /// **'Your account has no restaurant assigned.'**
+  String get errorRestaurantNoneForOwner;
 
   /// Error shown during signup when the email is already registered
   ///

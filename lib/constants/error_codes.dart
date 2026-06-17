@@ -32,6 +32,8 @@ abstract final class ErrorCodes {
 
   // Restaurant
   static const String restaurantNotFound = 'RESTAURANT_NOT_FOUND';
+  static const String restaurantOwnerOnly = 'RESTAURANT_OWNER_ONLY';
+  static const String restaurantNoneForOwner = 'RESTAURANT_NONE_FOR_OWNER';
 
   // User / signup
   static const String userEmailExists = 'USER_EMAIL_EXISTS';

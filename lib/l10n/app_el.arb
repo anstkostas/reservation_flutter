@@ -275,6 +275,10 @@
   "@ownerResolvedSnackbar": {
     "description": "Snackbar message shown after an owner marks a reservation as completed or no-show"
   },
+  "ownerEditRestaurantButton": "Επεξεργασία Εστιατορίου",
+  "@ownerEditRestaurantButton": {
+    "description": "Button on the owner dashboard that navigates to the restaurant edit page"
+  },
 
   "ownerTableColumnCustomer": "Πελάτης",
   "@ownerTableColumnCustomer": {
@@ -591,9 +595,58 @@
   "@errorReservationOwnerNoRestaurant": {
     "description": "Error shown when an owner with no restaurant tries to view reservations"
   },
+  "restaurantEditTitle": "Επεξεργασία Εστιατορίου",
+  "@restaurantEditTitle": {
+    "description": "Page heading on the restaurant edit page"
+  },
+  "restaurantEditSubtitle": "Ενημερώστε τα στοιχεία του εστιατορίου σας.",
+  "@restaurantEditSubtitle": {
+    "description": "Subtitle on the restaurant edit page"
+  },
+  "restaurantEditNameLabel": "Όνομα",
+  "@restaurantEditNameLabel": {
+    "description": "Label for the name input field on the restaurant edit form"
+  },
+  "restaurantEditDescriptionEnLabel": "Περιγραφή (Αγγλικά)",
+  "@restaurantEditDescriptionEnLabel": {
+    "description": "Label for the English description textarea on the restaurant edit form"
+  },
+  "restaurantEditDescriptionElLabel": "Περιγραφή (Ελληνικά)",
+  "@restaurantEditDescriptionElLabel": {
+    "description": "Label for the Greek description textarea on the restaurant edit form"
+  },
+  "restaurantEditAddressLabel": "Διεύθυνση",
+  "@restaurantEditAddressLabel": {
+    "description": "Label for the address input field on the restaurant edit form"
+  },
+  "restaurantEditPhoneLabel": "Τηλέφωνο",
+  "@restaurantEditPhoneLabel": {
+    "description": "Label for the phone input field on the restaurant edit form"
+  },
+  "restaurantEditCapacityLabel": "Χωρητικότητα (τραπέζια)",
+  "@restaurantEditCapacityLabel": {
+    "description": "Label for the capacity input field on the restaurant edit form"
+  },
+  "restaurantEditSaveButton": "Αποθήκευση αλλαγών",
+  "@restaurantEditSaveButton": {
+    "description": "Submit button on the restaurant edit form"
+  },
+  "restaurantEditSuccessSnackbar": "Το εστιατόριο ενημερώθηκε.",
+  "@restaurantEditSuccessSnackbar": {
+    "description": "Snackbar message shown after the restaurant is successfully updated"
+  },
+
   "errorRestaurantNotFound": "Το εστιατόριο δεν βρέθηκε.",
   "@errorRestaurantNotFound": {
     "description": "Error shown when the requested restaurant does not exist"
+  },
+  "errorRestaurantOwnerOnly": "Μόνο ιδιοκτήτες εστιατορίων μπορούν να εκτελέσουν αυτή την ενέργεια.",
+  "@errorRestaurantOwnerOnly": {
+    "description": "Error shown when a non-owner tries to access an owner-only restaurant endpoint"
+  },
+  "errorRestaurantNoneForOwner": "Ο λογαριασμός σας δεν έχει εκχωρηθεί εστιατόριο.",
+  "@errorRestaurantNoneForOwner": {
+    "description": "Error shown when an owner with no restaurant tries to access GET or PUT /restaurants/me"
   },
   "errorUserEmailExists": "Υπάρχει ήδη λογαριασμός με αυτό το email.",
   "@errorUserEmailExists": {

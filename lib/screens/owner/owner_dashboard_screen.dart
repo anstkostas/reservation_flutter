@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:antigravity_client/constants/breakpoints.dart';
 import 'package:antigravity_client/constants/reservation_status.dart';
@@ -204,23 +205,30 @@ class _OwnerDashboardScreenState extends State<OwnerDashboardScreen> {
   }
 
   Widget _buildTitleBlock() {
+    final l10n = AppLocalizations.of(context)!;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          AppLocalizations.of(context)!.ownerDashboardTitle,
+          l10n.ownerDashboardTitle,
           style: Theme.of(
             context,
           ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 4),
         Text(
-          AppLocalizations.of(context)!.ownerDashboardSubtitle,
+          l10n.ownerDashboardSubtitle,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
             color: Theme.of(
               context,
             ).colorScheme.onSurface.withValues(alpha: 0.6),
           ),
+        ),
+        const SizedBox(height: 8),
+        OutlinedButton.icon(
+          onPressed: () => context.push('/owner/restaurant'),
+          icon: const Icon(Icons.edit_outlined, size: 16),
+          label: Text(l10n.ownerEditRestaurantButton),
         ),
       ],
     );

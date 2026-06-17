@@ -40,6 +40,8 @@ String resolveErrorMessage(
     ErrorCodes.reservationOwnerNoRestaurant =>
       l10n.errorReservationOwnerNoRestaurant,
     ErrorCodes.restaurantNotFound => l10n.errorRestaurantNotFound,
+    ErrorCodes.restaurantOwnerOnly => l10n.errorRestaurantOwnerOnly,
+    ErrorCodes.restaurantNoneForOwner => l10n.errorRestaurantNoneForOwner,
     ErrorCodes.userEmailExists => l10n.errorUserEmailExists,
     ErrorCodes.userOwnerRestaurantRequired =>
       l10n.errorUserOwnerRestaurantRequired,

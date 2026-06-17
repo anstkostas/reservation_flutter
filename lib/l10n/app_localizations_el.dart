@@ -464,7 +464,49 @@ class AppLocalizationsEl extends AppLocalizations {
       'Ο λογαριασμός σας δεν έχει ανατεθεί εστιατόριο.';
 
   @override
+  String get ownerEditRestaurantButton => 'Επεξεργασία Εστιατορίου';
+
+  @override
+  String get restaurantEditTitle => 'Επεξεργασία Εστιατορίου';
+
+  @override
+  String get restaurantEditSubtitle =>
+      'Ενημερώστε τα στοιχεία του εστιατορίου σας.';
+
+  @override
+  String get restaurantEditNameLabel => 'Όνομα';
+
+  @override
+  String get restaurantEditDescriptionEnLabel => 'Περιγραφή (Αγγλικά)';
+
+  @override
+  String get restaurantEditDescriptionElLabel => 'Περιγραφή (Ελληνικά)';
+
+  @override
+  String get restaurantEditAddressLabel => 'Διεύθυνση';
+
+  @override
+  String get restaurantEditPhoneLabel => 'Τηλέφωνο';
+
+  @override
+  String get restaurantEditCapacityLabel => 'Χωρητικότητα (τραπέζια)';
+
+  @override
+  String get restaurantEditSaveButton => 'Αποθήκευση αλλαγών';
+
+  @override
+  String get restaurantEditSuccessSnackbar => 'Το εστιατόριο ενημερώθηκε.';
+
+  @override
   String get errorRestaurantNotFound => 'Το εστιατόριο δεν βρέθηκε.';
+
+  @override
+  String get errorRestaurantOwnerOnly =>
+      'Μόνο ιδιοκτήτες εστιατορίων μπορούν να εκτελέσουν αυτή την ενέργεια.';
+
+  @override
+  String get errorRestaurantNoneForOwner =>
+      'Ο λογαριασμός σας δεν έχει εκχωρηθεί εστιατόριο.';
 
   @override
   String get errorUserEmailExists =>
