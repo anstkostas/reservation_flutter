@@ -138,6 +138,12 @@ class AppLocalizationsEl extends AppLocalizations {
   String get restaurantDetailAbout => 'Σχετικά';
 
   @override
+  String get restaurantDetailAddress => 'Διεύθυνση';
+
+  @override
+  String get restaurantDetailPhone => 'Τηλέφωνο';
+
+  @override
   String restaurantDetailCapacityChip(int capacity) {
     return 'Χωρητικότητα: $capacity Τραπέζια';
   }

@@ -196,92 +196,94 @@ void main() {
       expect(find.byType(ErrorDisplay), findsOneWidget);
     });
 
-    testWidgets('invalid form: validation failure short-circuits, update not called', (
-      tester,
-    ) async {
-      // Why: verifies _submit()'s saveAndValidate() guard — an invalid field
-      // (capacity below min) blocks the submit, so OwnerRestaurantCubit.update()
-      // is never dispatched and updateOwn() is never called. The form stays on
-      // screen (no pop, no snackbar).
-      tester.view.physicalSize = const Size(1200, 800);
-      tester.view.devicePixelRatio = 1.0;
-      addTearDown(tester.view.resetPhysicalSize);
-      addTearDown(tester.view.resetDevicePixelRatio);
-      addTearDown(() => appRouter.go('/loading'));
+    testWidgets(
+      'invalid form: validation failure short-circuits, update not called',
+      (tester) async {
+        // Why: verifies _submit()'s saveAndValidate() guard — an invalid field
+        // (capacity below min) blocks the submit, so OwnerRestaurantCubit.update()
+        // is never dispatched and updateOwn() is never called. The form stays on
+        // screen (no pop, no snackbar).
+        tester.view.physicalSize = const Size(1200, 800);
+        tester.view.devicePixelRatio = 1.0;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+        addTearDown(() => appRouter.go('/loading'));
 
-      when(
-        () => mockRestaurants.getOwn(),
-      ).thenAnswer((_) async => fakeRestaurantPrivate);
+        when(
+          () => mockRestaurants.getOwn(),
+        ).thenAnswer((_) async => fakeRestaurantPrivate);
 
-      await pumpApp(
-        tester,
-        authRepo: mockAuth,
-        reservationRepo: mockReservations,
-        restaurantRepo: mockRestaurants,
-      );
+        await pumpApp(
+          tester,
+          authRepo: mockAuth,
+          reservationRepo: mockReservations,
+          restaurantRepo: mockRestaurants,
+        );
 
-      appRouter.push('/owner/restaurant');
-      await pumpUntilFound(tester, find.text('Save changes'));
+        appRouter.push('/owner/restaurant');
+        await pumpUntilFound(tester, find.text('Save changes'));
 
-      // Capacity is the 6th (index 5) FormBuilderTextField. '0' fails min(1) —
-      // a non-empty invalid value, so the validator runs regardless of how
-      // form_builder_validators treats empty input.
-      await tester.enterText(find.byType(FormBuilderTextField).at(5), '0');
-      await tester.tap(find.text('Save changes'));
-      await tester.pumpAndSettle();
+        // Capacity is the 6th (index 5) FormBuilderTextField. '0' fails min(1) —
+        // a non-empty invalid value, so the validator runs regardless of how
+        // form_builder_validators treats empty input.
+        await tester.enterText(find.byType(FormBuilderTextField).at(5), '0');
+        await tester.tap(find.text('Save changes'));
+        await tester.pumpAndSettle();
 
-      verifyNever(() => mockRestaurants.updateOwn(any()));
-      // Still on the edit form — no pop, no success snackbar.
-      expect(find.text('Save changes'), findsOneWidget);
-      expect(find.byType(SnackBar), findsNothing);
-    });
+        verifyNever(() => mockRestaurants.updateOwn(any()));
+        // Still on the edit form — no pop, no success snackbar.
+        expect(find.text('Save changes'), findsOneWidget);
+        expect(find.byType(SnackBar), findsNothing);
+      },
+    );
 
-    testWidgets('fetch failure on mount: shows ErrorDisplay, retry reloads the form', (
-      tester,
-    ) async {
-      // Why: verifies the load-failure path — getOwn() throws on mount, fetch()
-      // catches it and emits OwnerRestaurantFailure, the builder renders
-      // ErrorDisplay with a retry button. Tapping retry re-runs fetch(); with
-      // getOwn() now succeeding, the form renders. Covers the fetch() catch
-      // branch and the ErrorDisplay onRetry callback.
-      tester.view.physicalSize = const Size(1200, 800);
-      tester.view.devicePixelRatio = 1.0;
-      addTearDown(tester.view.resetPhysicalSize);
-      addTearDown(tester.view.resetDevicePixelRatio);
-      addTearDown(() => appRouter.go('/loading'));
+    testWidgets(
+      'fetch failure on mount: shows ErrorDisplay, retry reloads the form',
+      (tester) async {
+        // Why: verifies the load-failure path — getOwn() throws on mount, fetch()
+        // catches it and emits OwnerRestaurantFailure, the builder renders
+        // ErrorDisplay with a retry button. Tapping retry re-runs fetch(); with
+        // getOwn() now succeeding, the form renders. Covers the fetch() catch
+        // branch and the ErrorDisplay onRetry callback.
+        tester.view.physicalSize = const Size(1200, 800);
+        tester.view.devicePixelRatio = 1.0;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
+        addTearDown(() => appRouter.go('/loading'));
 
-      // First fetch (on mount) fails.
-      when(() => mockRestaurants.getOwn()).thenAnswer(
-        (_) async => throw const AppException(
-          message: 'You do not own any restaurant.',
-          statusCode: 403,
-          code: 'RESTAURANT_OWNER_ONLY',
-        ),
-      );
+        // First fetch (on mount) fails.
+        when(() => mockRestaurants.getOwn()).thenAnswer(
+          (_) async => throw const AppException(
+            message: 'You do not own any restaurant.',
+            statusCode: 403,
+            code: 'RESTAURANT_OWNER_ONLY',
+          ),
+        );
 
-      await pumpApp(
-        tester,
-        authRepo: mockAuth,
-        reservationRepo: mockReservations,
-        restaurantRepo: mockRestaurants,
-      );
+        await pumpApp(
+          tester,
+          authRepo: mockAuth,
+          reservationRepo: mockReservations,
+          restaurantRepo: mockRestaurants,
+        );
 
-      appRouter.push('/owner/restaurant');
-      await pumpUntilFound(tester, find.byType(ErrorDisplay));
+        appRouter.push('/owner/restaurant');
+        await pumpUntilFound(tester, find.byType(ErrorDisplay));
 
-      expect(find.byType(ErrorDisplay), findsOneWidget);
+        expect(find.byType(ErrorDisplay), findsOneWidget);
 
-      // Retry now succeeds — re-stub before tapping. The latest stub wins;
-      // recorded invocation counts accumulate across both stubs.
-      when(
-        () => mockRestaurants.getOwn(),
-      ).thenAnswer((_) async => fakeRestaurantPrivate);
+        // Retry now succeeds — re-stub before tapping. The latest stub wins;
+        // recorded invocation counts accumulate across both stubs.
+        when(
+          () => mockRestaurants.getOwn(),
+        ).thenAnswer((_) async => fakeRestaurantPrivate);
 
-      await tester.tap(find.text('Retry'));
-      await pumpUntilFound(tester, find.text('Save changes'));
+        await tester.tap(find.text('Retry'));
+        await pumpUntilFound(tester, find.text('Save changes'));
 
-      expect(find.text('Save changes'), findsOneWidget);
-      verify(() => mockRestaurants.getOwn()).called(2);
-    });
+        expect(find.text('Save changes'), findsOneWidget);
+        verify(() => mockRestaurants.getOwn()).called(2);
+      },
+    );
   });
 }

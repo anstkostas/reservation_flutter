@@ -136,6 +136,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get restaurantDetailAbout => 'About';
 
   @override
+  String get restaurantDetailAddress => 'Address';
+
+  @override
+  String get restaurantDetailPhone => 'Phone';
+
+  @override
   String restaurantDetailCapacityChip(int capacity) {
     return 'Capacity: $capacity Tables';
   }

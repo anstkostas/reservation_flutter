@@ -344,6 +344,18 @@ abstract class AppLocalizations {
   /// **'About'**
   String get restaurantDetailAbout;
 
+  /// Accessible label for the address icon on the restaurant detail page
+  ///
+  /// In en, this message translates to:
+  /// **'Address'**
+  String get restaurantDetailAddress;
+
+  /// Accessible label for the phone icon on the restaurant detail page
+  ///
+  /// In en, this message translates to:
+  /// **'Phone'**
+  String get restaurantDetailPhone;
+
   /// Capacity chip on the restaurant detail page — capacity is the number of simultaneous table slots
   ///
   /// In en, this message translates to:

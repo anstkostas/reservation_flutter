@@ -42,6 +42,8 @@ void main() {
       id: 'rest-id-1',
       name: 'Test Restaurant',
       description: 'A test restaurant',
+      address: '1 Test Street',
+      phone: '555-0001',
       capacity: 5,
       logoUrl: 'https://example.com/logo.png',
       coverImageUrl: 'https://example.com/cover.png',

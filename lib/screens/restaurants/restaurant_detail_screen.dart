@@ -241,6 +241,52 @@ class _RestaurantDetailScreenState extends State<RestaurantDetailScreen> {
               ),
             ),
             const SizedBox(height: 16),
+            Row(
+              children: [
+                Icon(
+                  Icons.location_on,
+                  size: 16,
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withValues(alpha: 0.6),
+                  semanticLabel: AppLocalizations.of(
+                    context,
+                  )!.restaurantDetailAddress,
+                ),
+                const SizedBox(width: 6),
+                Expanded(
+                  child: Text(
+                    restaurant.address,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.onSurface.withValues(alpha: 0.6),
+                    ),
+                  ),
+                ),
+                const SizedBox(width: 16),
+                Icon(
+                  Icons.phone,
+                  size: 16,
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withValues(alpha: 0.6),
+                  semanticLabel: AppLocalizations.of(
+                    context,
+                  )!.restaurantDetailPhone,
+                ),
+                const SizedBox(width: 6),
+                Text(
+                  restaurant.phone,
+                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withValues(alpha: 0.6),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(height: 12),
             Chip(
               avatar: const Icon(Icons.table_restaurant, size: 16),
               label: Text(

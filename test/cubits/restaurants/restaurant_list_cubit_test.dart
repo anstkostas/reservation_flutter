@@ -97,6 +97,8 @@ RestaurantModel _buildRestaurant() => const RestaurantModel(
   id: 'rest1',
   name: 'Test Bistro',
   description: 'A cozy spot.',
+  address: '1 Test Lane',
+  phone: '555-0001',
   capacity: 20,
   logoUrl: 'https://example.com/logo.png',
   coverImageUrl: 'https://example.com/cover.png',

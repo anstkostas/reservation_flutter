@@ -6,9 +6,8 @@ part 'restaurant_model.g.dart';
 
 /// Represents a restaurant returned by the API.
 ///
-/// Maps to the backend `restaurantOutputDTO` shape. Note: `address` and
-/// `phone` are intentionally omitted — the backend DTO does not expose
-/// them on restaurant list/detail endpoints.
+/// Maps to the backend `restaurantOutputDTO` shape. Includes [address] and
+/// [phone] as public business contact info — displayed on the detail screen.
 ///
 /// [ownerId] is nullable because unowned restaurants exist in the system —
 /// they appear in the owner signup flow so a new owner can claim one.
@@ -18,6 +17,8 @@ abstract class RestaurantModel with _$RestaurantModel {
     required String id,
     required String name,
     required String description,
+    required String address,
+    required String phone,
     required int capacity,
     required String logoUrl,
     required String coverImageUrl,
