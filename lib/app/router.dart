@@ -76,15 +76,17 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/owner',
       builder: (context, state) => const OwnerDashboardScreen(),
-    ),
-    GoRoute(
-      path: '/owner/restaurant',
-      builder: (context, state) => BlocProvider(
-        // OwnerRestaurantCubit is scoped here — fresh instance per visit so
-        // stale form data never bleeds back from a previous edit session.
-        create: (_) => _getIt<OwnerRestaurantCubit>(),
-        child: const RestaurantEditScreen(),
-      ),
+      routes: [
+        GoRoute(
+          path: 'restaurant',
+          builder: (context, state) => BlocProvider(
+            // OwnerRestaurantCubit is scoped here — fresh instance per visit so
+            // stale form data never bleeds back from a previous edit session.
+            create: (_) => _getIt<OwnerRestaurantCubit>(),
+            child: const RestaurantEditScreen(),
+          ),
+        ),
+      ],
     ),
   ],
 );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:go_router/go_router.dart';
 
 import 'package:antigravity_client/cubits/restaurants/owner_restaurant_cubit.dart';
 import 'package:antigravity_client/l10n/app_localizations.dart';
@@ -64,7 +65,7 @@ class _RestaurantEditScreenState extends State<RestaurantEditScreen> {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(l10n.restaurantEditSuccessSnackbar)),
           );
-          Navigator.of(context).pop();
+          context.pop();
         },
         buildWhen: (_, current) => current is! OwnerRestaurantUpdateSuccess,
         builder: (context, state) {

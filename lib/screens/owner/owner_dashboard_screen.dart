@@ -226,7 +226,7 @@ class _OwnerDashboardScreenState extends State<OwnerDashboardScreen> {
         ),
         const SizedBox(height: 8),
         OutlinedButton.icon(
-          onPressed: () => context.push('/owner/restaurant'),
+          onPressed: () => context.go('/owner/restaurant'),
           icon: const Icon(Icons.edit_outlined, size: 16),
           label: Text(l10n.ownerEditRestaurantButton),
         ),
