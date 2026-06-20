@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -130,7 +131,22 @@ class _RestaurantEditScreenState extends State<RestaurantEditScreen> {
                     labelText: l10n.restaurantEditNameLabel,
                   ),
                   validator: FormBuilderValidators.compose([
-                    FormBuilderValidators.minLength(1),
+                    (value) => (value == null || value.trim().isEmpty)
+                        ? l10n.validatorRestaurantNameRequired
+                        : null,
+                    FormBuilderValidators.minLength(4,
+                        errorText: l10n.validatorRestaurantNameTooShort),
+                    FormBuilderValidators.maxLength(100,
+                        errorText: l10n.validatorRestaurantNameTooLong),
+                    (value) => (value != null &&
+                            !RegExp(r'\p{L}', unicode: true).hasMatch(value))
+                        ? l10n.validatorRestaurantNameNoLetter
+                        : null,
+                    (value) => (value != null &&
+                            RegExp(r'[^\p{L}\p{N}\s]{2,}', unicode: true)
+                                .hasMatch(value))
+                        ? l10n.validatorRestaurantNameConsecutiveSpecial
+                        : null,
                   ]),
                 ),
                 const SizedBox(height: 16),
@@ -141,6 +157,17 @@ class _RestaurantEditScreenState extends State<RestaurantEditScreen> {
                     labelText: l10n.restaurantEditDescriptionEnLabel,
                   ),
                   maxLines: 4,
+                  validator: FormBuilderValidators.compose([
+                    (value) => (value == null || value.trim().isEmpty)
+                        ? l10n.validatorRestaurantDescriptionEnRequired
+                        : null,
+                    FormBuilderValidators.maxLength(500),
+                    (value) => (value != null &&
+                            RegExp(r'[Ͱ-Ͽἀ-῿]')
+                                .hasMatch(value))
+                        ? l10n.validatorRestaurantDescriptionEnLatinOnly
+                        : null,
+                  ]),
                 ),
                 const SizedBox(height: 16),
                 FormBuilderTextField(
@@ -150,6 +177,13 @@ class _RestaurantEditScreenState extends State<RestaurantEditScreen> {
                     labelText: l10n.restaurantEditDescriptionElLabel,
                   ),
                   maxLines: 4,
+                  validator: (value) {
+                    if (value == null || value.trim().isEmpty) return null;
+                    if (RegExp(r'[a-zA-Z]').hasMatch(value)) {
+                      return l10n.validatorRestaurantDescriptionElGreekOnly;
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 16),
                 FormBuilderTextField(
@@ -158,6 +192,16 @@ class _RestaurantEditScreenState extends State<RestaurantEditScreen> {
                   decoration: InputDecoration(
                     labelText: l10n.restaurantEditAddressLabel,
                   ),
+                  validator: FormBuilderValidators.compose([
+                    (value) => (value == null || value.trim().isEmpty)
+                        ? l10n.validatorRestaurantAddressRequired
+                        : null,
+                    (value) => (value != null &&
+                            value.isNotEmpty &&
+                            !RegExp(r'\p{L}', unicode: true).hasMatch(value))
+                        ? l10n.validatorRestaurantAddressNoLetter
+                        : null,
+                  ]),
                 ),
                 const SizedBox(height: 16),
                 FormBuilderTextField(
@@ -166,7 +210,17 @@ class _RestaurantEditScreenState extends State<RestaurantEditScreen> {
                   decoration: InputDecoration(
                     labelText: l10n.restaurantEditPhoneLabel,
                   ),
-                  keyboardType: TextInputType.phone,
+                  keyboardType: TextInputType.text,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  validator: FormBuilderValidators.compose([
+                    (value) => (value == null || value.isEmpty)
+                        ? l10n.validatorRestaurantPhoneRequired
+                        : null,
+                    FormBuilderValidators.minLength(7,
+                        errorText: l10n.validatorRestaurantPhoneTooShort),
+                    FormBuilderValidators.maxLength(15,
+                        errorText: l10n.validatorRestaurantPhoneTooLong),
+                  ]),
                 ),
                 const SizedBox(height: 16),
                 FormBuilderTextField(

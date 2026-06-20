@@ -998,6 +998,90 @@ abstract class AppLocalizations {
   /// **'Restaurant updated.'**
   String get restaurantEditSuccessSnackbar;
 
+  /// Validation error shown when the restaurant name field is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Name is required'**
+  String get validatorRestaurantNameRequired;
+
+  /// Validation error shown when the restaurant name is shorter than 4 characters
+  ///
+  /// In en, this message translates to:
+  /// **'Name must be at least 4 characters'**
+  String get validatorRestaurantNameTooShort;
+
+  /// Validation error shown when the restaurant name exceeds 100 characters
+  ///
+  /// In en, this message translates to:
+  /// **'Name must be at most 100 characters'**
+  String get validatorRestaurantNameTooLong;
+
+  /// Validation error shown when the restaurant name contains no letters (e.g. only numbers or symbols)
+  ///
+  /// In en, this message translates to:
+  /// **'Name must contain at least one letter'**
+  String get validatorRestaurantNameNoLetter;
+
+  /// Validation error shown when the restaurant name has two or more special characters in a row
+  ///
+  /// In en, this message translates to:
+  /// **'Name cannot contain consecutive special characters'**
+  String get validatorRestaurantNameConsecutiveSpecial;
+
+  /// Validation error shown when the English description field is empty
+  ///
+  /// In en, this message translates to:
+  /// **'An English description is required'**
+  String get validatorRestaurantDescriptionEnRequired;
+
+  /// Validation error shown when the English description field contains Greek script characters
+  ///
+  /// In en, this message translates to:
+  /// **'English description cannot contain Greek characters'**
+  String get validatorRestaurantDescriptionEnLatinOnly;
+
+  /// Validation error shown when the Greek description field contains Latin script characters
+  ///
+  /// In en, this message translates to:
+  /// **'Greek description cannot contain Latin characters'**
+  String get validatorRestaurantDescriptionElGreekOnly;
+
+  /// Validation error shown when the address field is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Address is required'**
+  String get validatorRestaurantAddressRequired;
+
+  /// Validation error shown when the address is purely numeric (e.g. '100' instead of 'Κορίνθου 100')
+  ///
+  /// In en, this message translates to:
+  /// **'Address must contain at least one letter'**
+  String get validatorRestaurantAddressNoLetter;
+
+  /// Validation error shown when the phone field is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Phone is required'**
+  String get validatorRestaurantPhoneRequired;
+
+  /// Validation error shown when the phone field contains non-digit characters
+  ///
+  /// In en, this message translates to:
+  /// **'Phone must contain digits only'**
+  String get validatorRestaurantPhoneDigitsOnly;
+
+  /// Validation error shown when the phone number is shorter than 7 digits
+  ///
+  /// In en, this message translates to:
+  /// **'Phone must be at least 7 digits'**
+  String get validatorRestaurantPhoneTooShort;
+
+  /// Validation error shown when the phone number exceeds 15 digits
+  ///
+  /// In en, this message translates to:
+  /// **'Phone must be at most 15 digits'**
+  String get validatorRestaurantPhoneTooLong;
+
   /// Error shown when the requested restaurant does not exist
   ///
   /// In en, this message translates to:

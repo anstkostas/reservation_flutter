@@ -649,6 +649,63 @@
     "description": "Snackbar message shown after the restaurant is successfully updated"
   },
 
+  "validatorRestaurantNameRequired": "Name is required",
+  "@validatorRestaurantNameRequired": {
+    "description": "Validation error shown when the restaurant name field is empty"
+  },
+  "validatorRestaurantNameTooShort": "Name must be at least 4 characters",
+  "@validatorRestaurantNameTooShort": {
+    "description": "Validation error shown when the restaurant name is shorter than 4 characters"
+  },
+  "validatorRestaurantNameTooLong": "Name must be at most 100 characters",
+  "@validatorRestaurantNameTooLong": {
+    "description": "Validation error shown when the restaurant name exceeds 100 characters"
+  },
+  "validatorRestaurantNameNoLetter": "Name must contain at least one letter",
+  "@validatorRestaurantNameNoLetter": {
+    "description": "Validation error shown when the restaurant name contains no letters (e.g. only numbers or symbols)"
+  },
+  "validatorRestaurantNameConsecutiveSpecial": "Name cannot contain consecutive special characters",
+  "@validatorRestaurantNameConsecutiveSpecial": {
+    "description": "Validation error shown when the restaurant name has two or more special characters in a row"
+  },
+  "validatorRestaurantDescriptionEnRequired": "An English description is required",
+  "@validatorRestaurantDescriptionEnRequired": {
+    "description": "Validation error shown when the English description field is empty"
+  },
+  "validatorRestaurantDescriptionEnLatinOnly": "English description cannot contain Greek characters",
+  "@validatorRestaurantDescriptionEnLatinOnly": {
+    "description": "Validation error shown when the English description field contains Greek script characters"
+  },
+  "validatorRestaurantDescriptionElGreekOnly": "Greek description cannot contain Latin characters",
+  "@validatorRestaurantDescriptionElGreekOnly": {
+    "description": "Validation error shown when the Greek description field contains Latin script characters"
+  },
+  "validatorRestaurantAddressRequired": "Address is required",
+  "@validatorRestaurantAddressRequired": {
+    "description": "Validation error shown when the address field is empty"
+  },
+  "validatorRestaurantAddressNoLetter": "Address must contain at least one letter",
+  "@validatorRestaurantAddressNoLetter": {
+    "description": "Validation error shown when the address is purely numeric (e.g. '100' instead of 'Κορίνθου 100')"
+  },
+  "validatorRestaurantPhoneRequired": "Phone is required",
+  "@validatorRestaurantPhoneRequired": {
+    "description": "Validation error shown when the phone field is empty"
+  },
+  "validatorRestaurantPhoneDigitsOnly": "Phone must contain digits only",
+  "@validatorRestaurantPhoneDigitsOnly": {
+    "description": "Validation error shown when the phone field contains non-digit characters"
+  },
+  "validatorRestaurantPhoneTooShort": "Phone must be at least 7 digits",
+  "@validatorRestaurantPhoneTooShort": {
+    "description": "Validation error shown when the phone number is shorter than 7 digits"
+  },
+  "validatorRestaurantPhoneTooLong": "Phone must be at most 15 digits",
+  "@validatorRestaurantPhoneTooLong": {
+    "description": "Validation error shown when the phone number exceeds 15 digits"
+  },
+
   "errorRestaurantNotFound": "Restaurant not found.",
   "@errorRestaurantNotFound": {
     "description": "Error shown when the requested restaurant does not exist"

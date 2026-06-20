@@ -497,6 +497,59 @@ class AppLocalizationsEn extends AppLocalizations {
   String get restaurantEditSuccessSnackbar => 'Restaurant updated.';
 
   @override
+  String get validatorRestaurantNameRequired => 'Name is required';
+
+  @override
+  String get validatorRestaurantNameTooShort =>
+      'Name must be at least 4 characters';
+
+  @override
+  String get validatorRestaurantNameTooLong =>
+      'Name must be at most 100 characters';
+
+  @override
+  String get validatorRestaurantNameNoLetter =>
+      'Name must contain at least one letter';
+
+  @override
+  String get validatorRestaurantNameConsecutiveSpecial =>
+      'Name cannot contain consecutive special characters';
+
+  @override
+  String get validatorRestaurantDescriptionEnRequired =>
+      'An English description is required';
+
+  @override
+  String get validatorRestaurantDescriptionEnLatinOnly =>
+      'English description cannot contain Greek characters';
+
+  @override
+  String get validatorRestaurantDescriptionElGreekOnly =>
+      'Greek description cannot contain Latin characters';
+
+  @override
+  String get validatorRestaurantAddressRequired => 'Address is required';
+
+  @override
+  String get validatorRestaurantAddressNoLetter =>
+      'Address must contain at least one letter';
+
+  @override
+  String get validatorRestaurantPhoneRequired => 'Phone is required';
+
+  @override
+  String get validatorRestaurantPhoneDigitsOnly =>
+      'Phone must contain digits only';
+
+  @override
+  String get validatorRestaurantPhoneTooShort =>
+      'Phone must be at least 7 digits';
+
+  @override
+  String get validatorRestaurantPhoneTooLong =>
+      'Phone must be at most 15 digits';
+
+  @override
   String get errorRestaurantNotFound => 'Restaurant not found.';
 
   @override

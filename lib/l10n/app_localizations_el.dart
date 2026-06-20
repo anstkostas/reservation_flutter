@@ -507,6 +507,61 @@ class AppLocalizationsEl extends AppLocalizations {
   String get restaurantEditSuccessSnackbar => 'Το εστιατόριο ενημερώθηκε.';
 
   @override
+  String get validatorRestaurantNameRequired => 'Το όνομα είναι υποχρεωτικό';
+
+  @override
+  String get validatorRestaurantNameTooShort =>
+      'Το όνομα πρέπει να έχει τουλάχιστον 4 χαρακτήρες';
+
+  @override
+  String get validatorRestaurantNameTooLong =>
+      'Το όνομα πρέπει να έχει το πολύ 100 χαρακτήρες';
+
+  @override
+  String get validatorRestaurantNameNoLetter =>
+      'Το όνομα πρέπει να περιέχει τουλάχιστον ένα γράμμα';
+
+  @override
+  String get validatorRestaurantNameConsecutiveSpecial =>
+      'Το όνομα δεν μπορεί να περιέχει διαδοχικούς ειδικούς χαρακτήρες';
+
+  @override
+  String get validatorRestaurantDescriptionEnRequired =>
+      'Απαιτείται αγγλική περιγραφή';
+
+  @override
+  String get validatorRestaurantDescriptionEnLatinOnly =>
+      'Η αγγλική περιγραφή δεν μπορεί να περιέχει ελληνικούς χαρακτήρες';
+
+  @override
+  String get validatorRestaurantDescriptionElGreekOnly =>
+      'Η ελληνική περιγραφή δεν μπορεί να περιέχει λατινικούς χαρακτήρες';
+
+  @override
+  String get validatorRestaurantAddressRequired =>
+      'Η διεύθυνση είναι υποχρεωτική';
+
+  @override
+  String get validatorRestaurantAddressNoLetter =>
+      'Η διεύθυνση πρέπει να περιέχει τουλάχιστον ένα γράμμα';
+
+  @override
+  String get validatorRestaurantPhoneRequired =>
+      'Το τηλέφωνο είναι υποχρεωτικό';
+
+  @override
+  String get validatorRestaurantPhoneDigitsOnly =>
+      'Το τηλέφωνο πρέπει να περιέχει μόνο ψηφία';
+
+  @override
+  String get validatorRestaurantPhoneTooShort =>
+      'Το τηλέφωνο πρέπει να έχει τουλάχιστον 7 ψηφία';
+
+  @override
+  String get validatorRestaurantPhoneTooLong =>
+      'Το τηλέφωνο πρέπει να έχει το πολύ 15 ψηφία';
+
+  @override
   String get errorRestaurantNotFound => 'Το εστιατόριο δεν βρέθηκε.';
 
   @override

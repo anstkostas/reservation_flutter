@@ -648,6 +648,63 @@
     "description": "Snackbar message shown after the restaurant is successfully updated"
   },
 
+  "validatorRestaurantNameRequired": "Το όνομα είναι υποχρεωτικό",
+  "@validatorRestaurantNameRequired": {
+    "description": "Validation error shown when the restaurant name field is empty"
+  },
+  "validatorRestaurantNameTooShort": "Το όνομα πρέπει να έχει τουλάχιστον 4 χαρακτήρες",
+  "@validatorRestaurantNameTooShort": {
+    "description": "Validation error shown when the restaurant name is shorter than 4 characters"
+  },
+  "validatorRestaurantNameTooLong": "Το όνομα πρέπει να έχει το πολύ 100 χαρακτήρες",
+  "@validatorRestaurantNameTooLong": {
+    "description": "Validation error shown when the restaurant name exceeds 100 characters"
+  },
+  "validatorRestaurantNameNoLetter": "Το όνομα πρέπει να περιέχει τουλάχιστον ένα γράμμα",
+  "@validatorRestaurantNameNoLetter": {
+    "description": "Validation error shown when the restaurant name contains no letters (e.g. only numbers or symbols)"
+  },
+  "validatorRestaurantNameConsecutiveSpecial": "Το όνομα δεν μπορεί να περιέχει διαδοχικούς ειδικούς χαρακτήρες",
+  "@validatorRestaurantNameConsecutiveSpecial": {
+    "description": "Validation error shown when the restaurant name has two or more special characters in a row"
+  },
+  "validatorRestaurantDescriptionEnRequired": "Απαιτείται αγγλική περιγραφή",
+  "@validatorRestaurantDescriptionEnRequired": {
+    "description": "Validation error shown when the English description field is empty"
+  },
+  "validatorRestaurantDescriptionEnLatinOnly": "Η αγγλική περιγραφή δεν μπορεί να περιέχει ελληνικούς χαρακτήρες",
+  "@validatorRestaurantDescriptionEnLatinOnly": {
+    "description": "Validation error shown when the English description field contains Greek script characters"
+  },
+  "validatorRestaurantDescriptionElGreekOnly": "Η ελληνική περιγραφή δεν μπορεί να περιέχει λατινικούς χαρακτήρες",
+  "@validatorRestaurantDescriptionElGreekOnly": {
+    "description": "Validation error shown when the Greek description field contains Latin script characters"
+  },
+  "validatorRestaurantAddressRequired": "Η διεύθυνση είναι υποχρεωτική",
+  "@validatorRestaurantAddressRequired": {
+    "description": "Validation error shown when the address field is empty"
+  },
+  "validatorRestaurantAddressNoLetter": "Η διεύθυνση πρέπει να περιέχει τουλάχιστον ένα γράμμα",
+  "@validatorRestaurantAddressNoLetter": {
+    "description": "Validation error shown when the address is purely numeric (e.g. '100' instead of 'Κορίνθου 100')"
+  },
+  "validatorRestaurantPhoneRequired": "Το τηλέφωνο είναι υποχρεωτικό",
+  "@validatorRestaurantPhoneRequired": {
+    "description": "Validation error shown when the phone field is empty"
+  },
+  "validatorRestaurantPhoneDigitsOnly": "Το τηλέφωνο πρέπει να περιέχει μόνο ψηφία",
+  "@validatorRestaurantPhoneDigitsOnly": {
+    "description": "Validation error shown when the phone field contains non-digit characters"
+  },
+  "validatorRestaurantPhoneTooShort": "Το τηλέφωνο πρέπει να έχει τουλάχιστον 7 ψηφία",
+  "@validatorRestaurantPhoneTooShort": {
+    "description": "Validation error shown when the phone number is shorter than 7 digits"
+  },
+  "validatorRestaurantPhoneTooLong": "Το τηλέφωνο πρέπει να έχει το πολύ 15 ψηφία",
+  "@validatorRestaurantPhoneTooLong": {
+    "description": "Validation error shown when the phone number exceeds 15 digits"
+  },
+
   "errorRestaurantNotFound": "Το εστιατόριο δεν βρέθηκε.",
   "@errorRestaurantNotFound": {
     "description": "Error shown when the requested restaurant does not exist"
