@@ -26,6 +26,18 @@ class RestaurantEditScreen extends StatefulWidget {
 
 class _RestaurantEditScreenState extends State<RestaurantEditScreen> {
   final _formKey = GlobalKey<FormBuilderState>();
+  bool _isSubmitting = false;
+
+  // Maps backend field names (from ValidationError.details[].field) to form field names.
+  // The backend validate middleware uses path[0], so nested description.en/.el both
+  // land as "description" — mapped to the EN field as best effort.
+  static const _backendToFormField = {
+    'name': 'name',
+    'description': 'descriptionEn',
+    'address': 'address',
+    'phone': 'phone',
+    'capacity': 'capacity',
+  };
 
   @override
   void initState() {
@@ -35,6 +47,8 @@ class _RestaurantEditScreenState extends State<RestaurantEditScreen> {
 
   void _submit() {
     if (!(_formKey.currentState?.saveAndValidate() ?? false)) return;
+    setState(() => _isSubmitting = true);
+
     final values = _formKey.currentState!.value;
 
     final capacityRaw = values['capacity'] as String?;
@@ -61,14 +75,47 @@ class _RestaurantEditScreenState extends State<RestaurantEditScreen> {
     return Scaffold(
       appBar: AppNavbar(),
       body: BlocConsumer<OwnerRestaurantCubit, OwnerRestaurantState>(
-        listenWhen: (_, current) => current is OwnerRestaurantUpdateSuccess,
-        listener: (context, _) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(l10n.restaurantEditSuccessSnackbar)),
-          );
-          context.pop();
+        listenWhen: (_, current) =>
+            current is OwnerRestaurantUpdateSuccess ||
+            current is OwnerRestaurantUpdateFailure,
+        listener: (context, state) {
+          if (state is OwnerRestaurantUpdateSuccess) {
+            setState(() => _isSubmitting = false);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(content: Text(l10n.restaurantEditSuccessSnackbar)),
+            );
+            context.pop();
+          } else if (state is OwnerRestaurantUpdateFailure) {
+            setState(() => _isSubmitting = false);
+            final details = state.details;
+            if (details != null && details.isNotEmpty) {
+              bool hasUnmapped = false;
+              for (final detail in details) {
+                final backendField = detail['field'] as String?;
+                final message = detail['message'] as String?;
+                if (backendField == null || message == null) continue;
+                final formField = _backendToFormField[backendField];
+                if (formField != null) {
+                  _formKey.currentState?.fields[formField]?.invalidate(message);
+                } else {
+                  hasUnmapped = true;
+                }
+              }
+              if (hasUnmapped) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text(state.message)),
+                );
+              }
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(state.message)),
+              );
+            }
+          }
         },
-        buildWhen: (_, current) => current is! OwnerRestaurantUpdateSuccess,
+        buildWhen: (_, current) =>
+            current is! OwnerRestaurantUpdateSuccess &&
+            current is! OwnerRestaurantUpdateFailure,
         builder: (context, state) {
           return switch (state) {
             OwnerRestaurantInitial() ||
@@ -167,6 +214,12 @@ class _RestaurantEditScreenState extends State<RestaurantEditScreen> {
                                 .hasMatch(value))
                         ? l10n.validatorRestaurantDescriptionEnLatinOnly
                         : null,
+                    (value) => (value != null &&
+                            value.trim().isNotEmpty &&
+                            !RegExp(r'\p{Script=Latin}', unicode: true)
+                                .hasMatch(value))
+                        ? l10n.validatorRestaurantDescriptionEnNoLetter
+                        : null,
                   ]),
                 ),
                 const SizedBox(height: 16),
@@ -181,6 +234,10 @@ class _RestaurantEditScreenState extends State<RestaurantEditScreen> {
                     if (value == null || value.trim().isEmpty) return null;
                     if (RegExp(r'[a-zA-Z]').hasMatch(value)) {
                       return l10n.validatorRestaurantDescriptionElGreekOnly;
+                    }
+                    if (!RegExp(r'\p{Script=Greek}', unicode: true)
+                        .hasMatch(value)) {
+                      return l10n.validatorRestaurantDescriptionElNoLetter;
                     }
                     return null;
                   },
@@ -239,8 +296,14 @@ class _RestaurantEditScreenState extends State<RestaurantEditScreen> {
                 SizedBox(
                   width: double.infinity,
                   child: FilledButton(
-                    onPressed: _submit,
-                    child: Text(l10n.restaurantEditSaveButton),
+                    onPressed: _isSubmitting ? null : _submit,
+                    child: _isSubmitting
+                        ? const SizedBox(
+                            height: 20,
+                            width: 20,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : Text(l10n.restaurantEditSaveButton),
                   ),
                 ),
               ],

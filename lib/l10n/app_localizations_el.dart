@@ -538,6 +538,14 @@ class AppLocalizationsEl extends AppLocalizations {
       'Η ελληνική περιγραφή δεν μπορεί να περιέχει λατινικούς χαρακτήρες';
 
   @override
+  String get validatorRestaurantDescriptionEnNoLetter =>
+      'Η αγγλική περιγραφή πρέπει να περιέχει τουλάχιστον ένα γράμμα';
+
+  @override
+  String get validatorRestaurantDescriptionElNoLetter =>
+      'Η ελληνική περιγραφή πρέπει να περιέχει τουλάχιστον ένα ελληνικό γράμμα';
+
+  @override
   String get validatorRestaurantAddressRequired =>
       'Η διεύθυνση είναι υποχρεωτική';
 

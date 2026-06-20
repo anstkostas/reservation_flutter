@@ -528,6 +528,14 @@ class AppLocalizationsEn extends AppLocalizations {
       'Greek description cannot contain Latin characters';
 
   @override
+  String get validatorRestaurantDescriptionEnNoLetter =>
+      'English description must contain at least one letter';
+
+  @override
+  String get validatorRestaurantDescriptionElNoLetter =>
+      'Greek description must contain at least one Greek letter';
+
+  @override
   String get validatorRestaurantAddressRequired => 'Address is required';
 
   @override

@@ -7,6 +7,7 @@ class AppException implements Exception {
     required this.message,
     required this.statusCode,
     this.code,
+    this.details,
   });
 
   final String message;
@@ -15,6 +16,11 @@ class AppException implements Exception {
   /// Machine-readable error code from the backend (e.g. 'AUTH_INVALID_CREDENTIALS').
   /// Null when the server did not include a code (network errors, plain 500s).
   final String? code;
+
+  /// Per-field validation details from a VALIDATION_ERROR response.
+  /// Each entry has at minimum `field` and `message` keys.
+  /// Null for non-validation errors.
+  final List<Map<String, dynamic>>? details;
 
   @override
   String toString() =>

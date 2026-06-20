@@ -680,6 +680,14 @@
   "@validatorRestaurantDescriptionElGreekOnly": {
     "description": "Validation error shown when the Greek description field contains Latin script characters"
   },
+  "validatorRestaurantDescriptionEnNoLetter": "Η αγγλική περιγραφή πρέπει να περιέχει τουλάχιστον ένα γράμμα",
+  "@validatorRestaurantDescriptionEnNoLetter": {
+    "description": "Validation error shown when the English description contains only numbers or symbols with no Latin letter"
+  },
+  "validatorRestaurantDescriptionElNoLetter": "Η ελληνική περιγραφή πρέπει να περιέχει τουλάχιστον ένα ελληνικό γράμμα",
+  "@validatorRestaurantDescriptionElNoLetter": {
+    "description": "Validation error shown when the Greek description contains only numbers or symbols with no Greek letter"
+  },
   "validatorRestaurantAddressRequired": "Η διεύθυνση είναι υποχρεωτική",
   "@validatorRestaurantAddressRequired": {
     "description": "Validation error shown when the address field is empty"

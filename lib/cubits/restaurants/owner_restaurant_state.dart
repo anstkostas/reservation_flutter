@@ -42,7 +42,7 @@ final class OwnerRestaurantUpdateSuccess extends OwnerRestaurantState {
   List<Object?> get props => [];
 }
 
-/// A fetch or update failed.
+/// A fetch failed.
 ///
 /// [message] is from the backend and is safe to display.
 /// [code] is the machine-readable error code for localized string lookup.
@@ -54,4 +54,20 @@ final class OwnerRestaurantFailure extends OwnerRestaurantState {
 
   @override
   List<Object?> get props => [message, code];
+}
+
+/// An update failed.
+///
+/// Unlike [OwnerRestaurantFailure] (fetch errors), this keeps the form visible.
+/// [details] carries per-field errors from a VALIDATION_ERROR response — each
+/// entry has at minimum `field` and `message` keys. Null for non-validation failures.
+final class OwnerRestaurantUpdateFailure extends OwnerRestaurantState {
+  const OwnerRestaurantUpdateFailure(this.message, {this.code, this.details});
+
+  final String message;
+  final String? code;
+  final List<Map<String, dynamic>>? details;
+
+  @override
+  List<Object?> get props => [message, code, details];
 }

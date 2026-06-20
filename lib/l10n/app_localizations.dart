@@ -1046,6 +1046,18 @@ abstract class AppLocalizations {
   /// **'Greek description cannot contain Latin characters'**
   String get validatorRestaurantDescriptionElGreekOnly;
 
+  /// Validation error shown when the English description contains only numbers or symbols with no Latin letter
+  ///
+  /// In en, this message translates to:
+  /// **'English description must contain at least one letter'**
+  String get validatorRestaurantDescriptionEnNoLetter;
+
+  /// Validation error shown when the Greek description contains only numbers or symbols with no Greek letter
+  ///
+  /// In en, this message translates to:
+  /// **'Greek description must contain at least one Greek letter'**
+  String get validatorRestaurantDescriptionElNoLetter;
+
   /// Validation error shown when the address field is empty
   ///
   /// In en, this message translates to:

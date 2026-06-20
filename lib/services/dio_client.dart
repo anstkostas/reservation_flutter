@@ -295,6 +295,10 @@ class DioClient {
       final body = data is Map<String, dynamic> ? data : null;
       final message = (body?['message'] as String?) ?? 'An error occurred.';
       final code = body?['code'] as String?;
+      final rawDetails = body?['details'];
+      final details = rawDetails is List
+          ? rawDetails.whereType<Map<String, dynamic>>().toList()
+          : null;
       handler.reject(
         DioException(
           requestOptions: e.requestOptions,
@@ -304,6 +308,7 @@ class DioClient {
             message: message,
             statusCode: e.response!.statusCode ?? 500,
             code: code,
+            details: details,
           ),
         ),
       );

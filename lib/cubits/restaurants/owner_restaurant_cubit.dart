@@ -37,10 +37,12 @@ class OwnerRestaurantCubit extends Cubit<OwnerRestaurantState> {
 
   /// Submits a partial update for the owner's restaurant.
   ///
+  /// Does not emit [OwnerRestaurantLoading] — the screen uses a local
+  /// `_isSubmitting` flag so the form stays in the tree on failure.
+  ///
   /// Emits [OwnerRestaurantUpdateSuccess] followed by [OwnerRestaurantLoaded],
-  /// or [OwnerRestaurantFailure] on error.
+  /// or [OwnerRestaurantUpdateFailure] on error.
   Future<void> update(UpdateRestaurantRequest request) async {
-    emit(const OwnerRestaurantLoading());
     try {
       await _repository.updateOwn(request);
       if (isClosed) return;
@@ -50,7 +52,7 @@ class OwnerRestaurantCubit extends Cubit<OwnerRestaurantState> {
       emit(OwnerRestaurantLoaded(restaurant));
     } on AppException catch (e) {
       if (isClosed) return;
-      emit(OwnerRestaurantFailure(e.message, code: e.code));
+      emit(OwnerRestaurantUpdateFailure(e.message, code: e.code, details: e.details));
     }
   }
 }
