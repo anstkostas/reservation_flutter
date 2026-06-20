@@ -21,6 +21,9 @@ class AppLocalizationsEl extends AppLocalizations {
   String get navDashboard => 'Πίνακας ελέγχου';
 
   @override
+  String get navMyRestaurant => 'Το εστιατόριό μου';
+
+  @override
   String get navReservations => 'Κρατήσεις';
 
   @override

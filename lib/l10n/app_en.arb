@@ -18,6 +18,10 @@
   "@navDashboard": {
     "description": "Navigation bar link to the owner dashboard — shown to restaurant owners only"
   },
+  "navMyRestaurant": "My Restaurant",
+  "@navMyRestaurant": {
+    "description": "Navigation bar dropdown link to the owner's restaurant edit page — shown to restaurant owners only"
+  },
   "navReservations": "Reservations",
   "@navReservations": {
     "description": "Navigation bar link to the reservation history page — shown to customers only"

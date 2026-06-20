@@ -122,6 +122,12 @@ abstract class AppLocalizations {
   /// **'Dashboard'**
   String get navDashboard;
 
+  /// Navigation bar dropdown link to the owner's restaurant edit page — shown to restaurant owners only
+  ///
+  /// In en, this message translates to:
+  /// **'My Restaurant'**
+  String get navMyRestaurant;
+
   /// Navigation bar link to the reservation history page — shown to customers only
   ///
   /// In en, this message translates to:

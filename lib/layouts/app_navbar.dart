@@ -182,6 +182,8 @@ class _UserMenuButton extends StatelessWidget {
       onSelected: (value) {
         if (value == 'nav') {
           context.go(user.role == UserRole.owner ? '/owner' : '/reservations');
+        } else if (value == 'myRestaurant') {
+          context.go('/owner/restaurant');
         } else if (value == 'logout') {
           context.read<AuthBloc>().add(const AuthLogoutRequested());
         }
@@ -240,6 +242,17 @@ class _UserMenuButton extends StatelessWidget {
             ],
           ),
         ),
+        if (user.role == UserRole.owner)
+          PopupMenuItem<String>(
+            value: 'myRestaurant',
+            child: Row(
+              children: [
+                Icon(Icons.store, size: iconSize),
+                const SizedBox(width: 8),
+                Text(AppLocalizations.of(menuContext)!.navMyRestaurant),
+              ],
+            ),
+          ),
         PopupMenuItem<String>(
           value: 'logout',
           child: Row(

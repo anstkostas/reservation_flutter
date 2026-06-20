@@ -21,6 +21,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navDashboard => 'Dashboard';
 
   @override
+  String get navMyRestaurant => 'My Restaurant';
+
+  @override
   String get navReservations => 'Reservations';
 
   @override
